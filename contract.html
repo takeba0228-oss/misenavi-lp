@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEO/AIO対策運用代行 サービス利用契約書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.8;
+    color: #1a1a1a;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .contract {
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 20mm;
+  }
+
+  /* タイトル */
+  .contract-title {
+    text-align: center;
+    font-size: 16pt;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 40px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #1a1a1a;
+  }
+
+  /* 前文 */
+  .preamble {
+    margin-bottom: 32px;
+    text-indent: 1em;
+  }
+
+  /* 条文 */
+  .article {
+    margin-bottom: 24px;
+  }
+
+  .article-title {
+    font-size: 11pt;
+    font-weight: 700;
+    margin-bottom: 8px;
+    border-left: 3px solid #333;
+    padding-left: 10px;
+  }
+
+  .article-body {
+    padding-left: 1em;
+  }
+
+  .article-body p {
+    margin-bottom: 6px;
+  }
+
+  .article-body ol {
+    padding-left: 1.5em;
+    margin-bottom: 8px;
+  }
+
+  .article-body ol li {
+    margin-bottom: 4px;
+  }
+
+  .article-body ul {
+    list-style: disc;
+    padding-left: 1.5em;
+    margin-bottom: 8px;
+  }
+
+  .article-body ul li {
+    margin-bottom: 4px;
+  }
+
+  /* 料金テーブル */
+  .plan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 10pt;
+  }
+
+  .plan-table th,
+  .plan-table td {
+    border: 1px solid #333;
+    padding: 8px 14px;
+    text-align: left;
+  }
+
+  .plan-table th {
+    background: #e8e8e8;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .plan-table td:last-child {
+    text-align: right;
+  }
+
+  /* プラン選択チェックボックス */
+  .plan-select {
+    margin: 12px 0;
+    font-size: 10.5pt;
+  }
+
+  .plan-select span {
+    margin-right: 1.5em;
+  }
+
+  /* 署名欄 */
+  .signature-section {
+    margin-top: 48px;
+  }
+
+  .signature-section h2 {
+    font-size: 11pt;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-left: 3px solid #333;
+    padding-left: 10px;
+  }
+
+  .signature-block {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 24px;
+  }
+
+  .signature-party {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .signature-party h3 {
+    font-size: 10.5pt;
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #666;
+  }
+
+  .signature-row {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 20px;
+    font-size: 10pt;
+  }
+
+  .signature-label {
+    white-space: nowrap;
+    min-width: 6em;
+    font-weight: 500;
+  }
+
+  .signature-line {
+    flex: 1;
+    border-bottom: 1px solid #333;
+    min-height: 1.5em;
+    margin-left: 8px;
+  }
+
+  /* 印刷用改ページ */
+  .page-break {
+    page-break-before: always;
+  }
+
+  /* フッター（契約書番号欄） */
+  .contract-footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid #999;
+    font-size: 9pt;
+    color: #666;
+    text-align: center;
+  }
+
+  /* 印刷時の調整 */
+  @media print {
+    body {
+      background: none;
+    }
+    .contract {
+      padding: 0;
+      max-width: none;
+    }
+  }
+
+  /* 画面表示用の余白 */
+  @media screen {
+    body {
+      background: #f0f0f0;
+      padding: 20px 0;
+    }
+    .contract {
+      background: #fff;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+      margin: 0 auto 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="contract">
+
+  <h1 class="contract-title">MEO/AIO対策運用代行<br>サービス利用契約書</h1>
+
+  <div class="preamble">
+    <p>Lien Edit株式会社（以下「乙」）と<span style="border-bottom:1px solid #333; display:inline-block; min-width:12em;">&nbsp;</span>（以下「甲」）は、以下の通りサービス利用契約（以下「本契約」）を締結する。</p>
+  </div>
+
+  <!-- 第1条 -->
+  <div class="article">
+    <h2 class="article-title">第1条（サービス内容）</h2>
+    <div class="article-body">
+      <p>乙は甲に対し、以下のサービス（以下「本サービス」）を提供する。</p>
+      <ol>
+        <li>Googleビジネスプロフィール（GBP）の最適化および運用代行</li>
+        <li>AI活用による投稿コンテンツの作成・配信</li>
+        <li>口コミの監視および返信代行</li>
+        <li>月次パフォーマンスレポートの提供</li>
+        <li>その他、別紙に定めるサービス</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 第2条 -->
+  <div class="article">
+    <h2 class="article-title">第2条（契約プランおよび料金）</h2>
+    <div class="article-body">
+      <p>本サービスの料金は、甲が選択するプランに応じて以下の通りとする。</p>
+      <table class="plan-table">
+        <thead>
+          <tr>
+            <th>プラン名</th>
+            <th>月額料金（税込）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ライトプラン</td>
+            <td>19,800円</td>
+          </tr>
+          <tr>
+            <td>スタンダードプラン</td>
+            <td>39,800円</td>
+          </tr>
+          <tr>
+            <td>プレミアムプラン</td>
+            <td>69,800円</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="plan-select">
+        <p>甲が選択したプラン：
+          <span>&square; ライト</span>
+          <span>&square; スタンダード</span>
+          <span>&square; プレミアム</span>
+        </p>
+      </div>
+      <p>初期費用：0円</p>
+    </div>
+  </div>
+
+  <!-- 第3条 -->
+  <div class="article">
+    <h2 class="article-title">第3条（契約期間）</h2>
+    <div class="article-body">
+      <ol>
+        <li>契約開始日：<span style="border-bottom:1px solid #333; display:inline-block; min-width:3em;">&nbsp;</span>年<span style="border-bottom:1px solid #333; display:inline-block; min-width:2em;">&nbsp;</span>月<span style="border-bottom:1px solid #333; display:inline-block; min-width:2em;">&nbsp;</span>日</li>
+        <li>契約期間は1ヶ月単位とし、甲または乙から解約の意思表示がない限り、同一条件にて自動的に更新されるものとする。</li>
+        <li>最低契約期間の定めはないものとする。</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 第4条 -->
+  <div class="article">
+    <h2 class="article-title">第4条（支払条件）</h2>
+    <div class="article-body">
+      <ol>
+        <li>料金の計算期間は毎月末日締めとし、翌月10日までに支払うものとする。</li>
+        <li>支払方法は銀行振込とする。振込手数料は甲の負担とする。</li>
+        <li>請求書は毎月1日にメールまたはLINEにて送付する。</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ページ区切り -->
+  <div class="page-break"></div>
+
+  <!-- 第5条 -->
+  <div class="article">
+    <h2 class="article-title">第5条（解約）</h2>
+    <div class="article-body">
+      <ol>
+        <li>甲が本契約の解約を希望する場合、解約を希望する月の末日の14日前までに、書面またはLINEにより乙に通知するものとする。</li>
+        <li>解約月の月額料金は日割り計算を行わず、1ヶ月分の全額を支払うものとする。</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 第6条 -->
+  <div class="article">
+    <h2 class="article-title">第6条（免責事項）</h2>
+    <div class="article-body">
+      <ol>
+        <li>乙は、本サービスの提供にあたり、検索順位の上昇その他特定の成果を保証するものではない。</li>
+        <li>Google等の検索エンジンまたはプラットフォームの仕様変更、アルゴリズム変更等により甲に生じた損害について、乙は一切の責任を負わないものとする。</li>
+        <li>天災地変、疫病、戦争、テロ、通信障害その他の不可抗力により本サービスの提供が遅延または不能となった場合、乙はその責任を負わないものとする。</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 第7条 -->
+  <div class="article">
+    <h2 class="article-title">第7条（秘密保持）</h2>
+    <div class="article-body">
+      <ol>
+        <li>甲および乙は、本契約の履行に際して知り得た相手方の技術上、営業上その他の秘密情報を、相手方の書面による事前の承諾なく第三者に開示または漏洩してはならない。</li>
+        <li>前項の義務は、本契約終了後も2年間有効に存続するものとする。</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 第8条 -->
+  <div class="article">
+    <h2 class="article-title">第8条（個人情報の取扱い）</h2>
+    <div class="article-body">
+      <ol>
+        <li>乙は、甲から提供された個人情報を本サービスの提供目的以外に使用しないものとする。</li>
+        <li>乙は、個人情報の保護に関する法律（個人情報保護法）その他関係法令に準じて、甲の個人情報を適切に管理するものとする。</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 第9条 -->
+  <div class="article">
+    <h2 class="article-title">第9条（反社会的勢力の排除）</h2>
+    <div class="article-body">
+      <ol>
+        <li>甲および乙は、自らが暴力団、暴力団員、暴力団関係企業、総会屋、社会運動標榜ゴロ、政治活動標榜ゴロ、特殊知能暴力集団その他の反社会的勢力（以下「反社会的勢力」という）に該当しないことを表明し、保証する。</li>
+        <li>甲または乙が前項の表明に反することが判明した場合、相手方は催告なく直ちに本契約を解除することができる。</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ページ区切り -->
+  <div class="page-break"></div>
+
+  <!-- 第10条 -->
+  <div class="article">
+    <h2 class="article-title">第10条（合意管轄）</h2>
+    <div class="article-body">
+      <p>本契約に関する一切の紛争については、大阪地方裁判所を第一審の専属的合意管轄裁判所とする。</p>
+    </div>
+  </div>
+
+  <!-- 補足 -->
+  <div class="article" style="margin-top: 32px;">
+    <div class="article-body">
+      <p>以上、本契約の締結を証するため、本書2通を作成し、甲乙記名押印のうえ各1通を保有する。</p>
+    </div>
+  </div>
+
+  <!-- 署名欄 -->
+  <div class="signature-section">
+
+    <div class="signature-block">
+
+      <!-- 甲（お客様） -->
+      <div class="signature-party">
+        <h3>甲（お客様）</h3>
+        <div class="signature-row">
+          <span class="signature-label">会社名/屋号：</span>
+          <span class="signature-line"></span>
+        </div>
+        <div class="signature-row">
+          <span class="signature-label">ご担当者名：</span>
+          <span class="signature-line"></span>
+        </div>
+        <div class="signature-row">
+          <span class="signature-label">住所：</span>
+          <span class="signature-line"></span>
+        </div>
+        <div class="signature-row">
+          <span class="signature-label">署名：</span>
+          <span class="signature-line"></span>
+        </div>
+        <div class="signature-row">
+          <span class="signature-label">日付：</span>
+          <span class="signature-line" style="max-width:3em;"></span>
+          <span style="margin:0 4px;">年</span>
+          <span class="signature-line" style="max-width:2em;"></span>
+          <span style="margin:0 4px;">月</span>
+          <span class="signature-line" style="max-width:2em;"></span>
+          <span style="margin:0 4px;">日</span>
+        </div>
+      </div>
+
+      <!-- 乙（サービス提供者） -->
+      <div class="signature-party">
+        <h3>乙（サービス提供者）</h3>
+        <div class="signature-row">
+          <span class="signature-label">会社名：</span>
+          <span style="flex:1;">Lien Edit株式会社</span>
+        </div>
+        <div class="signature-row">
+          <span class="signature-label">代表者名：</span>
+          <span style="flex:1;">代表取締役 竹林 慶仁</span>
+        </div>
+        <div class="signature-row">
+          <span class="signature-label">署名：</span>
+          <span class="signature-line"></span>
+        </div>
+        <div class="signature-row">
+          <span class="signature-label">日付：</span>
+          <span class="signature-line" style="max-width:3em;"></span>
+          <span style="margin:0 4px;">年</span>
+          <span class="signature-line" style="max-width:2em;"></span>
+          <span style="margin:0 4px;">月</span>
+          <span class="signature-line" style="max-width:2em;"></span>
+          <span style="margin:0 4px;">日</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="contract-footer">
+    契約書番号：<span style="border-bottom:1px solid #999; display:inline-block; min-width:10em;">&nbsp;</span>
+  </div>
+
+</div>
+
+</body>
+</html>

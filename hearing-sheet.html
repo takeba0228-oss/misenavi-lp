@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ミセナビ 初回ヒアリングシート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E03562;
+    --accent: #1a1a2e;
+  }
+
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    color: var(--accent);
+    line-height: 1.5;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* ===== Header ===== */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--primary);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+
+  .header h1 {
+    font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+    font-size: 18px;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+  }
+
+  .header-meta {
+    font-size: 10px;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  .header-meta span {
+    display: inline-block;
+    border-bottom: 1px solid #999;
+    min-width: 100px;
+    margin-left: 4px;
+  }
+
+  /* ===== Section ===== */
+  .section {
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--primary);
+    padding: 3px 10px;
+    margin-bottom: 4px;
+    border-radius: 2px;
+  }
+
+  .section-num {
+    font-family: 'Poppins', sans-serif;
+    margin-right: 6px;
+  }
+
+  /* ===== Table ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2px;
+  }
+
+  th, td {
+    border: 1px solid #bbb;
+    padding: 4px 8px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: #f5f0f2;
+    font-weight: 700;
+    width: 130px;
+    font-size: 10.5px;
+    white-space: nowrap;
+  }
+
+  td {
+    font-size: 10.5px;
+  }
+
+  td.tall {
+    height: 28px;
+  }
+
+  td.tall-2 {
+    height: 42px;
+  }
+
+  td.tall-3 {
+    height: 58px;
+  }
+
+  .checkbox-row {
+    line-height: 1.8;
+  }
+
+  .cb {
+    font-size: 13px;
+    margin-right: 2px;
+  }
+
+  .cb-item {
+    margin-right: 10px;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .blank {
+    display: inline-block;
+    border-bottom: 1px solid #999;
+    min-width: 60px;
+  }
+
+  .blank-wide {
+    display: inline-block;
+    border-bottom: 1px solid #999;
+    min-width: 160px;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    margin-top: 8px;
+    border-top: 2px solid var(--primary);
+    padding-top: 6px;
+    text-align: center;
+    font-size: 10px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .footer strong {
+    color: var(--primary);
+    font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+  }
+
+  /* Print */
+  @media print {
+    body {
+      font-size: 11px;
+    }
+    .page {
+      width: 100%;
+      padding: 0;
+    }
+    .section {
+      page-break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>ミセナビ 初回ヒアリングシート</h1>
+    <div class="header-meta">
+      日付: <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>年<span>&nbsp;&nbsp;</span>月<span>&nbsp;&nbsp;</span>日<br>
+      担当者名: <span style="min-width:140px;">&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">01</span>店舗基本情報</div>
+    <table>
+      <tr><th>店舗名</th><td class="tall"></td></tr>
+      <tr>
+        <th>業種</th>
+        <td class="checkbox-row">
+          <span class="cb-item"><span class="cb">&#9744;</span>飲食</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>美容</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>整体・整骨</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>クリニック</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>その他（<span class="blank">&nbsp;</span>）</span>
+        </td>
+      </tr>
+      <tr><th>所在地</th><td class="tall"></td></tr>
+      <tr><th>最寄り駅</th><td class="tall"></td></tr>
+      <tr><th>営業時間</th><td class="tall"></td></tr>
+      <tr><th>定休日</th><td class="tall"></td></tr>
+      <tr><th>ご担当者名</th><td class="tall"></td></tr>
+      <tr><th>電話番号</th><td class="tall"></td></tr>
+      <tr><th>メールアドレス</th><td class="tall"></td></tr>
+    </table>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">02</span>Googleビジネスプロフィール（GBP）の現状</div>
+    <table>
+      <tr>
+        <th>GBPアカウントの有無</th>
+        <td class="checkbox-row">
+          <span class="cb-item"><span class="cb">&#9744;</span>あり</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>なし</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>わからない</span>
+        </td>
+      </tr>
+      <tr><th>現在の口コミ数</th><td><span class="blank">&nbsp;</span> 件</td></tr>
+      <tr><th>現在の星評価</th><td><span class="blank">&nbsp;</span>（1〜5）</td></tr>
+      <tr>
+        <th>GBPへの投稿頻度</th>
+        <td class="checkbox-row">
+          <span class="cb-item"><span class="cb">&#9744;</span>毎日</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>週数回</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>月数回</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>ほぼなし</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>わからない</span>
+        </td>
+      </tr>
+      <tr>
+        <th>口コミへの返信</th>
+        <td class="checkbox-row">
+          <span class="cb-item"><span class="cb">&#9744;</span>すべて返信</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>一部返信</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>返信していない</span>
+        </td>
+      </tr>
+      <tr>
+        <th>写真の登録数</th>
+        <td class="checkbox-row">
+          <span class="cb-item"><span class="cb">&#9744;</span>30枚以上</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>10〜29枚</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>10枚未満</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>わからない</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">03</span>集客の現状</div>
+    <table>
+      <tr><th>月間の新規来客数（概算）</th><td><span class="blank">&nbsp;</span> 人</td></tr>
+      <tr>
+        <th>主な集客経路<br><span style="font-weight:400;font-size:9px;">（複数選択可）</span></th>
+        <td class="checkbox-row">
+          <span class="cb-item"><span class="cb">&#9744;</span>口コミ紹介</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>Googleマップ</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>食べログ等ポータル</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>SNS</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>チラシ</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>その他（<span class="blank">&nbsp;</span>）</span>
+        </td>
+      </tr>
+      <tr><th>現在の広告費（月額）</th><td><span class="blank">&nbsp;</span> 円</td></tr>
+      <tr><th>利用中の集客サービス</th><td class="tall"></td></tr>
+    </table>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">04</span>競合・差別化</div>
+    <table>
+      <tr><th>近隣の競合店<br><span style="font-weight:400;font-size:9px;">（気になる店舗）</span></th><td class="tall-2"></td></tr>
+      <tr><th>自店の強み・<br>差別化ポイント</th><td class="tall-3"></td></tr>
+    </table>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">05</span>目標・ご要望</div>
+    <table>
+      <tr><th>一番解決したい課題</th><td class="tall-2"></td></tr>
+      <tr><th>集客の目標<br><span style="font-weight:400;font-size:9px;">（月間来客数、売上等）</span></th><td class="tall"></td></tr>
+      <tr>
+        <th>ご希望のプラン</th>
+        <td class="checkbox-row">
+          <span class="cb-item"><span class="cb">&#9744;</span>ライト（19,800円）</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>スタンダード（39,800円）</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>プレミアム（69,800円）</span>
+          <span class="cb-item"><span class="cb">&#9744;</span>未定</span>
+        </td>
+      </tr>
+      <tr><th>その他ご質問・ご要望</th><td class="tall-3"></td></tr>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <strong>ミセナビ</strong> by Lien Edit株式会社<br>
+    LINE: https://line.me/ti/p/v4O9xEFNhY
+  </div>
+
+</div>
+
+</body>
+</html>
