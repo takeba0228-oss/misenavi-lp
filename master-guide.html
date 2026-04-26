@@ -1,0 +1,2720 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ミセナビ 事業運用マスターガイド | Lien Edit株式会社</title>
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --primary: #E03562;
+    --primary-dark: #c02850;
+    --accent: #1a1a2e;
+    --bg: #fafafa;
+    --surface: #ffffff;
+    --text: #1a1a2e;
+    --muted: #737373;
+    --border: #e5e5e5;
+    --success: #16a34a;
+    --warn: #f59e0b;
+    --danger: #dc2626;
+    --discord: #5865F2;
+    --line: #06C755;
+    --info: #2563eb;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.85; padding-bottom: 100px;
+  }
+
+  /* Nav */
+  .nav {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 14px 24px; position: sticky; top: 0; z-index: 50;
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo { font-weight: 900; color: var(--primary); font-size: 1.15rem; }
+  .logo span { color: var(--accent); font-size: 0.75rem; margin-left: 6px; font-weight: 500; }
+  .nav-links { display: flex; gap: 16px; font-size: 0.85rem; }
+  .nav-links a { color: var(--muted); }
+  .nav-links a:hover { color: var(--primary); }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d2d52 100%);
+    color: white; padding: 80px 24px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(224,53,98,0.3), transparent 50%);
+  }
+  .hero > * { position: relative; }
+  .hero h1 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900; margin-bottom: 16px;
+  }
+  .hero h1 em { color: #ff6088; font-style: normal; }
+  .hero p { max-width: 720px; margin: 0 auto; opacity: 0.9; font-size: 1rem; }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+    gap: 14px; max-width: 720px; margin: 32px auto 0;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 14px; border-radius: 10px;
+    backdrop-filter: blur(10px);
+  }
+  .hero-stat-num { font-size: 1.6rem; font-weight: 900; color: #ff6088; }
+  .hero-stat-label { font-size: 0.78rem; opacity: 0.8; }
+
+  /* Container */
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+
+  /* TOC sticky sidebar */
+  .layout {
+    display: grid; grid-template-columns: 240px 1fr;
+    gap: 32px; margin-top: 24px;
+  }
+  @media(max-width: 900px){ .layout { grid-template-columns: 1fr; } .toc-sidebar { display: none; } }
+
+  .toc-sidebar {
+    position: sticky; top: 80px; align-self: start;
+    background: white; border-radius: 12px;
+    padding: 18px 16px; border: 1px solid var(--border);
+    max-height: calc(100vh - 100px); overflow-y: auto;
+  }
+  .toc-sidebar h3 {
+    font-size: 0.82rem; color: var(--primary);
+    margin-bottom: 12px; text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .toc-sidebar a {
+    display: block; padding: 6px 8px;
+    color: var(--text); text-decoration: none;
+    font-size: 0.84rem; border-radius: 4px;
+    border-left: 3px solid transparent;
+    margin-bottom: 2px;
+  }
+  .toc-sidebar a:hover {
+    background: #fff5f7; border-left-color: var(--primary);
+    color: var(--primary);
+  }
+  .toc-sidebar a.sub { padding-left: 24px; font-size: 0.78rem; color: var(--muted); }
+
+  /* Section */
+  h2 {
+    font-size: 1.6rem; color: var(--accent);
+    margin: 56px 0 20px; padding-bottom: 10px;
+    border-bottom: 4px solid var(--primary);
+    display: flex; align-items: center; gap: 14px;
+  }
+  h2 i { color: var(--primary); }
+  h2 .num {
+    background: var(--primary); color: white;
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.05rem; font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-size: 1.2rem; color: var(--accent);
+    margin: 32px 0 12px; padding-left: 12px;
+    border-left: 5px solid var(--primary);
+  }
+
+  h4 { font-size: 1.02rem; color: var(--accent); margin: 18px 0 8px; }
+  p { margin: 8px 0; }
+
+  /* Cards */
+  .card {
+    background: white; border-radius: 14px;
+    padding: 24px 28px; margin-bottom: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
+
+  /* Steps */
+  .step-list { counter-reset: step; margin-bottom: 24px; }
+  .step {
+    background: white; border-radius: 14px;
+    padding: 22px 22px 22px 78px;
+    margin-bottom: 12px; border: 1px solid var(--border);
+    position: relative; counter-increment: step;
+  }
+  .step::before {
+    content: counter(step);
+    position: absolute; left: 22px; top: 22px;
+    width: 38px; height: 38px; background: var(--primary); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1rem;
+  }
+  .step h4 { font-size: 1.02rem; color: var(--accent); margin-bottom: 6px; }
+  .step .meta {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    font-size: 0.78rem; color: var(--muted); margin-bottom: 10px;
+  }
+  .step .meta span {
+    background: #fafafa; border: 1px solid var(--border);
+    padding: 2px 10px; border-radius: 999px;
+  }
+
+  /* Code blocks */
+  .code-block {
+    background: #1a1a2e; color: #e5e5e5;
+    padding: 16px 20px; border-radius: 8px;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.85rem; margin: 12px 0;
+    position: relative; overflow-x: auto;
+    line-height: 1.7;
+  }
+  .code-block::before {
+    content: '💻 ターミナルにコピペ';
+    position: absolute; top: -10px; left: 12px;
+    background: var(--primary); color: white;
+    padding: 2px 10px; border-radius: 4px;
+    font-size: 0.7rem; font-weight: 700;
+  }
+  .code-block.no-prefix::before { display: none; }
+  .copy-btn {
+    position: absolute; top: 8px; right: 8px;
+    background: rgba(255,255,255,0.1); color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 4px 10px; border-radius: 6px;
+    font-size: 0.75rem; cursor: pointer;
+    font-family: inherit;
+  }
+  .copy-btn:hover { background: var(--primary); border-color: var(--primary); }
+  .copy-btn.copied { background: var(--success); border-color: var(--success); }
+
+  .code-block .green { color: #4ade80; }
+  .code-block .red { color: #f87171; }
+  .code-block .yellow { color: #fbbf24; }
+  .code-block .cyan { color: #60a5fa; }
+  .code-block .gray { color: #888; }
+  .code-block .pink { color: #ec4899; }
+
+  /* Callouts */
+  .callout {
+    border-radius: 10px; padding: 14px 18px;
+    margin: 16px 0; font-size: 0.92rem;
+    border-left: 5px solid var(--primary);
+    background: #fff5f7;
+  }
+  .callout strong { color: var(--accent); display: block; margin-bottom: 4px; }
+  .callout-warn { background: #fefce8; border-left-color: var(--warn); }
+  .callout-success { background: #f0fdf4; border-left-color: var(--success); }
+  .callout-danger { background: #fef2f2; border-left-color: var(--danger); }
+  .callout-discord { background: #eef0fe; border-left-color: var(--discord); }
+  .callout-info { background: #eff6ff; border-left-color: var(--info); }
+
+  /* Mock terminal */
+  .mock-terminal {
+    background: #0a0a1a; color: white;
+    border-radius: 12px; padding: 16px 20px;
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 0.84rem; margin: 16px 0;
+    line-height: 1.6;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .mock-terminal .header {
+    display: flex; gap: 6px; margin-bottom: 12px;
+    padding-bottom: 10px; border-bottom: 1px solid #333;
+    align-items: center;
+  }
+  .mock-terminal .dot {
+    width: 12px; height: 12px; border-radius: 50%;
+  }
+  .dot.r { background: #ff5f57; }
+  .dot.y { background: #ffbd2e; }
+  .dot.g { background: #28c941; }
+  .mock-terminal .title {
+    font-size: 0.7rem; color: #888;
+    margin-left: 8px;
+  }
+  .mock-terminal .green { color: #4ade80; }
+  .mock-terminal .red { color: #f87171; }
+  .mock-terminal .yellow { color: #fbbf24; }
+  .mock-terminal .cyan { color: #60a5fa; }
+  .mock-terminal .gray { color: #888; }
+  .mock-terminal .magenta { color: #d946ef; }
+  .mock-terminal .pink { color: #ec4899; }
+
+  /* Mock Discord */
+  .mock-discord {
+    background: #36393f; color: #dcddde;
+    border-radius: 12px; padding: 16px 20px;
+    margin: 16px 0; font-size: 0.9rem;
+    border: 1px solid #202225;
+  }
+  .mock-discord .channel {
+    font-size: 0.78rem; color: #b9bbbe;
+    margin-bottom: 10px; padding-bottom: 8px;
+    border-bottom: 1px solid #202225;
+  }
+  .mock-discord .msg {
+    background: #2f3136; padding: 12px 14px; border-radius: 6px;
+    margin: 8px 0;
+  }
+  .mock-discord .msg-author {
+    color: #5865F2; font-weight: 700; font-size: 0.85rem;
+  }
+  .mock-discord .btn-row {
+    display: flex; gap: 8px; margin-top: 12px;
+  }
+  .mock-discord .d-btn {
+    padding: 6px 14px; border-radius: 4px;
+    font-size: 0.85rem; font-weight: 700;
+  }
+  .d-btn.success { background: #2d7d46; color: white; }
+  .d-btn.danger { background: #a52929; color: white; }
+  .d-btn.secondary { background: #4f545c; color: white; }
+  .mock-discord pre {
+    background: #202225; padding: 8px 12px;
+    border-radius: 4px; margin: 8px 0;
+    color: #b9bbbe; font-size: 0.82rem;
+    white-space: pre-wrap;
+  }
+
+  /* Tables */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 14px 0; font-size: 0.88rem;
+    background: white; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  th, td { border: 1px solid var(--border); padding: 9px 11px; text-align: left; }
+  th { background: var(--accent); color: white; font-weight: 700; font-size: 0.85rem; }
+  tr:nth-child(even) { background: #fafafa; }
+  td.center { text-align: center; }
+
+  /* Big flow */
+  .big-flow {
+    background: linear-gradient(180deg, #fff5f7, white);
+    border-radius: 16px; padding: 32px 24px;
+    border: 2px solid var(--primary);
+    margin: 24px 0;
+  }
+  .flow-stage {
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 14px; margin-bottom: 14px;
+    background: white; padding: 16px;
+    border-radius: 10px; border: 1px solid var(--border);
+  }
+  .flow-stage-num {
+    background: var(--primary); color: white;
+    border-radius: 50%; width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1.2rem;
+  }
+  .flow-stage-content h5 {
+    font-size: 1rem; color: var(--accent); margin-bottom: 4px;
+  }
+  .flow-stage-content p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+  .flow-arrow {
+    text-align: center; font-size: 1.8rem;
+    color: var(--primary); margin: -2px 0;
+    line-height: 1;
+  }
+
+  /* Phase tabs */
+  .phase {
+    background: white; border-radius: 14px;
+    padding: 20px 24px; margin-bottom: 16px;
+    border-left: 8px solid var(--primary);
+    border: 1px solid var(--border); border-left-width: 8px;
+  }
+  .phase-header {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 12px;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .phase-title { font-size: 1.15rem; color: var(--accent); font-weight: 900; }
+  .phase-meta {
+    background: var(--primary); color: white;
+    padding: 4px 12px; border-radius: 999px;
+    font-size: 0.78rem; font-weight: 700;
+  }
+
+  /* Cheat grid */
+  .cheat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .cheat-card {
+    background: white; border-radius: 10px;
+    padding: 18px; border: 1px solid var(--border);
+  }
+  .cheat-card h5 {
+    color: var(--primary); font-size: 0.95rem;
+    margin-bottom: 8px; padding-bottom: 6px;
+    border-bottom: 2px solid var(--primary);
+  }
+  .cheat-card code {
+    display: block;
+    background: #f5f5f5; padding: 6px 10px;
+    border-radius: 4px; margin: 4px 0;
+    font-family: monospace; font-size: 0.82rem;
+    color: var(--accent);
+    word-break: break-all;
+  }
+
+  /* FAQ */
+  .faq-item {
+    background: white; border-radius: 10px;
+    padding: 18px 22px; margin-bottom: 10px;
+    border: 1px solid var(--border);
+  }
+  .faq-q {
+    font-weight: 700; color: var(--accent);
+    font-size: 1rem; margin-bottom: 8px;
+  }
+  .faq-q::before { content: 'Q. '; color: var(--primary); font-weight: 900; }
+  .faq-a { color: #525252; font-size: 0.92rem; }
+  .faq-a::before { content: 'A. '; color: var(--success); font-weight: 900; }
+
+  /* Resource cards */
+  .resource-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .resource-card {
+    background: white; border-radius: 12px;
+    padding: 18px; border: 1px solid var(--border);
+    transition: all 0.15s; text-decoration: none; color: inherit;
+    display: block;
+  }
+  .resource-card:hover {
+    border-color: var(--primary); transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+  }
+  .resource-card .icon {
+    width: 44px; height: 44px;
+    background: #fff5f7; color: var(--primary);
+    border-radius: 10px; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 1.2rem; margin-bottom: 10px;
+  }
+  .resource-card h5 { font-size: 0.95rem; color: var(--accent); margin-bottom: 4px; }
+  .resource-card p { font-size: 0.82rem; color: var(--muted); margin: 0; }
+
+  /* KPI table */
+  .kpi-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 12px; margin: 8px 0;
+    align-items: center; padding: 12px;
+    background: white; border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .kpi-label { font-weight: 700; color: var(--accent); }
+  .kpi-num { font-size: 1.1rem; font-weight: 900; }
+  .kpi-good { color: var(--success); }
+  .kpi-bad { color: var(--danger); }
+  @media(max-width:540px){ .kpi-row { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* Badge */
+  .badge {
+    display: inline-block; padding: 2px 10px;
+    border-radius: 999px; font-size: 0.75rem;
+    font-weight: 700; margin: 0 4px;
+  }
+  .badge-auto { background: #d1fae5; color: #065f46; }
+  .badge-manual { background: #fed7aa; color: #92400e; }
+  .badge-hybrid { background: #dbeafe; color: #1e40af; }
+
+  /* Print */
+  .print-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    padding: 14px 22px; background: var(--primary); color: white;
+    border: none; border-radius: 999px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(224,53,98,0.3); font-size: 0.92rem;
+    font-family: inherit; z-index: 100;
+  }
+  .print-btn:hover { background: var(--primary-dark); }
+
+  @media print {
+    .nav, .print-btn, .copy-btn, .toc-sidebar { display: none !important; }
+    body { background: white; }
+    .layout { grid-template-columns: 1fr; }
+    .step, .card, table, .phase { page-break-inside: avoid; box-shadow: none !important; }
+    .hero { background: white; color: var(--text); }
+    .hero h1 em { color: var(--primary); }
+    .hero p { color: var(--muted); }
+    .mock-terminal, .mock-discord, .code-block {
+      background: #f5f5f5 !important; color: var(--text) !important;
+    }
+  }
+
+  footer {
+    background: var(--accent); color: #999;
+    padding: 28px 24px; text-align: center;
+    font-size: 0.85rem; margin-top: 60px;
+  }
+  footer a { color: #ccc; margin: 0 8px; }
+
+  kbd {
+    background: white; border: 1px solid var(--border);
+    border-bottom-width: 2px; border-radius: 4px;
+    padding: 1px 6px; font-family: monospace;
+    font-size: 0.85rem; box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+  }
+
+  .deco { text-align: center; font-size: 3rem; margin: 16px 0; line-height: 1; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">ミセナビ <span>by Lien Edit</span></a>
+    <div class="nav-links">
+      <a href="#flow">全体フロー</a>
+      <a href="#daily">毎日</a>
+      <a href="#approval">承認</a>
+      <a href="#emergency">緊急</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>ミセナビ <em>事業運用</em><br>マスターガイド</h1>
+  <p>営業 → 契約 → ヒアリング → GBP最適化 → AIO → 自動運用 → 承認 → 配信 → 効果検証<br>
+  事業に関わる全工程をこの1ページに収録。アホでも完璧に運用できる。</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">90日</div>
+      <div class="hero-stat-label">標準運用期間</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">5分/日</div>
+      <div class="hero-stat-label">承認作業</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">¥39,800</div>
+      <div class="hero-stat-label">月額(スタンダード)</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">3兆円</div>
+      <div class="hero-stat-label">国内MEO市場</div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+<div class="layout">
+
+<!-- TOC sidebar -->
+<aside class="toc-sidebar">
+  <h3>📚 目次</h3>
+  <a href="#overview">0. 全体俯瞰</a>
+  <a href="#flow">1. 90日全体フロー</a>
+  <a href="#sales" class="sub">→ Phase 0 営業</a>
+  <a href="#contract" class="sub">→ Phase 1 契約</a>
+  <a href="#hearing" class="sub">→ Phase 2 ヒアリング</a>
+  <a href="#gbp-grant" class="sub">→ Phase 3 GBP権限</a>
+  <a href="#optimization" class="sub">→ Phase 4 最適化</a>
+  <a href="#aio" class="sub">→ Phase 5 AIO</a>
+  <a href="#operation" class="sub">→ Phase 6 自動運用</a>
+  <a href="#monthly" class="sub">→ Phase 7 月次</a>
+  <a href="#final" class="sub">→ Phase 8 実績化</a>
+  <a href="#daily">2. 毎日の作業</a>
+  <a href="#approval">3. 承認フロー</a>
+  <a href="#commands">4. 全コマンド</a>
+  <a href="#templates">5. 投稿テンプレ</a>
+  <a href="#review-req">6. 口コミ依頼</a>
+  <a href="#aio-detail">7. AIO実装詳細</a>
+  <a href="#kpi">8. KPI管理</a>
+  <a href="#faq">9. FAQ</a>
+  <a href="#emergency">10. 緊急時</a>
+  <a href="#resources">11. リソース集</a>
+  <a href="#pricing-detail">12. 料金プラン</a>
+  <a href="#scripts">13. 話法・対応</a>
+  <a href="#photography">14. 撮影実務</a>
+  <a href="#monthly-report">15. 月次報告書</a>
+  <a href="#cancel-flow">16. 解約処理</a>
+  <a href="#billing">17. 請求・入金</a>
+  <a href="#prompt-tuning">18. AIプロンプト改善</a>
+  <a href="#competitor">19. 競合分析</a>
+  <a href="#gbp-rules">20. 規約NG集</a>
+  <a href="#legal">21. 守秘・賠償</a>
+  <a href="#ideal-customer">22. 理想顧客像</a>
+  <a href="#schedule">23. 1日/月間スケジュール</a>
+  <a href="#team-scale">24. チームスケール</a>
+</aside>
+
+<!-- Main content -->
+<main>
+
+<!-- 0. 全体俯瞰 -->
+<h2 id="overview"><span class="num">0</span><i class="fa-solid fa-eye"></i>全体俯瞰</h2>
+
+<div class="card">
+  <h3 style="border:none;padding:0;margin:0 0 12px;">ミセナビとは何か</h3>
+  <p>飲食・美容・整体・クリニック向けの<strong>Googleマップ集客（MEO）＆ AIO 対策の運用代行サービス</strong>。AIで投稿/口コミ返信を生成し、人手承認後に配信する半自動運用モデル。</p>
+
+  <h3 style="border:none;padding:0;margin:24px 0 12px;">事業の3本柱</h3>
+  <table>
+    <tr><th>柱</th><th>内容</th><th>料金</th></tr>
+    <tr><td><strong>① 運用代行</strong></td><td>GBP投稿/口コミ返信/月次レポートを月単位で代行</td><td>¥19,800〜¥69,800/月</td></tr>
+    <tr><td><strong>② 単発設定</strong></td><td>GBP完全設定+初月分投稿テンプレ10本（スポット商品）</td><td>¥29,800</td></tr>
+    <tr><td><strong>③ 診断レポート</strong></td><td>無料診断PDF→無料相談→運用代行へ誘導</td><td>無料（リード獲得）</td></tr>
+  </table>
+
+  <h3 style="border:none;padding:0;margin:24px 0 12px;">関係者と役割</h3>
+  <table>
+    <tr><th>役割</th><th>担当</th><th>稼働</th></tr>
+    <tr><td>顧客（店舗オーナー）</td><td>飲食/美容/整体等のオーナー</td><td>初期ヒアリング1.5h + 月1ミーティング30分</td></tr>
+    <tr><td>運用担当</td><td>竹林（自分）</td><td>1顧客あたり週1h（承認・確認）</td></tr>
+    <tr><td>AI（GPT-4o-mini）</td><td>投稿/返信/AIO自動生成</td><td>24/7</td></tr>
+    <tr><td>運用システム</td><td>misenavi-system（PM2常駐）</td><td>24/7</td></tr>
+    <tr><td>承認BOT</td><td>lien-edit-discord-bot連携</td><td>24/7</td></tr>
+  </table>
+
+  <h3 style="border:none;padding:0;margin:24px 0 12px;">5分でわかる事業の流れ</h3>
+  <ol style="margin-left:24px;">
+    <li><strong>営業</strong>: DM/ココナラ/紹介で店舗オーナーにアプローチ</li>
+    <li><strong>無料診断</strong>: <code>/diagnose</code>で60秒採点 → リード獲得</li>
+    <li><strong>契約</strong>: モニター(無料3ヶ月) or 有料プラン(¥19,800〜)</li>
+    <li><strong>オンボーディング</strong>: GBP管理者権限を顧客から付与してもらう</li>
+    <li><strong>初期構築</strong>: GBP最適化+AIO仕込み(4h)</li>
+    <li><strong>自動運用</strong>: 投稿/返信を毎日AI生成</li>
+    <li><strong>毎日5分の承認</strong>: Discord or CLIで承認</li>
+    <li><strong>5分以内に配信</strong>: GBP API経由で実投稿</li>
+    <li><strong>月次レポート</strong>: 自動生成PDFを顧客に送付</li>
+    <li><strong>3ヶ月で実績化</strong>: note/ココナラへ転用→ 次の顧客獲得</li>
+  </ol>
+</div>
+
+<!-- 1. 90日全体フロー -->
+<h2 id="flow"><span class="num">1</span><i class="fa-solid fa-route"></i>90日全体フロー</h2>
+
+<div class="big-flow">
+
+  <div class="flow-stage">
+    <div class="flow-stage-num">0</div>
+    <div class="flow-stage-content">
+      <h5>営業 → リード獲得（受注前）</h5>
+      <p>DM/ココナラ/紹介 → 無料診断60秒 → 無料相談Zoom → 受注</p>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+
+  <div class="flow-stage">
+    <div class="flow-stage-num">1</div>
+    <div class="flow-stage-content">
+      <h5>Day 0: 契約締結</h5>
+      <p>有料 or モニター契約書をPDFで送付・署名</p>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+
+  <div class="flow-stage">
+    <div class="flow-stage-num">2</div>
+    <div class="flow-stage-content">
+      <h5>Day 1〜3: ヒアリング ＋ GBP権限取得</h5>
+      <p>ヒアリングシート12項目記入 → 顧客がGBP管理者権限を付与（5分作業）</p>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+
+  <div class="flow-stage">
+    <div class="flow-stage-num">3</div>
+    <div class="flow-stage-content">
+      <h5>Day 4〜7: 土台構築（こちら側で実施）</h5>
+      <p>GBP最適化 + 説明文750字 + サービス15件 + 写真10枚 + AIO仕込み</p>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+
+  <div class="flow-stage">
+    <div class="flow-stage-num">4</div>
+    <div class="flow-stage-content">
+      <h5>Day 8〜30: 運用1ヶ月目</h5>
+      <p>AI投稿週3回 + 口コミ返信 → 毎日5分の承認 → 自動配信</p>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+
+  <div class="flow-stage">
+    <div class="flow-stage-num">5</div>
+    <div class="flow-stage-content">
+      <h5>Day 31〜60: 中間レポート + チューニング</h5>
+      <p>月次PDFレポート提供 → Zoom30分 → 施策見直し</p>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+
+  <div class="flow-stage">
+    <div class="flow-stage-num">6</div>
+    <div class="flow-stage-content">
+      <h5>Day 61〜90: 最終レポート + 実績化</h5>
+      <p>Before/After集計 → note記事化 → ココナラ実績欄 → 紹介依頼</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Phase詳細 -->
+
+<h3 id="sales">📞 Phase 0: 営業（受注前）</h3>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-title">DM・ココナラ・紹介でリード獲得</div>
+    <div class="phase-meta">受注前</div>
+  </div>
+
+  <p><strong>使うリソース</strong>: <code>~/business-launch/misenavi-sales-pack.md</code></p>
+
+  <h4>営業手段3つ</h4>
+  <table>
+    <tr><th>手段</th><th>文面</th><th>目標</th></tr>
+    <tr><td>X DM</td><td>飲食/美容向け2種類のテンプレ</td><td>月50件送信</td></tr>
+    <tr><td>Instagram DM</td><td>店舗投稿に絡める形</td><td>月50件送信</td></tr>
+    <tr><td>ココナラ出品</td><td>無料診断5,000円 / 月額19,800〜 / GBP単発29,800円</td><td>月10件問い合わせ</td></tr>
+    <tr><td>メール営業</td><td>フォーマル形式</td><td>月50件送信</td></tr>
+    <tr><td>紹介依頼</td><td>既存知人・受注顧客から</td><td>月3件成約</td></tr>
+  </table>
+
+  <h4>ファネル</h4>
+  <div class="kpi-row">
+    <div class="kpi-label">DM/メール送信</div>
+    <div class="kpi-num">200件/月</div>
+    <div class="kpi-label">無料診断完了</div>
+    <div class="kpi-num kpi-good">30件/月 (15%)</div>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-label">問い合わせ</div>
+    <div class="kpi-num kpi-good">8件/月 (27%)</div>
+    <div class="kpi-label">成約</div>
+    <div class="kpi-num kpi-good">3件/月 (37%)</div>
+  </div>
+
+  <div class="callout">
+    <strong>📌 営業時のNG行動</strong>
+    一斉送信NG / 「絶対1位」と約束NG / 即決を迫るNG / 既に他社運用中の店舗への営業NG
+  </div>
+</div>
+
+<h3 id="contract">📝 Phase 1: 契約締結（Day 0）</h3>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-title">契約書送付 → 署名 → キックオフ</div>
+    <div class="phase-meta">30分</div>
+  </div>
+
+  <h4>使う書類</h4>
+  <table>
+    <tr><th>書類</th><th>用途</th><th>URL</th></tr>
+    <tr><td>有料契約書</td><td>月額プラン顧客向け（10条+署名）</td><td><a href="/contract" target="_blank">/contract</a></td></tr>
+    <tr><td>モニター契約書</td><td>無料モニター向け（12条+成果保証否定+実績利用許諾）</td><td><a href="/monitor-contract" target="_blank">/monitor-contract</a></td></tr>
+    <tr><td>提案書</td><td>送付前のプレ営業</td><td><a href="/proposal" target="_blank">/proposal</a></td></tr>
+  </table>
+
+  <h4>送付フロー</h4>
+  <div class="step-list">
+    <div class="step">
+      <h4>契約書HTMLを開く</h4>
+      <p>該当URLにアクセス → 顧客名・所在地・月額・解約条件を埋めて記入完了状態にする。</p>
+    </div>
+    <div class="step">
+      <h4>「印刷 → PDFとして保存」でPDF化</h4>
+      <p>右下の印刷ボタンをクリック → 「PDFとして保存」を選択。</p>
+    </div>
+    <div class="step">
+      <h4>LINEで顧客に送付</h4>
+      <p>「ご確認＆署名後、写真かPDFで返信ください」と添える。</p>
+    </div>
+    <div class="step">
+      <h4>署名版を保管</h4>
+      <p><code>~/Documents/contracts/{顧客名}_{YYYYMMDD}.pdf</code> に保存。</p>
+    </div>
+  </div>
+</div>
+
+<h3 id="hearing">📋 Phase 2: ヒアリング（Day 1〜3）</h3>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-title">ヒアリングシート + Beforeデータ取得</div>
+    <div class="phase-meta">顧客側 60分 / 自分側 30分</div>
+  </div>
+
+  <h4>送付するもの</h4>
+  <ul style="margin-left:24px;">
+    <li><a href="/hearing-sheet" target="_blank">ヒアリングシート(/hearing-sheet)</a> をPDFで顧客送付</li>
+    <li><a href="/onboarding-guide" target="_blank">オンボーディングガイド(/onboarding-guide)</a> も併送</li>
+  </ul>
+
+  <h4>必須ヒアリング項目（標準12項目）</h4>
+  <table>
+    <tr><th>項目</th><th>用途</th></tr>
+    <tr><td>店舗基本情報（屋号/所在地/連絡先）</td><td>GBP情報の正確性担保</td></tr>
+    <tr><td>業種・主要メニュー（5〜10件）</td><td>サービス登録/投稿テーマ</td></tr>
+    <tr><td>ターゲット層（年代/性別/職業）</td><td>AI投稿のペルソナ設計</td></tr>
+    <tr><td>競合店3つ（地名+業種で検索した上位3店舗）</td><td>差別化・KW選定</td></tr>
+    <tr><td>禁止トピック</td><td>AIプロンプトのフィルタ</td></tr>
+    <tr><td>営業時間・定休日</td><td>GBP登録</td></tr>
+    <tr><td>SNS・ホームページのURL</td><td>クロスチャネル連携</td></tr>
+    <tr><td>直近3ヶ月の売上推移（モニターのみ）</td><td>ROI算出</td></tr>
+    <tr><td>平均客単価</td><td>順位上昇による売上換算</td></tr>
+    <tr><td>来店経路の内訳（推測）</td><td>GBP寄与率の仮説</td></tr>
+    <tr><td>過去のSNS投稿のトーン</td><td>違和感のないAI投稿</td></tr>
+    <tr><td>撮影可能日時の希望</td><td>撮影スケジュール調整</td></tr>
+  </table>
+
+  <h4>Beforeデータの記録（Day1必須）</h4>
+  <div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+cd ~/misenavi-system
+
+# 主要KW3つ × 順位を記録
+node src/commands/rank.js manual store_002 "業種 エリア" 8
+node src/commands/rank.js manual store_002 "業種 大エリア" 15
+
+# Before値をJSONLに追記
+echo '{"id":"store_002","name":"店舗名","before":{"reviewCount":25,"rating":4.1,"photoCount":12,"rank_main":8,"rank_sub":15,"viewsMonthly":1200,"callsMonthly":45},"snapshotDate":"2026-04-27"}' >> reports/before-after.jsonl
+  </div>
+
+  <p><strong>Before取得項目（全部記録）</strong>:
+  口コミ件数 / 星評価 / GBP写真枚数 / 主要KW3つの順位 / 月間閲覧数 / 月間通話数 / ルート検索数 / サイトクリック数</p>
+</div>
+
+<h3 id="gbp-grant">🔑 Phase 3: GBP管理者権限の取得</h3>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-title">顧客側で5分の作業</div>
+    <div class="phase-meta">最重要</div>
+  </div>
+
+  <div class="callout callout-warn">
+    <strong>⚠️ ここが詰まると全部止まる</strong>
+    GBP管理者権限がないと、AIが何も書き込めません。「編集者」ではなく必ず「管理者」を依頼。
+  </div>
+
+  <h4>顧客への手順案内</h4>
+  <p><a href="/onboarding-guide" target="_blank">/onboarding-guide</a> を送付すれば6ステップで画像付き解説あり。</p>
+
+  <h4>こちら側の確認</h4>
+  <div class="step-list">
+    <div class="step">
+      <h4>takeba0228@gmail.com の招待メール確認</h4>
+      <p>件名: 「Googleビジネスプロフィールの管理者として招待されました」</p>
+    </div>
+    <div class="step">
+      <h4>承諾</h4>
+      <p>「招待を承諾」をクリック。</p>
+    </div>
+    <div class="step">
+      <h4>https://business.google.com にログイン</h4>
+      <p>対象店舗が表示されることを確認。</p>
+    </div>
+    <div class="step">
+      <h4>権限が「管理者」になっているか確認</h4>
+      <p>編集者の場合は再度顧客に依頼し直し。</p>
+    </div>
+    <div class="step">
+      <h4>accountId / locationId をURLから抽出</h4>
+      <div class="code-block no-prefix">
+URL例:
+https://business.google.com/locations/<span class="yellow">12345678901234567890</span>/dashboard?aid=<span class="cyan">98765432109876543210</span>
+
+→ accountId: accounts/98765432109876543210
+→ locationId: locations/12345678901234567890
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 id="optimization">🛠️ Phase 4: GBP最適化（Day 4〜7）</h3>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-title">GBP管理画面で全項目見直し</div>
+    <div class="phase-meta">90分</div>
+  </div>
+
+  <h4>4-1. ビジネス基本情報チェックリスト</h4>
+  <ul style="margin-left:24px;">
+    <li>☐ ビジネス名（自然なKW挿入のみ。詰め込みNG）</li>
+    <li>☐ メインカテゴリ1つ + サブカテゴリ最大9つ</li>
+    <li>☐ 属性（Wi-Fi/テラス/ベジ対応/車椅子対応 等全チェック）</li>
+    <li>☐ 営業時間（通常+祝日+特別営業）</li>
+    <li>☐ 電話番号（モバイル可/固定優先）</li>
+    <li>☐ ウェブサイト（公式サイトURL）</li>
+    <li>☐ 予約リンク（ぐるなび/ホットペッパー等）</li>
+  </ul>
+
+  <h4>4-2. 説明文（D欄・最大750文字）</h4>
+  <p>AIO対策モジュールで自動生成：</p>
+  <div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+cd ~/misenavi-system && node src/commands/aio.js store_002
+# → reports/aio_store_002_YYYYMMDD.md に説明文・FAQ・JSON-LDが生成される
+  </div>
+
+  <p><strong>手動確認</strong>: 700文字以上 / 750以下 / KW3〜5回 / 結論ファースト / 改行2〜3箇所 / 絵文字なし</p>
+
+  <h4>4-3. サービス・メニュー15件登録</h4>
+  <table>
+    <tr><th>項目</th><th>記入例</th></tr>
+    <tr><td>サービス名</td><td>自家焙煎ハンドドリップコーヒー</td></tr>
+    <tr><td>説明</td><td>100〜200文字で産地・淹れ方の特徴</td></tr>
+    <tr><td>価格</td><td>580円 or「価格は変動」</td></tr>
+  </table>
+
+  <h4>4-4. 写真10枚以上追加</h4>
+  <table>
+    <tr><th>カテゴリ</th><th>枚数</th><th>撮影ポイント</th></tr>
+    <tr><td>外観（昼）</td><td>1</td><td>看板が見える正面構図</td></tr>
+    <tr><td>外観（夜）</td><td>1</td><td>営業中の照明あり</td></tr>
+    <tr><td>内観</td><td>3</td><td>客席・カウンター・全体雰囲気</td></tr>
+    <tr><td>メニュー/商品</td><td>3</td><td>真上 or 斜め45度・自然光</td></tr>
+    <tr><td>スタッフ</td><td>1</td><td>笑顔・挨拶ポーズ</td></tr>
+    <tr><td>制作工程</td><td>1</td><td>抽出・施術風景等</td></tr>
+  </table>
+
+  <p><strong>撮影機材</strong>: スマホ(iPhone推奨) + Lightroom Mobileで明るさ+15/鮮明度+10/わずかに暖色</p>
+
+  <h4>4-5. accounts.json 登録</h4>
+  <div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+cd ~/misenavi-system
+# accounts.json をエディタで開いて新規エントリ追記
+nano accounts.json
+  </div>
+
+  <div class="code-block no-prefix">
+{
+  "id": "store_002",
+  "name": "実店舗名",
+  "accountId": "accounts/xxxxx",
+  "locationId": "locations/yyyyy",
+  "category": "業種",
+  "area": "エリア",
+  "description": "店舗説明",
+  "keywords": ["主KW", "サブKW1", "サブKW2"],
+  "serpLocation": "Osaka, Osaka, Japan",
+  "postFrequency": "weekly3",
+  "plan": "standard",
+  "monitorStartDate": "2026-04-27",
+  "active": true
+}
+  </div>
+
+  <h4>4-6. PM2再起動で反映</h4>
+  <div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+pm2 restart misenavi
+  </div>
+</div>
+
+<h3 id="aio">🤖 Phase 5: AIO対策仕込み（Day 4〜7）</h3>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-title">生成AI検索（ChatGPT/Perplexity/Gemini）対策</div>
+    <div class="phase-meta">45分</div>
+  </div>
+
+  <h4>AIOとは</h4>
+  <p>従来のSEOが「検索結果のリンクをクリック」を目指したのに対し、AIOは <strong>「AIの回答文中に直接引用される」</strong> ことを目指す。</p>
+
+  <h4>AIOで重要な4要素</h4>
+  <ol style="margin-left:24px;">
+    <li><strong>構造化データ（JSON-LD）</strong>: LocalBusiness/FAQPage 機械が理解しやすい形</li>
+    <li><strong>一問一答型FAQ</strong>: 質問文をそのまま見出しに</li>
+    <li><strong>第三者言及</strong>: 口コミ・引用される文脈の蓄積</li>
+    <li><strong>明示的なエンティティ情報</strong>: 住所・営業時間・特徴の自然言語化</li>
+  </ol>
+
+  <h4>自動生成コマンド</h4>
+  <div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+cd ~/misenavi-system && node src/commands/aio.js store_002
+
+# 生成物:
+# - reports/aio_store_002_YYYYMMDD.md  (顧客向けレポート)
+# - reports/aio_store_002_YYYYMMDD.json (構造化データ)
+  </div>
+
+  <h4>実装手順</h4>
+  <table>
+    <tr><th>タスク</th><th>場所</th><th>所要</th></tr>
+    <tr><td>GBP説明文を最適化版に差し替え</td><td>GBP管理画面 → 情報 → 説明</td><td>5分</td></tr>
+    <tr><td>サービス欄に派生15件以上追加</td><td>GBP管理画面 → サービス</td><td>15分</td></tr>
+    <tr><td>JSON-LDを公式サイトに埋め込み</td><td>{顧客サイト}/&lt;head&gt;</td><td>15分</td></tr>
+    <tr><td>FAQページ作成</td><td>{顧客サイト}/faq</td><td>15分</td></tr>
+    <tr><td>note店舗紹介記事1本投稿</td><td>note.com</td><td>30分</td></tr>
+  </table>
+
+  <h4>AIO効果検証（30日後）</h4>
+  <p>ChatGPT・Perplexity・Geminiで以下のクエリを投げて店舗が言及されるか確認：</p>
+  <ul style="margin-left:24px;">
+    <li>「{エリア}で{業種}を探しています」</li>
+    <li>「{KW1} {エリア} のおすすめは？」</li>
+    <li>「{店舗名}の営業時間は？」（直接指名）</li>
+    <li>「{エリア}で{特徴}な店は？」</li>
+  </ul>
+  <p>各クエリの回答に <strong>店舗名 or 公式サイトURL</strong> が含まれていればAIO成功。</p>
+</div>
+
+<h3 id="operation">⚙️ Phase 6: 自動運用（Day 8〜）</h3>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-title">PM2常駐 + cron + 承認フロー</div>
+    <div class="phase-meta">24/7 自動稼働</div>
+  </div>
+
+  <h4>自動稼働するもの</h4>
+  <table>
+    <tr><th>ジョブ</th><th>頻度</th><th>担当モジュール</th><th>承認</th></tr>
+    <tr><td>AI投稿生成</td><td>月水金 10:00</td><td>postScheduler.js</td><td><span class="badge badge-hybrid">要承認</span></td></tr>
+    <tr><td>口コミチェック・AI返信生成</td><td>3時間毎</td><td>reviewManager.js</td><td><span class="badge badge-hybrid">要承認</span></td></tr>
+    <tr><td>承認済みの実配信</td><td>5分毎</td><td>approvalProcessor.js</td><td><span class="badge badge-auto">自動</span></td></tr>
+    <tr><td>ヘルスチェック</td><td>3時間毎</td><td>health-check.js</td><td><span class="badge badge-auto">自動</span></td></tr>
+    <tr><td>月次レポートPDF</td><td>毎月1日 9:00</td><td>reportGenerator.js</td><td><span class="badge badge-auto">自動</span></td></tr>
+  </table>
+
+  <h4>手動でやること（週1〜2h）</h4>
+  <ul style="margin-left:24px;">
+    <li>毎日5分: 承認待ちの処理（Discord or CLI）</li>
+    <li>週1: AI投稿の品質チェック → success_patterns.jsonに反映</li>
+    <li>月1: 顧客とのZoom 30分</li>
+    <li>月1: 月次レポート読み合わせ</li>
+  </ul>
+</div>
+
+<h3 id="monthly">📊 Phase 7: 月次オペレーション（Day 31〜60）</h3>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-title">中間レポート + チューニング</div>
+    <div class="phase-meta">月1回</div>
+  </div>
+
+  <h4>月次レポート生成</h4>
+  <div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+cd ~/misenavi-system && node src/commands/report.js store_002
+# → reports/monthly_store_002_YYYYMM.pdf 生成
+  </div>
+
+  <h4>レポート内容</h4>
+  <ul style="margin-left:24px;">
+    <li>Before（Day1）/ Now（Day30）の主要KPI比較</li>
+    <li>投稿実績（数・反応）</li>
+    <li>口コミ推移グラフ</li>
+    <li>検索クエリTOP10</li>
+    <li>通話/ルート検索/サイトクリック数</li>
+    <li>来月の重点施策3つ</li>
+  </ul>
+
+  <h4>中間ミーティング（Zoom 30分）</h4>
+  <ol style="margin-left:24px;">
+    <li>レポート読み合わせ（10分）</li>
+    <li>顧客側の感触ヒアリング（5分）</li>
+    <li>撮影・更新したい写真の有無確認（5分）</li>
+    <li>来月の重点施策の合意（5分）</li>
+    <li>紹介依頼（5分）</li>
+  </ol>
+</div>
+
+<h3 id="final">🏆 Phase 8: 最終レポート＆実績化（Day 61〜90）</h3>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-title">Before/After集計 + note記事化 + 実績転用</div>
+    <div class="phase-meta">6時間</div>
+  </div>
+
+  <h4>Before/After集計（自動）</h4>
+  <div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+cd ~/misenavi-system && node src/commands/report.js store_002 --final
+  </div>
+
+  <h4>note記事化（4,500〜6,000文字）</h4>
+  <p>記事構成テンプレ：</p>
+  <ol style="margin-left:24px;">
+    <li>サマリー（500文字）</li>
+    <li>なぜモニター案件を始めたか（500文字）</li>
+    <li>やったこと5つ（メイン3,000文字）</li>
+    <li>数字の推移（500文字+表）</li>
+    <li>学び・失敗談（800文字）</li>
+    <li>同じ施策をしてほしい方へ（500文字+導線）</li>
+  </ol>
+
+  <h4>ココナラ実績欄に追加</h4>
+  <div class="code-block no-prefix">
+🏆 実績: ◯◯業 / 大阪 / 90日でメインKW8位→3位
+🏆 実績: ◯◯業 / 口コミ25→58件 (+132%)
+🏆 実績: ◯◯業 / Googleマップ経由のCall 月45→110回
+  </div>
+</div>
+
+<!-- 2. 毎日の作業 -->
+<h2 id="daily"><span class="num">2</span><i class="fa-solid fa-sun"></i>毎日の作業（5分）</h2>
+
+<p>事業全体で毎日必要なのは <strong>「承認」だけ</strong>。あとは全部自動。</p>
+
+<div class="callout callout-warn">
+  <strong>⚠️ 1日1回は必ずやる</strong>
+  承認しないと顧客のGBPに何も投稿されません。「自動運用なのに止まってる」状態に。
+</div>
+
+<h3>パターン①: スマホDiscord（外出中ベスト）</h3>
+
+<div class="step-list">
+  <div class="step">
+    <h4>Discordアプリで「アカネ」チャンネルを開く</h4>
+    <p>承認待ちメッセージが流れている：</p>
+    <div class="mock-discord">
+      <div class="channel"># アカネ｜承認待ち</div>
+      <div class="msg">
+        <div class="msg-author">アカネ Bot</div>
+        ⚠️ <strong>承認待ち</strong> 📝 (post) ID: <code>apr-xxxxx</code><br>
+        <strong>タイトル</strong>: [ミセナビ 投稿] サンプル カフェ<br>
+        <pre>春のメニュー、桜のラテ（580円）登場！
+自家焙煎エスプレッソに桜の風味を加えた一杯。
+営業：10:00-22:00 / 大阪市中央区...</pre>
+        要請元: misenavi / 緊急度: medium
+        <div class="btn-row">
+          <div class="d-btn success">✅ 承認</div>
+          <div class="d-btn danger">❌ 却下</div>
+          <div class="d-btn secondary">⏸ 保留</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="step">
+    <h4>3つのボタンを押すだけ</h4>
+    <table>
+      <tr><th>ボタン</th><th>意味</th><th>使う時</th></tr>
+      <tr><td>✅ 承認</td><td>これで投稿OK</td><td>内容に問題なし</td></tr>
+      <tr><td>❌ 却下</td><td>これは投稿しない</td><td>事実誤認・不適切・季節外れ</td></tr>
+      <tr><td>⏸ 保留</td><td>あとで判断</td><td>調べてから決めたい</td></tr>
+    </table>
+  </div>
+  <div class="step">
+    <h4>5分以内にGoogleに自動投稿される</h4>
+    <p>承認したものは、5分以内のcronで自動配信。何もしなくてOK。</p>
+  </div>
+</div>
+
+<h3>パターン②: Macターミナル（最速一括処理）</h3>
+
+<div class="step-list">
+  <div class="step">
+    <h4>ターミナルを開いてコピペ</h4>
+    <div class="code-block">
+<button class="copy-btn" data-copy="cd ~/misenavi-system && npm run approve">📋 コピー</button>
+cd ~/misenavi-system && npm run approve
+    </div>
+  </div>
+  <div class="step">
+    <h4>1件ずつキー入力で処理</h4>
+    <div class="mock-terminal">
+      <div class="header"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="title">~/misenavi-system</div></div>
+      <span class="magenta">━━━ 承認待ち 3件 ━━━</span><br>
+      <br>
+      <span class="cyan">[1]</span> 📝 <strong>投稿</strong> <span class="gray">post-xxx</span><br>
+      <span class="cyan">サンプル カフェ</span> <span class="gray">(store_001) 5分前</span><br>
+      <span class="gray">春のメニュー、桜のラテ（580円）登場！...</span><br>
+      <br>
+      <strong>[1/3] 操作 (o/r/e/s/q): </strong><span style="background:#fbbf24;color:#000;padding:0 4px;">_</span>
+    </div>
+    <table>
+      <tr><th>キー</th><th>意味</th></tr>
+      <tr><td><kbd>o</kbd> + Enter</td><td>承認（OK）</td></tr>
+      <tr><td><kbd>r</kbd> + Enter</td><td>却下（Reject）</td></tr>
+      <tr><td><kbd>e</kbd> + Enter</td><td>修正（Edit）→ 新本文を入力</td></tr>
+      <tr><td><kbd>s</kbd> + Enter</td><td>スキップ</td></tr>
+      <tr><td><kbd>q</kbd> + Enter</td><td>終了</td></tr>
+    </table>
+  </div>
+  <div class="step">
+    <h4>最後に「今すぐ配信？」と聞かれる</h4>
+    <p><kbd>y</kbd>を押すと即配信。何もしなくても5分以内のcronで送られる。</p>
+  </div>
+</div>
+
+<!-- 3. 承認フロー -->
+<h2 id="approval"><span class="num">3</span><i class="fa-solid fa-check-double"></i>承認フロー詳細</h2>
+
+<h3>状態遷移</h3>
+
+<div class="big-flow" style="border-color:var(--info);">
+  <div class="flow-stage">
+    <div class="flow-stage-num" style="background:var(--info);">1</div>
+    <div class="flow-stage-content">
+      <h5>pending（承認待ち）</h5>
+      <p>AIが生成 → キューに登録された直後の状態。Discord/CLIで判定待ち。</p>
+    </div>
+  </div>
+  <div class="flow-arrow" style="color:var(--info);">↓</div>
+  <div class="flow-stage">
+    <div class="flow-stage-num" style="background:var(--success);">2</div>
+    <div class="flow-stage-content">
+      <h5>approved（承認済み）</h5>
+      <p>人が承認 → 5分以内のcronで配信予定。</p>
+    </div>
+  </div>
+  <div class="flow-arrow" style="color:var(--success);">↓</div>
+  <div class="flow-stage">
+    <div class="flow-stage-num" style="background:var(--success);">3</div>
+    <div class="flow-stage-content">
+      <h5>delivered（配信済み）</h5>
+      <p>GBPに投稿完了。history.jsonに保存。</p>
+    </div>
+  </div>
+</div>
+
+<h3>その他の状態</h3>
+<table>
+  <tr><th>状態</th><th>意味</th></tr>
+  <tr><td>rejected</td><td>却下（送らない）</td></tr>
+  <tr><td>expired</td><td>48時間放置で自動失効</td></tr>
+</table>
+
+<h3>緊急度の見分け方</h3>
+<table>
+  <tr><th>マーク</th><th>意味</th><th>対応速度</th></tr>
+  <tr><td>🚨 high</td><td>低評価の口コミ返信（★1〜2）</td><td>即対応推奨</td></tr>
+  <tr><td>⚠️ medium</td><td>通常の投稿・返信</td><td>1日以内</td></tr>
+  <tr><td>ℹ️ low</td><td>軽い案件</td><td>2日以内</td></tr>
+</table>
+
+<h3>承認モードのON/OFF</h3>
+<div class="callout callout-danger">
+  <strong>⚠️ 慎重に</strong>
+  承認OFF=AIが直接投稿します。長期休暇のみ使用推奨。
+</div>
+
+<div class="code-block">
+<button class="copy-btn" data-copy="echo 'APPROVAL_REQUIRED=false' >> ~/misenavi-system/.env && pm2 restart misenavi">📋 コピー</button>
+# 承認OFF（自動投稿モード）
+echo 'APPROVAL_REQUIRED=false' >> ~/misenavi-system/.env && pm2 restart misenavi
+
+# 承認ONに戻す
+# .envの「APPROVAL_REQUIRED=false」の行を手動削除してから:
+pm2 restart misenavi
+</div>
+
+<!-- 4. 全コマンド -->
+<h2 id="commands"><span class="num">4</span><i class="fa-solid fa-terminal"></i>全コマンド一覧（コピペ可）</h2>
+
+<div class="cheat-grid">
+
+  <div class="cheat-card">
+    <h5>🌅 毎日の承認</h5>
+    <code>cd ~/misenavi-system</code>
+    <code>npm run approve</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>📋 承認待ち一覧</h5>
+    <code>npm run approve list</code>
+    <code>npm run approve list post</code>
+    <code>npm run approve list review_reply</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>📊 統計</h5>
+    <code>npm run approve stats</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>🚀 即時配信</h5>
+    <code>npm run approve deliver</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>🎯 ID指定承認</h5>
+    <code>npm run approve ok &lt;id&gt;</code>
+    <code>npm run approve ok &lt;id&gt; --deliver</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>❌ ID指定却下</h5>
+    <code>npm run approve no &lt;id&gt; "理由"</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>✏️ ID指定修正</h5>
+    <code>npm run approve edit &lt;id&gt; "新本文"</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>🌐 運用ダッシュボード</h5>
+    <code>npm run dashboard</code>
+    <code>npm run dashboard store_002</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>🩺 ヘルスチェック</h5>
+    <code>npm run health</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>📈 順位記録（手動）</h5>
+    <code>npm run rank:track</code>
+    <code>node src/commands/rank.js manual store_002 "KW" 5</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>🤖 AIO対策生成</h5>
+    <code>npm run aio</code>
+    <code>npm run aio store_002</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>📊 月次レポート手動生成</h5>
+    <code>node src/commands/report.js store_002</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>🎯 無料診断PDF生成</h5>
+    <code>npm run diagnose</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>📱 投稿手動実行</h5>
+    <code>npm run post</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>💬 口コミチェック手動実行</h5>
+    <code>npm run reviews</code>
+  </div>
+
+  <div class="cheat-card">
+    <h5>⚙️ PM2 操作</h5>
+    <code>pm2 list</code>
+    <code>pm2 restart misenavi</code>
+    <code>pm2 logs misenavi --lines 30</code>
+  </div>
+</div>
+
+<!-- 5. 投稿テンプレ -->
+<h2 id="templates"><span class="num">5</span><i class="fa-solid fa-pen-to-square"></i>投稿テンプレ20本（業種別）</h2>
+
+<div class="card">
+  <p><strong>使い方</strong>: AI生成プロンプト改善時の参考、または承認時に「修正」で差し替え。</p>
+</div>
+
+<h3>5-1. 飲食店向け 5本</h3>
+<div class="card">
+<h4>📌 テンプレ1: 新メニュー紹介</h4>
+<div class="code-block no-prefix">
+🌸 春の新メニュー登場！🌸
+「桜のラテアート（580円）」を期間限定でご提供。
+{店舗名}自慢の自家焙煎エスプレッソに、桜の風味を加えた一杯。
+お花見シーズンのおやつタイムにいかがでしょうか？
+営業：{営業時間} / アクセス：{アクセス}
+</div>
+
+<h4>📌 テンプレ2: 季節商品入荷</h4>
+<div class="code-block no-prefix">
+本日{曜日}、新鮮な{食材名}が入荷しました！
+「{メニュー名}」を本日限定でお出しします。
+数量限定のため、お早めのご来店がおすすめです。
+{営業時間} / {住所}
+</div>
+
+<h4>📌 テンプレ3: お客様の声紹介</h4>
+<div class="code-block no-prefix">
+お客様の口コミありがとうございます！
+「{口コミ抜粋30字}」という嬉しいお言葉。
+これからも{店舗の特徴}を大切に、皆様にご満足いただける一杯をお届けします。
+</div>
+
+<h4>📌 テンプレ4: アクセス・道順</h4>
+<div class="code-block no-prefix">
+{店舗名}は{最寄り駅}から徒歩{X}分です。
+{駅出口}を出て{道順の特徴}に進むと、{目印}が見えます。
+近隣の{駐車場名}（提携：1時間サービス）もご利用ください。
+迷われた際は{電話番号}までお気軽にどうぞ。
+</div>
+
+<h4>📌 テンプレ5: イベント告知</h4>
+<div class="code-block no-prefix">
+🎉 {イベント名}を{開催日}に開催！
+内容：{イベント内容}
+参加費：{価格} / 定員：{人数}名
+ご予約は{予約方法}より承ります。
+</div>
+</div>
+
+<h3>5-2. 美容・サロン向け 5本</h3>
+<div class="card">
+<h4>📌 テンプレ6: 施術ビフォーアフター</h4>
+<div class="code-block no-prefix">
+本日のお客様の {施術名} ビフォーアフター ✨
+ご要望：{お悩み}
+施術内容：{施術詳細}
+所要時間：{時間} / 料金：{価格}
+ご予約：{予約サイトURL}
+</div>
+
+<h4>📌 テンプレ7: 季節の悩み対応</h4>
+<div class="code-block no-prefix">
+{季節}の{お悩み}でお困りの方へ。
+{店舗名}では{対応メニュー}をご用意。
+{施術の特徴・効果}
+ご相談だけでも歓迎です。LINE：{LINE URL}
+</div>
+
+<h4>📌 テンプレ8: メニュー詳細</h4>
+<div class="code-block no-prefix">
+人気No.1メニュー「{メニュー名}」のご紹介。
+{所要時間} / {価格}
+こんな方におすすめ：
+・{ターゲット1}
+・{ターゲット2}
+・{ターゲット3}
+ご予約：{予約方法}
+</div>
+
+<h4>📌 テンプレ9: スタッフ紹介</h4>
+<div class="code-block no-prefix">
+スタッフの{名前}です。
+得意な施術：{得意分野}
+お客様へひとこと：{メッセージ}
+ご指名予約も承ります：{予約方法}
+</div>
+
+<h4>📌 テンプレ10: 悩み解決事例</h4>
+<div class="code-block no-prefix">
+こんなお悩みありませんか？
+「{悩み事例}」
+{店舗名}では{施術名}で改善のサポートをしています。
+カウンセリング無料です：{URL}
+</div>
+</div>
+
+<h3>5-3. 整体・治療院向け 5本</h3>
+<div class="card">
+<h4>📌 テンプレ11: 症状改善事例</h4>
+<div class="code-block no-prefix">
+{症状}でご来院されたお客様の改善事例。
+ご来院時：{症状の重さ}
+施術内容：{施術詳細}
+{回数 or 期間}通われて：{結果}
+※個人差があります
+</div>
+
+<h4>📌 テンプレ12: 健康コラム</h4>
+<div class="code-block no-prefix">
+【{季節}に多い{症状}とその対策】
+{症状}の主な原因は{原因}と言われています。
+ご自宅でできるセルフケア：
+・{ケア1}
+・{ケア2}
+・{ケア3}
+症状が長引く場合は{店舗名}までご相談ください。
+</div>
+
+<h4>📌 テンプレ13: メニュー解説</h4>
+<div class="code-block no-prefix">
+「{メニュー名}」とは？
+{施術内容の解説}
+こんな方におすすめ：
+・{症状1}
+・{症状2}
+所要時間：{時間} / 料金：{価格}
+</div>
+
+<h4>📌 テンプレ14: 院長挨拶</h4>
+<div class="code-block no-prefix">
+{店舗名}院長の{名前}です。
+{経歴・想い}
+{店舗の方針・特徴}
+お悩みのある方はお気軽にご相談ください。
+</div>
+
+<h4>📌 テンプレ15: 設備紹介</h4>
+<div class="code-block no-prefix">
+{店舗名}では{設備名}を導入しています。
+特徴：{特徴}
+これにより、{改善できること}が可能です。
+</div>
+</div>
+
+<h3>5-4. 共通・汎用 5本</h3>
+<div class="card">
+<h4>📌 テンプレ16: 営業時間案内（GW・年末年始等）</h4>
+<div class="code-block no-prefix">
+【{期間}の営業時間のお知らせ】
+{日付}：{営業時間}
+{日付}：{営業時間}
+{日付}：定休日
+ご予約はお早めに：{予約方法}
+</div>
+
+<h4>📌 テンプレ17: 駐車場・アクセス</h4>
+<div class="code-block no-prefix">
+お車でお越しのお客様へ。
+{店舗名}には{駐車場情報}がございます。
+{近隣の有料駐車場との提携情報}
+</div>
+
+<h4>📌 テンプレ18: 写真投稿（雰囲気訴求）</h4>
+<div class="code-block no-prefix">
+{店舗名}の{場所}の様子です。
+{雰囲気・こだわりの説明}
+{営業時間}にお待ちしております。
+</div>
+
+<h4>📌 テンプレ19: 周年・感謝</h4>
+<div class="code-block no-prefix">
+{店舗名}は{オープン年}年に開業し、{N}周年を迎えました。
+これも{エリア}の皆様のおかげです。本当にありがとうございます。
+これからも{方針}を大切に、より良いサービスを提供してまいります。
+</div>
+
+<h4>📌 テンプレ20: 採用・スタッフ募集</h4>
+<div class="code-block no-prefix">
+{店舗名}では一緒に働く仲間を募集しています。
+募集職種：{職種}
+勤務時間：{時間}
+給与：{給与}
+詳細・応募：{URL or 電話}
+</div>
+</div>
+
+<!-- 6. 口コミ依頼 -->
+<h2 id="review-req"><span class="num">6</span><i class="fa-solid fa-star"></i>口コミ依頼テンプレ全種</h2>
+
+<div class="card">
+<h4>📩 LINE文面（既存顧客向け）</h4>
+<div class="code-block no-prefix">
+{お客様名}様
+
+先日はご来店ありがとうございました！
+{店舗名}の{担当者名}です。
+
+もしご満足いただけたら、Googleで一言ご感想を書いていただけませんか？
+{店舗名}スタッフ一同の励みになります🙇‍♀️
+
+📝 書き込みはこちら：
+{Google口コミ書き込みURL}
+
+🎁 投稿いただいた方には、次回ご来店時に{特典}をプレゼント！
+
+無理のない範囲でぜひお願いします。
+</div>
+
+<h4>🧾 レシート・伝票裏のQR用</h4>
+<div class="code-block no-prefix">
+━━━━━━━━━━━━━━━━━
+本日はありがとうございました
+ご感想を聞かせていただけますか？
+
+[QRコード]
+
+⭐ Googleレビューを書く
+（30秒で書けます）
+
+ご投稿いただいた方には
+次回{特典}をプレゼント🎁
+━━━━━━━━━━━━━━━━━
+</div>
+
+<h4>🪧 レジ横ポップ（A6縦サイズ）</h4>
+<div class="code-block no-prefix">
+🌸 ご来店ありがとうございました 🌸
+
+ご感想をお聞かせください
+↓
+[QRコード]
+
+Googleで30秒、感想を投稿
+→ 次回{特典}サービス！
+
+スタッフ一同
+励みになります✨
+</div>
+
+<h4>💬 退店時の声かけスクリプト</h4>
+<div class="code-block no-prefix">
+（会計時の自然な流れで）
+
+スタッフ：「ありがとうございました。お料理 / 施術 はいかがでしたか？」
+お客様：「美味しかったです / 良かったです」
+スタッフ：「ありがとうございます！😊
+　もしよろしければ、Google で一言ご感想いただけると本当に励みになります。
+　QRコードがこちらにありますので、お時間あるときにでもぜひ。
+　書いていただいた方には次回{特典}をサービスさせていただきます🎁」
+</div>
+
+<h4>📧 メールマガジン本文</h4>
+<div class="code-block no-prefix">
+件名: 【{店舗名}】お時間あるときに、ひとことお願いできますか？
+
+{お客様名}様
+
+いつも{店舗名}をご利用いただきありがとうございます。
+もしよろしければ、Googleでお店のご感想を一言いただけませんか？
+
+📝 書き込みリンク：
+{Google口コミ書き込みURL}
+
+⏰ 30秒で書けます
+🎁 投稿いただいた方には次回{特典}をご用意
+
+ご無理ない範囲でぜひお願いします。
+</div>
+
+<h4>🙏 お礼メッセージ（口コミ書いてくれた人向け）</h4>
+<div class="code-block no-prefix">
+{お客様名}様
+
+Googleレビューのご投稿、本当にありがとうございました！
+スタッフ一同で読ませていただき、大変嬉しく拝見しました。
+
+次回ご来店時に{特典}をご用意しています。
+お会計時にこのメッセージをお見せください。
+
+これからも{お客様名}様にご満足いただけるよう、
+スタッフ一同精進してまいります。
+</div>
+</div>
+
+<!-- 7. AIO実装詳細 -->
+<h2 id="aio-detail"><span class="num">7</span><i class="fa-solid fa-robot"></i>AIO実装詳細</h2>
+
+<h3>7-1. 自動生成手順</h3>
+<div class="step-list">
+  <div class="step">
+    <h4>aio コマンド実行</h4>
+    <div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+cd ~/misenavi-system && node src/commands/aio.js store_002
+    </div>
+  </div>
+  <div class="step">
+    <h4>生成された Markdown を確認</h4>
+    <div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+open ~/misenavi-system/reports/aio_store_002_$(date +%Y%m%d).md
+    </div>
+  </div>
+  <div class="step">
+    <h4>「## 1. GBP説明文」を GBP管理画面に貼り付け</h4>
+    <p>GBP → 情報 → 説明 にコピペして保存。</p>
+  </div>
+  <div class="step">
+    <h4>「## 2. FAQ」を サービス欄に派生登録</h4>
+    <p>FAQの質問を逆算してサービス名化。例：「子供連れOK？」→「キッズチェア完備・子連れ歓迎」</p>
+  </div>
+  <div class="step">
+    <h4>JSON-LD を公式サイトに埋め込み</h4>
+    <div class="code-block no-prefix">
+&lt;script type="application/ld+json"&gt;
+{...LocalBusiness...}
+&lt;/script&gt;
+&lt;script type="application/ld+json"&gt;
+{...FAQPage...}
+&lt;/script&gt;
+    </div>
+    <p>検証: <a href="https://search.google.com/test/rich-results" target="_blank">Googleリッチリザルトテスト</a></p>
+  </div>
+</div>
+
+<h3>7-2. 効果検証クエリ（30日後）</h3>
+
+<table>
+  <tr><th>クエリ</th><th>確認すること</th></tr>
+  <tr><td>「{エリア}で{業種}を探しています」</td><td>店舗名orURLが言及されるか</td></tr>
+  <tr><td>「{KW1} {エリア} のおすすめは？」</td><td>同上</td></tr>
+  <tr><td>「{店舗名}の営業時間は？」</td><td>正しい情報が返るか</td></tr>
+  <tr><td>「{エリア}で{特徴}な店は？」</td><td>差別化キーワードでヒットするか</td></tr>
+</table>
+
+<p>テスト先: ChatGPT / Perplexity / Google AI Overview / Gemini の4つ。</p>
+
+<!-- 8. KPI -->
+<h2 id="kpi"><span class="num">8</span><i class="fa-solid fa-chart-line"></i>KPI管理</h2>
+
+<h3>8-1. 営業ファネルKPI（月次）</h3>
+<table>
+  <tr><th>指標</th><th>目標</th><th>実績入力先</th></tr>
+  <tr><td>DM/メール送信数</td><td>200件/月</td><td>営業ログスプシ</td></tr>
+  <tr><td>無料診断完了数</td><td>30件/月（着地率15%）</td><td>Google Form / Vercel Analytics</td></tr>
+  <tr><td>LINE/フォーム問い合わせ</td><td>8件/月（27%）</td><td>LINE管理画面</td></tr>
+  <tr><td>成約</td><td>3件/月（37%）</td><td>契約書PDF件数</td></tr>
+  <tr><td>月次MRR追加</td><td>¥60,000〜120,000</td><td>会計ソフト</td></tr>
+</table>
+
+<h3>8-2. 顧客KPI（90日）</h3>
+<table>
+  <tr><th>指標</th><th>達成基準</th></tr>
+  <tr><td>口コミ数</td><td>+20件以上</td></tr>
+  <tr><td>星評価</td><td>+0.3以上 or 4.5以上維持</td></tr>
+  <tr><td>メインKW順位</td><td>+3位以上 or TOP3達成</td></tr>
+  <tr><td>GBP閲覧数</td><td>+30%以上</td></tr>
+  <tr><td>通話/ルート検索</td><td>+50%以上</td></tr>
+</table>
+
+<h3>8-3. 運用KPI（毎日）</h3>
+<table>
+  <tr><th>指標</th><th>目標</th><th>確認方法</th></tr>
+  <tr><td>承認待ち滞留時間</td><td>24時間以内</td><td>npm run approve stats</td></tr>
+  <tr><td>承認率</td><td>85%以上</td><td>history.jsonの approved/total</td></tr>
+  <tr><td>配信成功率</td><td>99%以上</td><td>history.jsonの delivered.ok</td></tr>
+  <tr><td>口コミ返信率</td><td>100%（72時間以内）</td><td>review-log.json</td></tr>
+</table>
+
+<!-- 9. FAQ -->
+<h2 id="faq"><span class="num">9</span><i class="fa-solid fa-circle-question"></i>困った時のFAQ</h2>
+
+<div class="faq-item">
+  <div class="faq-q">承認したのにGoogleに投稿されてない</div>
+  <div class="faq-a">承認後、最大5分以内に配信されます。それ以上待っても出ない場合は <code>npm run approve deliver</code> で手動配信。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">Discord通知が来ない</div>
+  <div class="faq-a"><code>pm2 logs lien-bot --lines 50 | grep misenavi</code> でブリッジ起動確認。起動してなければ <code>pm2 restart lien-bot</code>。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">ターミナルで「command not found」</div>
+  <div class="faq-a">先に <code>cd ~/misenavi-system</code> でディレクトリ移動。これを忘れるとnpmが見つからない。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">承認待ちが大量に溜まってる</div>
+  <div class="faq-a">48時間で自動失効するので慌てなくてOK。一気に処理：<code>npm run approve</code> → <kbd>o</kbd>連打。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">間違って承認してしまった</div>
+  <div class="faq-a">5分以内なら間に合うかも。<code>data/approval_pending.json</code>を編集してstatus=rejectedに。既にdeliveredならGBP管理画面から手動削除。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">口コミに不適切な返信が出てしまった</div>
+  <div class="faq-a">GBP管理画面 → 該当口コミ → 返信を編集 or 削除。<code>contentGenerator.js</code> のプロンプトを修正して再発防止。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">顧客から「投稿が止まってる」とクレーム</div>
+  <div class="faq-a">承認待ちが溜まっている可能性大。即 <code>npm run approve</code> で処理。今後は1日1回以上の承認を習慣化。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">PM2のmisenaviがstoppedになってる</div>
+  <div class="faq-a"><code>pm2 logs misenavi --lines 100</code> で原因確認。ほとんどの場合 <code>pm2 restart misenavi</code> で復旧。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">GBP API HTTP 403エラーが出る</div>
+  <div class="faq-a">権限不足 or トークン期限切れ。GBP管理画面で「管理者」になっているか再確認。<code>node src/setup.js</code> でリフレッシュトークン再取得。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">SerpApi 401エラー</div>
+  <div class="faq-a">APIキー未設定 or 期限切れ。<code>.env</code>の<code>SERPAPI_KEY</code>確認。月100検索の無料枠を超えていないか<a href="https://serpapi.com/dashboard" target="_blank">ダッシュボード</a>で確認。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">月次レポートPDFが生成されない</div>
+  <div class="faq-a">手動実行: <code>cd ~/misenavi-system && DEBUG=1 npm run report</code> で詳細ログ確認。フォントエラーなら <code>~/Library/Fonts/GenShinGothic-Heavy.ttf</code> 確認。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">承認モードを一時停止したい（休暇中など）</div>
+  <div class="faq-a">.envに <code>APPROVAL_REQUIRED=false</code> を追加 → <code>pm2 restart misenavi</code>。AIが直接投稿モードに。戻すときは行を削除して再起動。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">スマホだけで完結したい</div>
+  <div class="faq-a">DiscordだけでOK。ボタン押下のみで運用可能。Discordの通知をミュートにしないこと。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">Macが落ちると全部止まる？</div>
+  <div class="faq-a">PM2のlaunchdで自動起動登録済みなので、Mac再起動でも自動復帰します。電源切れる→復旧後3分以内に再開。</div>
+</div>
+
+<!-- 10. 緊急時 -->
+<h2 id="emergency"><span class="num">10</span><i class="fa-solid fa-triangle-exclamation"></i>緊急時の対処</h2>
+
+<h3>🆘 「全部動いてない！」</h3>
+
+<div class="step-list">
+  <div class="step">
+    <h4>状態確認</h4>
+    <div class="code-block">
+<button class="copy-btn" data-copy="pm2 list">📋 コピー</button>
+pm2 list
+    </div>
+    <p>misenavi / lien-bot がonlineか確認。</p>
+  </div>
+  <div class="step">
+    <h4>停止していたら再起動</h4>
+    <div class="code-block">
+<button class="copy-btn" data-copy="pm2 restart misenavi && pm2 restart lien-bot">📋 コピー</button>
+pm2 restart misenavi && pm2 restart lien-bot
+    </div>
+  </div>
+  <div class="step">
+    <h4>ログを見る</h4>
+    <div class="code-block">
+<button class="copy-btn" data-copy="pm2 logs misenavi --lines 50">📋 コピー</button>
+pm2 logs misenavi --lines 50
+pm2 logs lien-bot --lines 50
+    </div>
+  </div>
+  <div class="step">
+    <h4>ヘルスチェック</h4>
+    <div class="code-block">
+<button class="copy-btn" data-copy="cd ~/misenavi-system && npm run health">📋 コピー</button>
+cd ~/misenavi-system && npm run health
+    </div>
+  </div>
+</div>
+
+<h3>🆘 「不適切な投稿が出たとクレーム」</h3>
+<ol style="margin-left:24px;">
+  <li>GBP管理画面 → 投稿 → 該当を削除</li>
+  <li>口コミ返信なら → 該当口コミ → 返信を編集or削除</li>
+  <li><code>data/approval_history.json</code> で承認履歴確認</li>
+  <li><code>contentGenerator.js</code> のプロンプトを修正</li>
+  <li>顧客に電話orLINEで謝罪 → 再発防止策を提示</li>
+</ol>
+
+<h3>🆘 「PCもDiscordも見られない」</h3>
+<ol style="margin-left:24px;">
+  <li>承認は48時間TTLで自動失効するので、放置でもGBPに影響なし</li>
+  <li>長期不在の場合は別の人に <code>npm run approve</code> を任せる</li>
+  <li>または APPROVAL_REQUIRED=false で自動運用に一時切替</li>
+</ol>
+
+<h3>🆘 「顧客のGBPアカウントから締め出された」</h3>
+<ol style="margin-left:24px;">
+  <li>顧客に連絡 → 再度管理者として招待してもらう</li>
+  <li>顧客のオーナー権限は不変なので、招待し直せば即復旧可能</li>
+</ol>
+
+<!-- 11. リソース -->
+<h2 id="resources"><span class="num">11</span><i class="fa-solid fa-link"></i>リソース集</h2>
+
+<h3>11-1. 公開ページ（顧客に共有可能）</h3>
+
+<div class="resource-grid">
+  <a href="/" class="resource-card">
+    <div class="icon"><i class="fa-solid fa-globe"></i></div>
+    <h5>LP本体</h5>
+    <p>ミセナビ サービスTOP / 60秒診断への導線</p>
+  </a>
+  <a href="/diagnose" class="resource-card">
+    <div class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+    <h5>60秒MEO診断</h5>
+    <p>9問→100点採点+TOP3+CTA</p>
+  </a>
+  <a href="/proposal" class="resource-card">
+    <div class="icon"><i class="fa-solid fa-file-lines"></i></div>
+    <h5>提案書（7ページ）</h5>
+    <p>営業時の事前資料</p>
+  </a>
+  <a href="/contract" class="resource-card">
+    <div class="icon"><i class="fa-solid fa-file-signature"></i></div>
+    <h5>有料契約書</h5>
+    <p>10条+署名欄</p>
+  </a>
+  <a href="/monitor-contract" class="resource-card">
+    <div class="icon"><i class="fa-solid fa-handshake"></i></div>
+    <h5>モニター契約書</h5>
+    <p>12条+成果保証否定+実績許諾</p>
+  </a>
+  <a href="/hearing-sheet" class="resource-card">
+    <div class="icon"><i class="fa-solid fa-clipboard-list"></i></div>
+    <h5>ヒアリングシート</h5>
+    <p>A4 2ページ・手書き記入式</p>
+  </a>
+  <a href="/onboarding-guide" class="resource-card">
+    <div class="icon"><i class="fa-solid fa-rocket"></i></div>
+    <h5>オンボーディングガイド</h5>
+    <p>GBP権限取得6ステップ</p>
+  </a>
+  <a href="/approval-quickstart" class="resource-card">
+    <div class="icon"><i class="fa-solid fa-check-double"></i></div>
+    <h5>承認クイックスタート</h5>
+    <p>承認フロー専用解説</p>
+  </a>
+</div>
+
+<h3>11-2. 内部ドキュメント（社内専用）</h3>
+<table>
+  <tr><th>ドキュメント</th><th>パス</th></tr>
+  <tr><td>営業パック</td><td><code>~/business-launch/misenavi-sales-pack.md</code></td></tr>
+  <tr><td>モニター運用プレイブック</td><td><code>~/business-launch/misenavi-monitor-playbook.md</code></td></tr>
+  <tr><td>承認フローガイド</td><td><code>~/misenavi-system/APPROVAL_GUIDE.md</code></td></tr>
+  <tr><td>運用マニュアル</td><td><code>~/misenavi-system/OPERATION.md</code></td></tr>
+  <tr><td>ホリニシMEOプレイブック</td><td><code>~/business-launch/horinishi-meo-playbook.md</code></td></tr>
+  <tr><td>ココナラ提案文10種</td><td><code>~/business-launch/coconala-proposal-templates.md</code></td></tr>
+  <tr><td>X/note ローンチパック</td><td><code>~/business-launch/x-pinned-and-note-launch.md</code></td></tr>
+</table>
+
+<h3>11-3. 運用システム</h3>
+<table>
+  <tr><th>項目</th><th>場所</th></tr>
+  <tr><td>misenavi-system</td><td><code>~/misenavi-system/</code></td></tr>
+  <tr><td>lien-edit-discord-bot</td><td><code>~/lien-edit-discord-bot/</code></td></tr>
+  <tr><td>承認キューデータ</td><td><code>~/misenavi-system/data/approval_pending.json</code></td></tr>
+  <tr><td>承認履歴</td><td><code>~/misenavi-system/data/approval_history.json</code></td></tr>
+  <tr><td>顧客リスト</td><td><code>~/misenavi-system/accounts.json</code></td></tr>
+  <tr><td>環境変数</td><td><code>~/misenavi-system/.env</code></td></tr>
+  <tr><td>レポート保存先</td><td><code>~/misenavi-system/reports/</code></td></tr>
+  <tr><td>ログ</td><td><code>~/misenavi-system/logs/</code></td></tr>
+</table>
+
+<h3>11-4. 外部サービス</h3>
+<table>
+  <tr><th>サービス</th><th>URL</th></tr>
+  <tr><td>Googleビジネスプロフィール管理画面</td><td><a href="https://business.google.com" target="_blank">business.google.com</a></td></tr>
+  <tr><td>Vercel（LP）</td><td><a href="https://vercel.com/dashboard" target="_blank">vercel.com/dashboard</a></td></tr>
+  <tr><td>Google Cloud Console</td><td><a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a></td></tr>
+  <tr><td>SerpApi（順位計測）</td><td><a href="https://serpapi.com/dashboard" target="_blank">serpapi.com/dashboard</a></td></tr>
+  <tr><td>OpenAI Platform</td><td><a href="https://platform.openai.com/usage" target="_blank">platform.openai.com</a></td></tr>
+  <tr><td>リッチリザルトテスト</td><td><a href="https://search.google.com/test/rich-results" target="_blank">search.google.com</a></td></tr>
+  <tr><td>Schema.org Validator</td><td><a href="https://validator.schema.org/" target="_blank">validator.schema.org</a></td></tr>
+</table>
+
+<!-- 12. 料金プラン詳細 -->
+<h2 id="pricing-detail"><span class="num">12</span><i class="fa-solid fa-yen-sign"></i>料金プラン詳細・アップセル戦略</h2>
+
+<h3>12-1. 3プラン比較</h3>
+
+<table>
+  <tr><th>項目</th><th>ライト</th><th>スタンダード（一番人気）</th><th>プレミアム</th></tr>
+  <tr><td>月額</td><td><strong>¥19,800</strong></td><td><strong>¥39,800</strong></td><td><strong>¥69,800</strong></td></tr>
+  <tr><td>初期費用</td><td>0円</td><td>0円</td><td>0円</td></tr>
+  <tr><td>契約縛り</td><td>なし</td><td>なし</td><td>なし</td></tr>
+  <tr><td>GBP最適化</td><td>○</td><td>○</td><td>○</td></tr>
+  <tr><td>AI投稿頻度</td><td>週2回</td><td>週4回</td><td>毎日</td></tr>
+  <tr><td>口コミ返信</td><td>○（24h以内）</td><td>○（24h以内）</td><td>○（24h以内）</td></tr>
+  <tr><td>月次レポートPDF</td><td>○</td><td>○</td><td>○</td></tr>
+  <tr><td>競合分析</td><td>—</td><td>○（3社）</td><td>○（5社）</td></tr>
+  <tr><td>写真撮影</td><td>—</td><td>月1回</td><td>月2回</td></tr>
+  <tr><td>AIO対策</td><td>—</td><td>○</td><td>○（強化版）</td></tr>
+  <tr><td>SNS運用</td><td>—</td><td>—</td><td>○（X or Insta選択）</td></tr>
+  <tr><td>動画制作</td><td>—</td><td>—</td><td>月1本</td></tr>
+  <tr><td>季節キャンペーンLP</td><td>—</td><td>—</td><td>年2回</td></tr>
+  <tr><td>定例ミーティング</td><td>—</td><td>月1（30分）</td><td>月1（60分・戦略）</td></tr>
+  <tr><td>解約条件</td><td colspan="3">月末14日前までに通知</td></tr>
+</table>
+
+<h3>12-2. 顧客タイプ別おすすめプラン</h3>
+
+<table>
+  <tr><th>顧客像</th><th>推奨プラン</th><th>理由</th></tr>
+  <tr><td>初めてMEO/個人店</td><td>ライト</td><td>低価格でハードル下げて関係構築</td></tr>
+  <tr><td>既に効果実感したい</td><td>スタンダード</td><td>本格運用で3ヶ月で結果が出る</td></tr>
+  <tr><td>多店舗・本気で投資</td><td>プレミアム</td><td>動画/SNS含めワンストップ</td></tr>
+  <tr><td>一度限りで充分</td><td>GBP単発設定（¥29,800）</td><td>月額嫌う層向けスポット</td></tr>
+</table>
+
+<h3>12-3. アップセル動線</h3>
+
+<div class="big-flow">
+  <div class="flow-stage">
+    <div class="flow-stage-num">1</div>
+    <div class="flow-stage-content">
+      <h5>無料診断（リード）</h5>
+      <p>60秒診断で関心ある層を抽出。改善ポイントTOP3を提示。</p>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-stage">
+    <div class="flow-stage-num">2</div>
+    <div class="flow-stage-content">
+      <h5>有料診断（ココナラ ¥5,000）</h5>
+      <p>10ページPDF+30分Zoom。「数字を見える化」してくれる人として認知。</p>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-stage">
+    <div class="flow-stage-num">3</div>
+    <div class="flow-stage-content">
+      <h5>運用代行ライト（¥19,800/月）</h5>
+      <p>診断料金は初月相殺。継続契約のスタートライン。</p>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-stage">
+    <div class="flow-stage-num">4</div>
+    <div class="flow-stage-content">
+      <h5>3ヶ月後 → スタンダードへ昇格（¥39,800/月）</h5>
+      <p>結果が出始めたタイミングで「より早く成果を」と提案。</p>
+    </div>
+  </div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-stage">
+    <div class="flow-stage-num">5</div>
+    <div class="flow-stage-content">
+      <h5>キズナビ本丸（SNS運用 ¥250,000/月 / YouTube ¥400,000/月）</h5>
+      <p>MEOの結果を見て信頼関係ができたタイミングで本命商品を提案。</p>
+    </div>
+  </div>
+</div>
+
+<h3>12-4. 値引き・特典の使い方</h3>
+
+<table>
+  <tr><th>特典</th><th>使う場面</th></tr>
+  <tr><td>初月50%OFF</td><td>ココナラ初回購入特典として明示</td></tr>
+  <tr><td>無料診断レポート（通常¥5,000）</td><td>運用代行加入時のフック</td></tr>
+  <tr><td>3ヶ月モニター（無料）</td><td>実績獲得目的・選定後に提案</td></tr>
+  <tr><td>紹介報酬30%</td><td>既存顧客に紹介依頼するとき</td></tr>
+  <tr><td>2店舗目以降10%OFF</td><td>多店舗オーナー獲得時</td></tr>
+</table>
+
+<!-- 13. 話法・対応 -->
+<h2 id="scripts"><span class="num">13</span><i class="fa-solid fa-comments"></i>話法・対応シーン別スクリプト</h2>
+
+<h3>13-1. 初回問い合わせ対応</h3>
+
+<div class="card">
+<h4>📞 LINEに問い合わせが来たら</h4>
+<div class="code-block no-prefix">
+{お名前}様
+
+ミセナビにご興味をお持ちいただきありがとうございます！
+代表の竹林と申します。
+
+まずは無料の60秒診断で現状を可視化させていただけませんか？
+→ https://misenavi-lp.vercel.app/diagnose
+
+入力いただいた内容を踏まえて、20〜30分のZoomで改善提案も無料でお出ししています。
+無理な営業は一切しないので、お気軽にどうぞ🙇
+
+ご都合のよい時間帯がございましたら、こちらからスケジュールを送らせていただきます。
+</div>
+</div>
+
+<h3>13-2. Zoom面談の流れ（30分）</h3>
+
+<table>
+  <tr><th>分</th><th>内容</th></tr>
+  <tr><td>0〜5分</td><td>挨拶・自己紹介・ミセナビとは</td></tr>
+  <tr><td>5〜15分</td><td>診断結果の読み合わせ・現状ヒアリング</td></tr>
+  <tr><td>15〜22分</td><td>改善提案（具体施策3つ）</td></tr>
+  <tr><td>22〜27分</td><td>料金説明・モニター案内（該当者のみ）</td></tr>
+  <tr><td>27〜30分</td><td>クロージング・次のアクション合意</td></tr>
+</table>
+
+<h3>13-3. よくある質問への回答</h3>
+
+<div class="faq-item">
+  <div class="faq-q">本当に効果あるんですか？</div>
+  <div class="faq-a">「効果には個人差があります」と前置きしつつ、過去事例（モニター実績）を見せる。「3ヶ月続けて改善が見られなければ翌月解約してください、それがミセナビのスタンスです」</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">他のMEO業者との違いは？</div>
+  <div class="faq-a">「価格が透明（縛りなし・初期費用0円）」「AIで人件費削減した分を顧客に還元」「キズナビ本体がSNS運用代行も持っているので、MEOから先のフェーズも一気通貫」</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">他社で運用してもらってますが…</div>
+  <div class="faq-a">「現在の運用が効果出ていれば継続をお勧めします。もし効果実感がない or 高すぎる場合のみ、診断だけでもお試しください」と無理しない</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">パソコンが苦手で…</div>
+  <div class="faq-a">「LINEでのやり取りだけで完結できます。GBPの管理画面操作はこちらで全部代行します」</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">途中でやめられる？</div>
+  <div class="faq-a">「いつでも解約OKです。月末14日前までにLINEでお伝えいただければ翌月から停止します。違約金は一切ありません」</div>
+</div>
+
+<h3>13-4. クレーム対応スクリプト</h3>
+
+<div class="card">
+<h4>😡 「投稿の内容が違う」と言われたら</h4>
+<div class="code-block no-prefix">
+{お客様名}様
+
+ご不快な思いをさせて申し訳ありません。
+即座に該当投稿を削除し、原因を確認いたします。
+
+【今すぐ実施】
+1. 該当投稿の削除（30分以内）
+2. 原因調査（24時間以内に報告）
+3. 再発防止策の実施
+
+ミセナビでは「人の承認を経て投稿」する仕組みを採用していますが、
+今回は私の確認漏れが原因です。心よりお詫び申し上げます。
+
+具体的にどの投稿のどの部分が問題でしたか？
+お手数ですがスクリーンショットをお送りいただけますでしょうか。
+</div>
+
+<h4>😡 「全然順位が上がらない」と言われたら</h4>
+<div class="code-block no-prefix">
+{お客様名}様
+
+ご期待に沿えず申し訳ありません。
+率直に現状をご説明させていただきたいので、お電話orZoomで
+30分ほどお時間いただけますでしょうか。
+
+【お話したい内容】
+1. 現状の数字の正確な分析
+2. 競合との差・伸びていない理由
+3. 来月から実施する具体施策3つ
+4. それでも改善されない場合の解約のご提案
+
+成果が出ないまま継続いただくのは申し訳ないので、
+まずはじっくりお話を聞かせてください。
+</div>
+</div>
+
+<h3>13-5. 解約申し出への対応</h3>
+
+<div class="card">
+<div class="code-block no-prefix">
+{お客様名}様
+
+これまでのご利用ありがとうございました。
+解約のお手続きについて、以下の流れで進めさせていただきます。
+
+【解約フロー】
+1. 解約日（月末日）の確認
+2. 最終月のレポートPDFをお送りします
+3. GBP管理者権限を当社から離脱します
+4. ご希望に応じて引継ぎ書類を作成します
+
+差し支えなければ、解約理由をお聞かせいただけますでしょうか？
+今後のサービス改善に活用させていただきます。
+
+なお、再開はいつでも歓迎です。データは1年間保管しています。
+</div>
+</div>
+
+<!-- 14. 撮影実務 -->
+<h2 id="photography"><span class="num">14</span><i class="fa-solid fa-camera"></i>撮影実務</h2>
+
+<h3>14-1. 撮影の流れ</h3>
+
+<div class="step-list">
+  <div class="step">
+    <h4>事前準備（前日）</h4>
+    <ul style="margin-left:24px;">
+      <li>顧客に「混雑時間外」を確認（営業前 or 営業後）</li>
+      <li>スマホ充電100%・Lightroom Mobile起動確認</li>
+      <li>撮影リスト作成（外観/内観/メニュー/スタッフ/工程の各枚数）</li>
+    </ul>
+  </div>
+  <div class="step">
+    <h4>当日機材</h4>
+    <ul style="margin-left:24px;">
+      <li>スマホ（iPhone推奨・カメラ性能重視）</li>
+      <li>三脚（夜間撮影用・約3,000円）</li>
+      <li>レフ板（A3白厚紙でも可）</li>
+      <li>必要ならポータブル照明（顔撮影用）</li>
+    </ul>
+  </div>
+  <div class="step">
+    <h4>撮影所要時間（標準45分）</h4>
+    <table>
+      <tr><th>カテゴリ</th><th>時間</th></tr>
+      <tr><td>外観（昼/夜）</td><td>5分</td></tr>
+      <tr><td>内観</td><td>10分</td></tr>
+      <tr><td>メニュー/商品</td><td>15分（盛り付け含む）</td></tr>
+      <tr><td>スタッフ・工程</td><td>10分</td></tr>
+      <tr><td>予備（再撮影用）</td><td>5分</td></tr>
+    </table>
+  </div>
+  <div class="step">
+    <h4>編集（自宅・所要30分）</h4>
+    <p>Lightroom Mobile設定:</p>
+    <ul style="margin-left:24px;">
+      <li>明るさ +15</li>
+      <li>コントラスト +5</li>
+      <li>鮮明度 +10</li>
+      <li>色温度 わずかに暖色</li>
+      <li>彩度 +5</li>
+    </ul>
+    <p>料理撮影は「シズル感」重視 → 湯気/光沢/影を強調。</p>
+  </div>
+  <div class="step">
+    <h4>GBP登録（オフィス・所要15分）</h4>
+    <p>GBP管理画面 → 写真 → カテゴリ別にアップロード（外観/内観/料理/チーム/その他）</p>
+  </div>
+</div>
+
+<h3>14-2. 業種別撮影ポイント</h3>
+
+<table>
+  <tr><th>業種</th><th>必須カット</th></tr>
+  <tr><td>飲食店</td><td>看板/外観/暖簾/カウンター/個室/メニュー10品/スタッフの笑顔</td></tr>
+  <tr><td>美容院・サロン</td><td>外観/受付/施術スペース/シャンプー台/ビフォーアフター/スタイル写真</td></tr>
+  <tr><td>整体・治療院</td><td>外観/受付/施術ベッド/設備/院長/施術風景（顔ぼかし）</td></tr>
+  <tr><td>物販店</td><td>外観/什器/商品ディスプレイ/限定品/スタッフ</td></tr>
+</table>
+
+<h3>14-3. 撮影NG事項</h3>
+
+<ul style="margin-left:24px;">
+  <li>❌ お客様の顔が映る撮影（必ず許諾 or 顔ぼかし）</li>
+  <li>❌ 競合店のロゴが映る構図</li>
+  <li>❌ 食材の汚れ・スタッフの寝不足顔・乱雑な裏方</li>
+  <li>❌ ストック画像・他店の流用（規約違反）</li>
+</ul>
+
+<!-- 15. 月次報告書 -->
+<h2 id="monthly-report"><span class="num">15</span><i class="fa-solid fa-file-pdf"></i>月次報告書サンプル</h2>
+
+<h3>15-1. レポート構成（標準10ページPDF）</h3>
+
+<table>
+  <tr><th>ページ</th><th>内容</th></tr>
+  <tr><td>1</td><td>表紙（顧客名・対象月・サマリースコア）</td></tr>
+  <tr><td>2</td><td>サマリー（先月比3行）</td></tr>
+  <tr><td>3</td><td>口コミ推移（件数・星評価グラフ）</td></tr>
+  <tr><td>4</td><td>GBP閲覧数推移</td></tr>
+  <tr><td>5</td><td>通話/ルート検索/サイトクリック推移</td></tr>
+  <tr><td>6</td><td>主要KW順位推移（3〜5KW）</td></tr>
+  <tr><td>7</td><td>投稿実績一覧（先月分）</td></tr>
+  <tr><td>8</td><td>口コミ返信実績</td></tr>
+  <tr><td>9</td><td>来月の重点施策3つ</td></tr>
+  <tr><td>10</td><td>お問い合わせ・質問欄</td></tr>
+</table>
+
+<h3>15-2. レポート送付フロー</h3>
+
+<div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+# 月初の自動生成（cronで毎月1日 9:00に実行）
+# → reports/monthly_{storeId}_{YYYYMM}.pdf 生成
+
+# 顧客に送付
+# 1. PDFをLINEで送付
+# 2. 「今月のレポートです」とメッセージ
+# 3. 30分Zoomの予定打診
+
+# 手動再生成（必要時）
+cd ~/misenavi-system && node src/commands/report.js store_002
+</div>
+
+<h3>15-3. レポート読み合わせミーティング</h3>
+
+<table>
+  <tr><th>項目</th><th>話す内容</th></tr>
+  <tr><td>結果報告</td><td>「今月は〇〇が改善しました。一方で△△は伸びていません」</td></tr>
+  <tr><td>原因分析</td><td>「△△が伸びていない原因は××だと考えています」</td></tr>
+  <tr><td>来月施策</td><td>「来月は1)〇〇 2)△△ 3)□□ を集中的にやります」</td></tr>
+  <tr><td>顧客側依頼</td><td>「お願いしたいこと: 写真提供・口コミ依頼の徹底など」</td></tr>
+</table>
+
+<!-- 16. 解約処理 -->
+<h2 id="cancel-flow"><span class="num">16</span><i class="fa-solid fa-door-open"></i>解約・契約終了処理</h2>
+
+<h3>16-1. 解約フロー（標準）</h3>
+
+<div class="step-list">
+  <div class="step">
+    <h4>解約申し出を受ける</h4>
+    <p>LINE or メールで「来月から解約したい」と来た時。<strong>月末14日前まで</strong>が解約期限。</p>
+  </div>
+  <div class="step">
+    <h4>解約理由をヒアリング</h4>
+    <p>「差し支えなければ理由を教えてください」と聞く。<br>
+    パターン: a) 効果実感なし b) 値段 c) 自分でやる d) 店舗閉店 e) 他社移行</p>
+  </div>
+  <div class="step">
+    <h4>挽回提案（理由による）</h4>
+    <table>
+      <tr><th>理由</th><th>提案</th></tr>
+      <tr><td>効果実感なし</td><td>3ヶ月延長で半額提案・新施策説明</td></tr>
+      <tr><td>値段</td><td>ライトプランへのダウングレード提案</td></tr>
+      <tr><td>自分でやる</td><td>引継ぎ書類提供・3ヶ月後再開歓迎</td></tr>
+      <tr><td>店舗閉店</td><td>無理せず即承諾・労いの言葉</td></tr>
+      <tr><td>他社移行</td><td>無理引き止めしない・データ移管に協力</td></tr>
+    </table>
+  </div>
+  <div class="step">
+    <h4>解約承諾</h4>
+    <p>解約日を確定。最終月のレポート提供を約束。</p>
+  </div>
+  <div class="step">
+    <h4>解約日のシステム処理</h4>
+    <div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+# 1. accounts.json で active=false に変更
+# 2. 最終レポート手動生成
+node src/commands/report.js store_xxx --final
+
+# 3. PM2再起動
+pm2 restart misenavi
+    </div>
+  </div>
+  <div class="step">
+    <h4>GBP管理者権限から離脱</h4>
+    <p>https://business.google.com → 該当店舗 → ユーザー → 自分（takeba0228@gmail.com）→ 削除</p>
+  </div>
+  <div class="step">
+    <h4>退会後ヒアリング（任意）</h4>
+    <p>解約から1週間後にLINEで「もしまた必要になったらいつでも」と添えて関係維持。</p>
+  </div>
+</div>
+
+<h3>16-2. データ保管</h3>
+
+<table>
+  <tr><th>項目</th><th>保管期間</th><th>保管先</th></tr>
+  <tr><td>contracts</td><td>5年（法定）</td><td><code>~/Documents/contracts/</code></td></tr>
+  <tr><td>monthly_reports</td><td>1年</td><td><code>~/misenavi-system/reports/</code></td></tr>
+  <tr><td>approval_history</td><td>3ヶ月（自動ローテーション）</td><td><code>~/misenavi-system/data/</code></td></tr>
+  <tr><td>顧客個人情報</td><td>解約後1年で削除</td><td>accounts.json から削除</td></tr>
+</table>
+
+<!-- 17. 請求・入金 -->
+<h2 id="billing"><span class="num">17</span><i class="fa-solid fa-receipt"></i>請求・入金・税務</h2>
+
+<h3>17-1. 月次請求フロー</h3>
+
+<div class="step-list">
+  <div class="step">
+    <h4>毎月1日：請求書発行</h4>
+    <p>invoice-generator スキル使用 or freee/MoneyForwardで自動発行</p>
+    <div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+# Claude Code経由で請求書生成
+claude /invoice-generator
+    </div>
+  </div>
+  <div class="step">
+    <h4>請求書をLINE/メールで送付</h4>
+    <p>支払期限：翌月末日</p>
+  </div>
+  <div class="step">
+    <h4>入金確認（毎日）</h4>
+    <p>銀行アプリ or freeeで入金チェック → 入金消込</p>
+  </div>
+  <div class="step">
+    <h4>未入金時の対応</h4>
+    <table>
+      <tr><th>遅延日数</th><th>対応</th></tr>
+      <tr><td>3日</td><td>LINEで「入金確認できていないようです」とリマインド</td></tr>
+      <tr><td>7日</td><td>メールで督促・電話確認</td></tr>
+      <tr><td>14日</td><td>運用一時停止の通知</td></tr>
+      <tr><td>30日</td><td>契約解除通知書送付・法的手続き検討</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>17-2. 支払方法</h3>
+
+<table>
+  <tr><th>方法</th><th>手数料</th><th>注意点</th></tr>
+  <tr><td>銀行振込</td><td>顧客負担</td><td>標準・最も推奨</td></tr>
+  <tr><td>クレカ（Stripe等）</td><td>3.6%（自社負担）</td><td>解約しやすいので継続率↑</td></tr>
+  <tr><td>請求書払い（NP掛け払い等）</td><td>4-5%</td><td>大企業向け</td></tr>
+  <tr><td>現金（直接受領）</td><td>0%</td><td>領収書発行義務</td></tr>
+</table>
+
+<h3>17-3. 税務（個人事業主・法人）</h3>
+
+<table>
+  <tr><th>項目</th><th>内容</th></tr>
+  <tr><td>消費税</td><td>顧客請求時に10%加算（インボイス対応必須）</td></tr>
+  <tr><td>源泉徴収</td><td>個人顧客の場合は不要・法人取引で源泉される場合あり</td></tr>
+  <tr><td>確定申告</td><td>年1回（2/16〜3/15）・freee or MFクラウドで自動化</td></tr>
+  <tr><td>領収書発行</td><td>顧客から要求されたら即発行</td></tr>
+  <tr><td>経費計上</td><td>OpenAI料金/サーバー代/SerpApi/Vercel/撮影機材は全て経費</td></tr>
+</table>
+
+<!-- 18. AIプロンプト改善 -->
+<h2 id="prompt-tuning"><span class="num">18</span><i class="fa-solid fa-brain"></i>AIプロンプト調整・継続改善</h2>
+
+<h3>18-1. success_patterns.json運用</h3>
+
+<p>成功した投稿パターン・失敗パターンを蓄積し、AI生成プロンプトに注入する仕組み。</p>
+
+<div class="code-block">
+<button class="copy-btn">📋 コピー</button>
+cat ~/misenavi-system/data/success_patterns.json
+</div>
+
+<h4>サンプル構造</h4>
+
+<div class="code-block no-prefix">
+{
+  "patterns": [
+    {
+      "id": "pat-001",
+      "type": "post",
+      "category": "新メニュー紹介",
+      "structure": "🌸絵文字+商品名+価格+特徴2文+CTA",
+      "examples": ["..."],
+      "metric": { "engagement": "high" },
+      "createdAt": "2026-04-15"
+    }
+  ],
+  "antiPatterns": [
+    {
+      "id": "anti-001",
+      "issue": "業種に合わない絵文字使用",
+      "example": "整体院で🍣使用",
+      "fix": "整体院は🩺💆‍♀️🌿のみ使用"
+    }
+  ]
+}
+</div>
+
+<h3>18-2. 月次プロンプト見直しサイクル</h3>
+
+<div class="step-list">
+  <div class="step">
+    <h4>月末: 投稿パフォーマンス集計</h4>
+    <p>GBP管理画面から各投稿の閲覧数・クリック数を取得。エンゲージメント上位3つ・下位3つを抽出。</p>
+  </div>
+  <div class="step">
+    <h4>パターン抽出</h4>
+    <p>上位パターンの共通点（絵文字・構造・テーマ・時間）を分析。下位の問題点も同様に。</p>
+  </div>
+  <div class="step">
+    <h4>success_patterns.json 更新</h4>
+    <p>新パターンを追加・古いパターンを削除（半年で陳腐化）。</p>
+  </div>
+  <div class="step">
+    <h4>contentGenerator.js プロンプト調整</h4>
+    <p>成功パターンを「参考事例」としてプロンプトに注入する。</p>
+  </div>
+</div>
+
+<!-- 19. 競合分析 -->
+<h2 id="competitor"><span class="num">19</span><i class="fa-solid fa-binoculars"></i>競合分析</h2>
+
+<h3>19-1. 競合店リサーチ手順（顧客ごとに月1回）</h3>
+
+<div class="step-list">
+  <div class="step">
+    <h4>Googleマップで「{業種} {エリア}」検索</h4>
+    <p>上位3〜5店舗をリストアップ。</p>
+  </div>
+  <div class="step">
+    <h4>各競合の指標を記録</h4>
+    <table>
+      <tr><th>項目</th><th>記録方法</th></tr>
+      <tr><td>口コミ件数・星評価</td><td>GBPページから手動コピー</td></tr>
+      <tr><td>投稿頻度</td><td>過去1ヶ月の投稿数を数える</td></tr>
+      <tr><td>写真枚数</td><td>「写真を見る」をクリック</td></tr>
+      <tr><td>使用カテゴリ</td><td>GBPプロフィール下部</td></tr>
+      <tr><td>営業時間</td><td>同</td></tr>
+      <tr><td>差別化ポイント</td><td>説明文・写真から推定</td></tr>
+    </table>
+  </div>
+  <div class="step">
+    <h4>差分分析</h4>
+    <p>顧客と競合の差を可視化 → 「ここで負けてるから、ここを伸ばす」と提案。</p>
+  </div>
+</div>
+
+<h3>19-2. 競合別の戦い方</h3>
+
+<table>
+  <tr><th>競合の特徴</th><th>こちらの戦略</th></tr>
+  <tr><td>圧倒的口コミ数</td><td>「質」で勝負（投稿頻度・写真クオリティ）</td></tr>
+  <tr><td>大手チェーン</td><td>「個人店ならでは」を訴求（顔の見える投稿）</td></tr>
+  <tr><td>古くからの店</td><td>「最新メニュー」「進化」を訴求</td></tr>
+  <tr><td>新規開業店</td><td>「実績」「歴史」「安定感」を訴求</td></tr>
+</table>
+
+<!-- 20. 規約NG集 -->
+<h2 id="gbp-rules"><span class="num">20</span><i class="fa-solid fa-ban"></i>Googleガイドライン・規約違反NG集</h2>
+
+<div class="callout callout-danger">
+  <strong>⚠️ これらをやるとアカウント停止リスク</strong>
+  顧客のGBPアカウントが消えたら賠償問題にもなります。絶対NG。
+</div>
+
+<h3>20-1. 投稿系のNG</h3>
+
+<ul style="margin-left:24px;">
+  <li>❌ キーワード詰め込み（「美容院 大阪 駅近 安い 個室」みたいな羅列）</li>
+  <li>❌ 虚偽情報（実在しないメニュー・架空の特典）</li>
+  <li>❌ 競合店の悪口・比較表現（「他店より安い」も微妙）</li>
+  <li>❌ 過度なURL・電話番号の繰り返し</li>
+  <li>❌ アフィリエイトリンク・外部サイト誘導の過剰使用</li>
+  <li>❌ 性的・暴力的・差別的表現</li>
+</ul>
+
+<h3>20-2. 口コミ系のNG</h3>
+
+<ul style="margin-left:24px;">
+  <li>❌ 自演レビュー・サクラ口コミ</li>
+  <li>❌ 親族・スタッフ・友人による組織的レビュー</li>
+  <li>❌ 「レビュー書いたら割引」と直接的な対価交換（「励みになります」程度はOK）</li>
+  <li>❌ 低評価レビューへの感情的返信・反論</li>
+  <li>❌ 個人を特定できる返信（顧客の本名公表など）</li>
+</ul>
+
+<h3>20-3. プロフィール系のNG</h3>
+
+<ul style="margin-left:24px;">
+  <li>❌ ビジネス名にキーワードを不自然に挿入</li>
+  <li>❌ 別店舗の住所・電話番号の流用</li>
+  <li>❌ 営業時間の偽装（実際は閉まってるのに開いてると表示）</li>
+  <li>❌ 該当しないカテゴリ選択</li>
+  <li>❌ 第三者の写真・素材集画像の無断使用</li>
+</ul>
+
+<h3>20-4. 違反時の流れ</h3>
+
+<table>
+  <tr><th>レベル</th><th>結果</th></tr>
+  <tr><td>軽微</td><td>該当投稿・写真の削除</td></tr>
+  <tr><td>中度</td><td>機能制限（投稿不可など30日）</td></tr>
+  <tr><td>重度</td><td>アカウント停止・復活困難</td></tr>
+</table>
+
+<p>違反を発見した場合は <strong>即座に修正</strong> してください。Googleからの通知メールが顧客に届く前に。</p>
+
+<!-- 21. 守秘・賠償 -->
+<h2 id="legal"><span class="num">21</span><i class="fa-solid fa-shield"></i>守秘義務・個人情報・賠償</h2>
+
+<h3>21-1. 守秘義務</h3>
+
+<ul style="margin-left:24px;">
+  <li>顧客の経営情報・売上・顧客情報を第三者に開示しない（契約書 第9条）</li>
+  <li>SNS・note記事化時は事前許諾必須（モニター契約書 第4条で許諾済みのみ）</li>
+  <li>業務終了後3年間は守秘義務存続</li>
+</ul>
+
+<h3>21-2. 個人情報保護</h3>
+
+<table>
+  <tr><th>取扱項目</th><th>保管・廃棄</th></tr>
+  <tr><td>顧客の連絡先</td><td>業務目的のみ・解約後1年で削除</td></tr>
+  <tr><td>顧客の口コミレビュー閲覧者情報</td><td>取得しない・GBP上に残るのみ</td></tr>
+  <tr><td>従業員・スタッフの写真</td><td>同意確認後のみ使用</td></tr>
+  <tr><td>顧客のメール内容</td><td>業務目的のみ・転送禁止</td></tr>
+</table>
+
+<h3>21-3. 賠償リスクと対応</h3>
+
+<table>
+  <tr><th>リスク</th><th>想定額</th><th>対策</th></tr>
+  <tr><td>不適切投稿による信用毀損</td><td>10〜100万円</td><td>承認フロー必須・契約書で上限設定</td></tr>
+  <tr><td>GBPアカウント停止</td><td>営業損失分</td><td>規約厳守・違反時即修正</td></tr>
+  <tr><td>個人情報漏洩</td><td>1人あたり数千円〜数万円</td><td>暗号化・アクセス制限</td></tr>
+  <tr><td>サービス停止</td><td>当該月料金返金</td><td>PM2で常駐・ヘルスチェック</td></tr>
+</table>
+
+<p><strong>契約書での上限</strong>: 有料契約「3ヶ月分の料金」/ モニター契約「119,400円（39,800×3）」</p>
+
+<h3>21-4. 賠償保険</h3>
+
+<p>事業規模が大きくなったら検討:</p>
+<ul style="margin-left:24px;">
+  <li>業務総合賠償責任保険（年5〜10万円）</li>
+  <li>サイバー保険（情報漏洩対策）</li>
+</ul>
+
+<!-- 22. 理想顧客像 -->
+<h2 id="ideal-customer"><span class="num">22</span><i class="fa-solid fa-user-check"></i>理想顧客像・取らない顧客</h2>
+
+<h3>22-1. 理想顧客像（取りに行く）</h3>
+
+<table>
+  <tr><th>項目</th><th>条件</th></tr>
+  <tr><td>業種</td><td>飲食店/美容院/整体/クリニック/小売/教室</td></tr>
+  <tr><td>店舗数</td><td>1〜3店舗（個人〜小規模法人）</td></tr>
+  <tr><td>エリア</td><td>大阪・京都・神戸・東京</td></tr>
+  <tr><td>オーナー年齢</td><td>30〜60代</td></tr>
+  <tr><td>月商</td><td>200万〜2,000万円</td></tr>
+  <tr><td>MEO意識</td><td>「上位表示したいが手が回らない」</td></tr>
+  <tr><td>性格</td><td>素直・改善意欲あり・感情的でない</td></tr>
+</table>
+
+<h3>22-2. 取らない顧客（断る）</h3>
+
+<table>
+  <tr><th>状況</th><th>理由</th></tr>
+  <tr><td>「絶対1位にして」と要求</td><td>無理な約束を強要する→トラブル必至</td></tr>
+  <tr><td>支払いを渋る・値切る</td><td>長期関係構築困難</td></tr>
+  <tr><td>違法・反社会的事業</td><td>法的リスク</td></tr>
+  <tr><td>競合店の運用と被る</td><td>利益相反</td></tr>
+  <tr><td>過去にGoogle規約違反履歴あり</td><td>運用継続困難</td></tr>
+  <tr><td>連絡が取れない・常に既読スルー</td><td>運用情報共有不可</td></tr>
+  <tr><td>業界が衰退・店舗が閉店間近</td><td>努力に見合う成果出ない</td></tr>
+</table>
+
+<h3>22-3. 断り方の例</h3>
+
+<div class="code-block no-prefix">
+{お客様名}様
+
+ご検討いただきありがとうございます。
+誠に恐縮ですが、以下の理由により今回はお引き受けが難しいです。
+
+【理由】
+{具体的な理由を簡潔に}
+
+別の解決策として、{代替提案}をご検討いただければ幸いです。
+お時間いただきありがとうございました。
+</div>
+
+<!-- 23. スケジュール -->
+<h2 id="schedule"><span class="num">23</span><i class="fa-solid fa-calendar-days"></i>1日/月間スケジュール</h2>
+
+<h3>23-1. 平日1日のタイムスケジュール（顧客5件運用時）</h3>
+
+<table>
+  <tr><th>時間</th><th>業務</th><th>所要</th></tr>
+  <tr><td>08:00</td><td>朝の承認チェック（CLI）</td><td>10分</td></tr>
+  <tr><td>09:00</td><td>新規問い合わせ対応・リード返信</td><td>30分</td></tr>
+  <tr><td>10:00</td><td>営業活動（DM50件・ココナラチェック）</td><td>1h</td></tr>
+  <tr><td>11:00</td><td>顧客Zoom面談（ある日）</td><td>30〜60分</td></tr>
+  <tr><td>13:00</td><td>撮影同行（月2〜3回）</td><td>2h</td></tr>
+  <tr><td>15:00</td><td>レポート作成・GBP最適化作業</td><td>1〜2h</td></tr>
+  <tr><td>17:00</td><td>夕方の承認チェック</td><td>5分</td></tr>
+  <tr><td>18:00</td><td>業務終了・記事執筆・SNS投稿</td><td>1h</td></tr>
+  <tr><td>22:00</td><td>夜の最終承認チェック</td><td>5分</td></tr>
+</table>
+
+<p><strong>1日の業務時間目安</strong>: 営業1h + 顧客対応1〜3h + 制作1〜2h + 承認20分 = <strong>4〜7時間</strong></p>
+
+<h3>23-2. 月間業務カレンダー</h3>
+
+<table>
+  <tr><th>日</th><th>業務</th></tr>
+  <tr><td>1日</td><td>月次レポート自動生成・送付</td></tr>
+  <tr><td>2〜5日</td><td>レポート読み合わせ Zoom（顧客全員）</td></tr>
+  <tr><td>6〜10日</td><td>請求書発行・入金確認</td></tr>
+  <tr><td>10〜20日</td><td>新規撮影・GBP更新・施策実施</td></tr>
+  <tr><td>20〜25日</td><td>競合分析・KW順位記録</td></tr>
+  <tr><td>25〜末日</td><td>解約申し出締切・翌月準備</td></tr>
+  <tr><td>毎日</td><td>承認・営業・新規対応</td></tr>
+</table>
+
+<!-- 24. チームスケール -->
+<h2 id="team-scale"><span class="num">24</span><i class="fa-solid fa-people-group"></i>チームスケール時のロール分担</h2>
+
+<h3>24-1. 1人運用の限界</h3>
+
+<table>
+  <tr><th>顧客数</th><th>1人で可能か</th><th>業務時間/日</th></tr>
+  <tr><td>1〜5件</td><td>○ 楽勝</td><td>2〜4h</td></tr>
+  <tr><td>5〜15件</td><td>○ ピーク作業時に厳しい</td><td>4〜6h</td></tr>
+  <tr><td>15〜30件</td><td>△ 補助スタッフ必要</td><td>6〜10h</td></tr>
+  <tr><td>30件以上</td><td>✕ チーム化必須</td><td>10h+</td></tr>
+</table>
+
+<h3>24-2. ロール分担案（10件超えたら）</h3>
+
+<table>
+  <tr><th>ロール</th><th>業務</th><th>稼働</th><th>採用形態</th></tr>
+  <tr><td>営業担当</td><td>DM・ココナラ対応・初回面談</td><td>20h/週</td><td>業務委託</td></tr>
+  <tr><td>運用担当</td><td>承認・GBP最適化・投稿チェック</td><td>30h/週</td><td>パート</td></tr>
+  <tr><td>撮影担当</td><td>撮影・編集</td><td>10h/週</td><td>外注</td></tr>
+  <tr><td>制作担当</td><td>レポート・資料作成</td><td>10h/週</td><td>外注</td></tr>
+  <tr><td>代表（自分）</td><td>戦略・新規開発・最終決裁</td><td>残り</td><td>—</td></tr>
+</table>
+
+<h3>24-3. 委託時の権限管理</h3>
+
+<table>
+  <tr><th>権限</th><th>誰が持つか</th></tr>
+  <tr><td>GBP管理者</td><td>運用担当のみ・代表は予備</td></tr>
+  <tr><td>承認権限</td><td>運用担当（CLI/Discord共に）</td></tr>
+  <tr><td>契約書発行</td><td>代表のみ</td></tr>
+  <tr><td>請求書発行</td><td>制作担当 + 代表確認</td></tr>
+  <tr><td>緊急対応</td><td>運用担当 → 代表エスカレーション</td></tr>
+</table>
+
+<h3>24-4. 委託契約時の注意</h3>
+
+<ul style="margin-left:24px;">
+  <li>NDA（守秘義務契約）必須</li>
+  <li>業務委託契約書（再委託禁止条項あり）</li>
+  <li>ログイン情報共有時は1Password等で管理</li>
+  <li>業務終了時は権限即削除</li>
+</ul>
+
+<div class="deco">🎉</div>
+<div class="callout callout-success" style="text-align:center;">
+  <strong>これがミセナビ事業の<u>本当の全て</u>です。</strong><br>
+  営業・契約・運用・経理・労務・法務・スケールまで、このページに書かれていない作業はありません。<br>
+  毎朝5分の承認だけ続ければ、事故ゼロの運用が永続的に続きます。
+</div>
+
+</main>
+</div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()"><i class="fa-solid fa-print"></i> 印刷 / PDF保存</button>
+
+<footer>
+  <p>ミセナビ by <a href="/">Lien Edit株式会社</a> | <a href="/proposal">提案書</a> | <a href="/contract">契約書</a> | <a href="/monitor-contract">モニター契約書</a></p>
+  <p style="margin-top:8px;opacity:0.7;">最終更新: 2026-04-27 / 内部運用マスターガイド（社外秘）</p>
+</footer>
+
+<script>
+'use strict';
+
+// コピペボタン
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const text = btn.dataset.copy || btn.parentElement.textContent.replace(/📋 コピー/g, '').trim();
+    try {
+      await navigator.clipboard.writeText(text);
+      btn.textContent = '✓ コピー完了';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = '📋 コピー';
+        btn.classList.remove('copied');
+      }, 2000);
+    } catch (e) {
+      btn.textContent = '⚠️ 失敗';
+    }
+  });
+});
+
+// アクティブセクションをハイライト
+const tocLinks = document.querySelectorAll('.toc-sidebar a');
+const sections = document.querySelectorAll('h2[id], h3[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    const top = s.getBoundingClientRect().top;
+    if (top < 200) current = s.id;
+  });
+  tocLinks.forEach(l => {
+    l.style.background = '';
+    l.style.color = '';
+    if (l.getAttribute('href') === '#' + current) {
+      l.style.background = '#fff5f7';
+      l.style.color = '#E03562';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

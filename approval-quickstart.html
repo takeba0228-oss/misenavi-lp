@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ミセナビ 承認フロー 超かんたん使い方ガイド | Lien Edit株式会社</title>
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --primary: #E03562;
+    --primary-dark: #c02850;
+    --accent: #1a1a2e;
+    --bg: #fafafa;
+    --surface: #ffffff;
+    --text: #1a1a2e;
+    --muted: #737373;
+    --border: #e5e5e5;
+    --success: #16a34a;
+    --warn: #f59e0b;
+    --danger: #dc2626;
+    --discord: #5865F2;
+    --line: #06C755;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.85; padding-bottom: 100px;
+  }
+
+  /* Nav */
+  .nav {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 14px 24px; position: sticky; top: 0; z-index: 50;
+  }
+  .nav-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo { font-weight: 900; color: var(--primary); font-size: 1.15rem; }
+  .logo span { color: var(--accent); font-size: 0.75rem; margin-left: 6px; font-weight: 500; }
+  .nav-back { color: var(--muted); font-size: 0.85rem; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #fff5f7, #ffeef2);
+    padding: 60px 24px; text-align: center;
+  }
+  .hero h1 {
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    font-weight: 900; color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .hero h1 em { color: var(--primary); font-style: normal; }
+  .hero p { color: var(--muted); max-width: 640px; margin: 0 auto 16px; font-size: 1rem; }
+  .hero-warn {
+    display: inline-block;
+    background: white; border: 2px solid var(--primary);
+    color: var(--primary); font-weight: 700;
+    padding: 8px 18px; border-radius: 999px;
+    font-size: 0.88rem; margin-top: 14px;
+  }
+
+  /* Container */
+  .container { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+
+  /* TOC */
+  .toc {
+    background: var(--accent); color: white;
+    border-radius: 14px; padding: 28px;
+    margin-bottom: 40px;
+  }
+  .toc h2 { color: white; border: none; margin: 0 0 16px; font-size: 1.2rem; }
+  .toc h2 i { color: var(--primary); margin-right: 8px; }
+  .toc-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 10px;
+  }
+  .toc-item {
+    background: rgba(255,255,255,0.08);
+    padding: 12px 14px; border-radius: 8px;
+    display: flex; align-items: center; gap: 10px;
+    color: white; text-decoration: none;
+    transition: all 0.15s;
+    font-size: 0.92rem;
+  }
+  .toc-item:hover {
+    background: var(--primary);
+    transform: translateX(4px);
+  }
+  .toc-num {
+    flex-shrink: 0; width: 28px; height: 28px;
+    background: var(--primary); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 0.9rem;
+  }
+
+  /* Section */
+  h2 {
+    font-size: 1.5rem; color: var(--accent);
+    margin: 48px 0 18px; padding-bottom: 8px;
+    border-bottom: 4px solid var(--primary);
+    display: flex; align-items: center; gap: 12px;
+  }
+  h2 i { color: var(--primary); }
+  h2 .num {
+    background: var(--primary); color: white;
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 900;
+  }
+
+  h3 { font-size: 1.1rem; color: var(--accent); margin: 24px 0 10px; }
+  p { margin: 8px 0; }
+
+  /* Cards */
+  .card {
+    background: white; border-radius: 14px;
+    padding: 24px 28px; margin-bottom: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
+
+  /* Step */
+  .step-list { counter-reset: step; }
+  .step {
+    background: white; border-radius: 14px;
+    padding: 24px 24px 24px 80px;
+    margin-bottom: 14px; border: 1px solid var(--border);
+    position: relative; counter-increment: step;
+  }
+  .step::before {
+    content: counter(step);
+    position: absolute; left: 22px; top: 24px;
+    width: 42px; height: 42px; background: var(--primary); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1.1rem;
+  }
+  .step h4 { font-size: 1.05rem; color: var(--accent); margin-bottom: 8px; }
+
+  /* Code blocks (copyable) */
+  .code-block {
+    background: #1a1a2e; color: #e5e5e5;
+    padding: 16px 20px; border-radius: 8px;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.9rem; margin: 12px 0;
+    position: relative; overflow-x: auto;
+    line-height: 1.6;
+  }
+  .code-block::before {
+    content: 'コピーしてターミナルに貼り付け';
+    position: absolute; top: -12px; left: 12px;
+    background: var(--primary); color: white;
+    padding: 2px 10px; border-radius: 4px;
+    font-size: 0.7rem; font-weight: 700;
+  }
+  .code-block.no-copy::before { display: none; }
+  .copy-btn {
+    position: absolute; top: 8px; right: 8px;
+    background: rgba(255,255,255,0.1); color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 4px 10px; border-radius: 6px;
+    font-size: 0.75rem; cursor: pointer;
+    font-family: inherit;
+  }
+  .copy-btn:hover { background: var(--primary); border-color: var(--primary); }
+  .copy-btn.copied { background: var(--success); border-color: var(--success); }
+
+  /* Callouts */
+  .callout {
+    border-radius: 10px; padding: 14px 18px;
+    margin: 16px 0; font-size: 0.92rem;
+    border-left: 5px solid var(--primary);
+    background: #fff5f7;
+  }
+  .callout strong { color: var(--accent); display: block; margin-bottom: 4px; }
+  .callout-warn { background: #fefce8; border-left-color: var(--warn); }
+  .callout-success { background: #f0fdf4; border-left-color: var(--success); }
+  .callout-danger { background: #fef2f2; border-left-color: var(--danger); }
+  .callout-discord { background: #eef0fe; border-left-color: var(--discord); }
+
+  /* Mock screen */
+  .mock-terminal {
+    background: #1a1a2e; color: white;
+    border-radius: 12px; padding: 16px 20px;
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 0.86rem; margin: 16px 0;
+    line-height: 1.6;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .mock-terminal .header {
+    display: flex; gap: 6px; margin-bottom: 12px;
+    padding-bottom: 10px; border-bottom: 1px solid #333;
+    font-size: 0.7rem; color: #888;
+  }
+  .mock-terminal .dot {
+    width: 12px; height: 12px; border-radius: 50%;
+  }
+  .dot.r { background: #ff5f57; }
+  .dot.y { background: #ffbd2e; }
+  .dot.g { background: #28c941; }
+  .mock-terminal .green { color: #4ade80; }
+  .mock-terminal .red { color: #f87171; }
+  .mock-terminal .yellow { color: #fbbf24; }
+  .mock-terminal .cyan { color: #60a5fa; }
+  .mock-terminal .gray { color: #888; }
+  .mock-terminal .magenta { color: #d946ef; }
+  .mock-terminal .pink { color: #ec4899; }
+
+  .mock-discord {
+    background: #36393f; color: #dcddde;
+    border-radius: 12px; padding: 16px 20px;
+    margin: 16px 0; font-size: 0.9rem;
+    border: 1px solid #202225;
+  }
+  .mock-discord .channel {
+    font-size: 0.78rem; color: #b9bbbe;
+    margin-bottom: 10px; padding-bottom: 8px;
+    border-bottom: 1px solid #202225;
+  }
+  .mock-discord .msg {
+    background: #2f3136; padding: 12px 14px; border-radius: 6px;
+    margin: 8px 0;
+  }
+  .mock-discord .msg-author {
+    color: #5865F2; font-weight: 700; font-size: 0.85rem;
+  }
+  .mock-discord .btn-row {
+    display: flex; gap: 8px; margin-top: 12px;
+  }
+  .mock-discord .d-btn {
+    padding: 6px 14px; border-radius: 4px;
+    font-size: 0.85rem; font-weight: 700; cursor: default;
+  }
+  .d-btn.success { background: #2d7d46; color: white; }
+  .d-btn.danger { background: #a52929; color: white; }
+  .d-btn.secondary { background: #4f545c; color: white; }
+  .mock-discord pre {
+    background: #202225; padding: 8px 12px;
+    border-radius: 4px; margin: 8px 0;
+    color: #b9bbbe; font-size: 0.82rem;
+    white-space: pre-wrap;
+  }
+
+  /* Tables */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 14px 0; font-size: 0.9rem;
+    background: white; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; }
+  th { background: var(--accent); color: white; font-weight: 700; }
+  tr:nth-child(even) { background: #fafafa; }
+
+  /* FAQ */
+  .faq-item {
+    background: white; border-radius: 10px;
+    padding: 18px 22px; margin-bottom: 10px;
+    border: 1px solid var(--border);
+  }
+  .faq-q {
+    font-weight: 700; color: var(--accent);
+    font-size: 1rem; margin-bottom: 8px;
+  }
+  .faq-q::before {
+    content: 'Q. '; color: var(--primary);
+    font-weight: 900;
+  }
+  .faq-a { color: #525252; font-size: 0.92rem; }
+  .faq-a::before {
+    content: 'A. '; color: var(--success);
+    font-weight: 900;
+  }
+
+  /* Decision tree */
+  .flow {
+    background: white; border-radius: 14px;
+    padding: 24px 28px; margin: 20px 0;
+    border: 2px dashed var(--primary);
+  }
+  .flow-step {
+    padding: 12px 14px; border-radius: 8px;
+    background: #fff5f7; margin: 8px 0;
+    border-left: 4px solid var(--primary);
+    font-size: 0.92rem;
+  }
+  .flow-arrow {
+    text-align: center; font-size: 1.6rem;
+    color: var(--primary); margin: 4px 0;
+  }
+  .flow-branch {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin: 8px 0;
+  }
+  @media(max-width:540px){ .flow-branch { grid-template-columns: 1fr; } }
+
+  /* Cheatsheet */
+  .cheat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .cheat-card {
+    background: white; border-radius: 10px;
+    padding: 18px; border: 1px solid var(--border);
+  }
+  .cheat-card h4 {
+    color: var(--primary); font-size: 0.95rem;
+    margin-bottom: 8px; padding-bottom: 6px;
+    border-bottom: 2px solid var(--primary);
+  }
+  .cheat-card code {
+    display: block;
+    background: #f5f5f5; padding: 6px 10px;
+    border-radius: 4px; margin: 4px 0;
+    font-family: monospace; font-size: 0.82rem;
+    color: var(--accent);
+    word-break: break-all;
+  }
+
+  /* Print */
+  .print-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    padding: 14px 22px; background: var(--primary); color: white;
+    border: none; border-radius: 999px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(224,53,98,0.3); font-size: 0.92rem;
+    font-family: inherit; z-index: 100;
+  }
+  .print-btn:hover { background: var(--primary-dark); }
+
+  @media print {
+    .nav, .print-btn, .copy-btn { display: none !important; }
+    body { background: white; }
+    .step, .card, table { page-break-inside: avoid; box-shadow: none !important; }
+  }
+
+  /* Footer */
+  footer {
+    background: var(--accent); color: #999;
+    padding: 28px 24px; text-align: center;
+    font-size: 0.85rem; margin-top: 60px;
+  }
+  footer a { color: #ccc; margin: 0 8px; }
+
+  /* Big emoji deco */
+  .deco {
+    text-align: center; font-size: 3rem; margin: 16px 0;
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">ミセナビ <span>by Lien Edit</span></a>
+    <a href="/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> サービスTOPへ</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>ミセナビ <em>承認フロー</em><br>超かんたん使い方ガイド</h1>
+  <p>毎朝5分やるだけ。やらないと顧客投稿が止まります。<br>これだけ読めば100%わかるように作りました。</p>
+  <div class="hero-warn"><i class="fa-solid fa-bell"></i> 1日1回は必ずチェック！</div>
+</section>
+
+<div class="container">
+
+<!-- 目次 -->
+<div class="toc">
+  <h2><i class="fa-solid fa-list"></i>目次</h2>
+  <div class="toc-grid">
+    <a class="toc-item" href="#what"><div class="toc-num">1</div><div>そもそも何をする仕組み？</div></a>
+    <a class="toc-item" href="#daily"><div class="toc-num">2</div><div>毎日の作業（5分）</div></a>
+    <a class="toc-item" href="#discord"><div class="toc-num">3</div><div>Discord通知が来た時</div></a>
+    <a class="toc-item" href="#cli"><div class="toc-num">4</div><div>ターミナル（CLI）の使い方</div></a>
+    <a class="toc-item" href="#scenarios"><div class="toc-num">5</div><div>シーン別の判断フロー</div></a>
+    <a class="toc-item" href="#cheatsheet"><div class="toc-num">6</div><div>コピペ早見表</div></a>
+    <a class="toc-item" href="#faq"><div class="toc-num">7</div><div>困った時のFAQ</div></a>
+    <a class="toc-item" href="#emergency"><div class="toc-num">8</div><div>緊急時の対処</div></a>
+  </div>
+</div>
+
+<!-- 1. 何をする仕組みか -->
+<h2 id="what"><span class="num">1</span><i class="fa-solid fa-circle-question"></i>そもそも何をする仕組み？</h2>
+
+<div class="card">
+  <p><strong>3秒で説明：</strong></p>
+  <p>「AIが作った文章を、自動でGoogleに投稿する前に、自分が🆗するか🆖するか決める仕組み」です。</p>
+  <p>これがないと…</p>
+  <ul style="margin-left:24px;margin-top:8px;">
+    <li>❌ AIが間違って「営業時間11時〜25時」と書いたまま投稿してしまう</li>
+    <li>❌ AIが低評価の口コミに不適切な返信をして炎上する</li>
+    <li>❌ 顧客に「なんでこんな投稿してるんですか」と怒られる</li>
+  </ul>
+  <p style="margin-top:12px;">承認フローがあれば「人がOKしたものだけ」がGoogleに出ます。 = 100%安全。</p>
+</div>
+
+<div class="callout callout-warn">
+  <strong>⚠️ 重要</strong>
+  承認しないとGoogleには何も投稿されません。「自動運用」なのに承認しないと「停止」と同じです。1日1回は必ず処理してください。
+</div>
+
+<!-- 2. 毎日の作業 -->
+<h2 id="daily"><span class="num">2</span><i class="fa-solid fa-sun"></i>毎日の作業（5分）</h2>
+
+<p style="font-size:1rem;margin-bottom:16px;">パターンは2つ。<strong>どっちか好きな方</strong>を選べばOK。両方併用も可。</p>
+
+<h3>📱 パターンA: スマホでDiscordを見る（外出中ベスト）</h3>
+
+<div class="step-list">
+
+<div class="step">
+  <h4>Discordアプリを開く</h4>
+  <p>「アカネ」というチャンネルを開いてください（スマホでもPCでも同じ）。</p>
+  <div class="callout callout-discord">
+    <strong>💡 Discordインストールがまだなら</strong>
+    iPhone/AndroidのApp Storeで「Discord」検索してインストール → 既存ログイン情報でサインイン。
+  </div>
+</div>
+
+<div class="step">
+  <h4>承認待ちメッセージを探す</h4>
+  <p>こんな見た目のメッセージが流れています：</p>
+  <div class="mock-discord">
+    <div class="channel"># アカネ　|　承認待ち</div>
+    <div class="msg">
+      <div class="msg-author">アカネ Bot</div>
+      ⚠️ <strong>承認待ち</strong> 📝 (post) ID: <code>apr-xxxxx</code><br>
+      <strong>タイトル</strong>: [ミセナビ 投稿] サンプル カフェ<br>
+      <pre>春のメニュー、桜のラテ（580円）登場！
+自家焙煎エスプレッソに桜の風味を加えた一杯。
+営業：10:00-22:00 / 大阪市中央区...</pre>
+      要請元: misenavi / 緊急度: medium
+      <div class="btn-row">
+        <div class="d-btn success">✅ 承認</div>
+        <div class="d-btn danger">❌ 却下</div>
+        <div class="d-btn secondary">⏸ 保留</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="step">
+  <h4>3つのボタンのどれかを押すだけ</h4>
+  <table>
+    <tr><th>ボタン</th><th>意味</th><th>こんな時に押す</th></tr>
+    <tr><td>✅ 承認</td><td>これで投稿OK</td><td>内容に問題なし</td></tr>
+    <tr><td>❌ 却下</td><td>これは投稿しない</td><td>事実誤認・不適切・季節外れ</td></tr>
+    <tr><td>⏸ 保留</td><td>あとで判断</td><td>調べてから決めたい / 時間ない</td></tr>
+  </table>
+</div>
+
+<div class="step">
+  <h4>5分以内にGoogleに自動投稿される</h4>
+  <p>承認したものは、最大5分以内にGoogleビジネスプロフィールへ自動配信されます。何もする必要なし。</p>
+  <div class="callout callout-success">
+    <strong>✅ これで完了</strong>
+    Discordで承認 → 5分以内に自動でGoogleに投稿。これだけ。
+  </div>
+</div>
+
+</div>
+
+<h3>💻 パターンB: Macのターミナルで一気に処理</h3>
+
+<div class="step-list">
+
+<div class="step">
+  <h4>ターミナルを開く</h4>
+  <p>Macの「アプリケーション → ユーティリティ → ターミナル」を起動。または<kbd>⌘+Space</kbd>で「ターミナル」と入力してEnter。</p>
+</div>
+
+<div class="step">
+  <h4>このコマンドをコピペ</h4>
+  <div class="code-block">
+    <button class="copy-btn" data-copy="cd ~/misenavi-system && npm run approve">📋 コピー</button>
+cd ~/misenavi-system && npm run approve
+  </div>
+  <p style="font-size:0.88rem;color:var(--muted);">→ 承認待ちが1件ずつ表示されます。</p>
+</div>
+
+<div class="step">
+  <h4>1件ずつキー入力で処理</h4>
+  <div class="mock-terminal">
+    <div class="header"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+    <div class="magenta">━━━ 承認待ち 3件 ━━━</div>
+    <br>
+    <span class="cyan">[1]</span> 📝 <strong>投稿</strong> <span class="gray">post-xxx</span><br>
+    <span class="cyan">サンプル カフェ</span> <span class="gray">(store_001) 5分前</span><br>
+    <span class="gray">春のメニュー、桜のラテ（580円）登場！...</span><br>
+    <br>
+    <strong>[1/3] 操作 (o/r/e/s/q): </strong><span style="background:#fbbf24;color:#000;padding:0 4px;">_</span>
+  </div>
+
+  <table>
+    <tr><th>キー</th><th>意味</th></tr>
+    <tr><td><kbd>o</kbd> + Enter</td><td>承認（OK）</td></tr>
+    <tr><td><kbd>r</kbd> + Enter</td><td>却下（Reject）</td></tr>
+    <tr><td><kbd>e</kbd> + Enter</td><td>修正（Edit）→ 新本文を入力</td></tr>
+    <tr><td><kbd>s</kbd> + Enter</td><td>スキップ（後回し）</td></tr>
+    <tr><td><kbd>q</kbd> + Enter</td><td>終了</td></tr>
+  </table>
+</div>
+
+<div class="step">
+  <h4>最後に「今すぐ配信？」と聞かれる</h4>
+  <p>承認したものを今すぐGoogleに送るかの確認。<kbd>y</kbd>を押すと即配信。何もしなくても5分以内のcronで送られます。</p>
+  <div class="callout callout-success">
+    <strong>✅ 完了！</strong>
+    終了したらターミナルを閉じてOK。
+  </div>
+</div>
+
+</div>
+
+<!-- 3. Discord通知 -->
+<h2 id="discord"><span class="num">3</span><i class="fa-brands fa-discord"></i>Discord通知が来た時の見方</h2>
+
+<div class="card">
+  <h3>緊急度のマーク</h3>
+  <table>
+    <tr><th>マーク</th><th>意味</th><th>対応速度</th></tr>
+    <tr><td>🚨 high</td><td>低評価の口コミ返信（★1〜2）</td><td>即対応推奨</td></tr>
+    <tr><td>⚠️ medium</td><td>通常の投稿・返信</td><td>1日以内</td></tr>
+    <tr><td>ℹ️ low</td><td>軽い案件</td><td>2日以内</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>カテゴリのマーク</h3>
+  <table>
+    <tr><th>マーク</th><th>カテゴリ</th></tr>
+    <tr><td>📝 post</td><td>新規GBP投稿</td></tr>
+    <tr><td>💬 review</td><td>口コミ返信</td></tr>
+  </table>
+</div>
+
+<div class="callout callout-warn">
+  <strong>⚠️ 48時間で期限切れになります</strong>
+  承認しないまま48時間経つと、自動的に「expired」になって配信されません。月曜朝に金曜分が消えてた…とならないよう注意。
+</div>
+
+<!-- 4. CLIの使い方 -->
+<h2 id="cli"><span class="num">4</span><i class="fa-solid fa-terminal"></i>ターミナル（CLI）の使い方</h2>
+
+<p>「ターミナル」は黒い画面のことです。Macの中にもとから入ってるアプリ。怖くないです。</p>
+
+<h3>基本コマンド一覧</h3>
+
+<div class="cheat-grid">
+
+  <div class="cheat-card">
+    <h4>📋 承認待ちを見る</h4>
+    <code>npm run approve list</code>
+    <p style="font-size:0.82rem;color:var(--muted);margin-top:6px;">一覧だけ表示（操作しない）</p>
+  </div>
+
+  <div class="cheat-card">
+    <h4>🎯 1件ずつ処理（推奨）</h4>
+    <code>npm run approve</code>
+    <p style="font-size:0.82rem;color:var(--muted);margin-top:6px;">対話モード。これだけ覚えればOK</p>
+  </div>
+
+  <div class="cheat-card">
+    <h4>📊 統計を見る</h4>
+    <code>npm run approve stats</code>
+    <p style="font-size:0.82rem;color:var(--muted);margin-top:6px;">承認待ち何件、却下何件、配信済み何件</p>
+  </div>
+
+  <div class="cheat-card">
+    <h4>🚀 今すぐ配信</h4>
+    <code>npm run approve deliver</code>
+    <p style="font-size:0.82rem;color:var(--muted);margin-top:6px;">承認済みを5分待たずに即送信</p>
+  </div>
+
+  <div class="cheat-card">
+    <h4>📝 投稿だけ見る</h4>
+    <code>npm run approve list post</code>
+    <p style="font-size:0.82rem;color:var(--muted);margin-top:6px;">口コミ返信を除外して投稿のみ</p>
+  </div>
+
+  <div class="cheat-card">
+    <h4>💬 口コミ返信だけ見る</h4>
+    <code>npm run approve list review_reply</code>
+    <p style="font-size:0.82rem;color:var(--muted);margin-top:6px;">投稿を除外して口コミだけ</p>
+  </div>
+
+</div>
+
+<div class="callout">
+  <strong>💡 これだけ覚えればOK</strong>
+  <code style="display:inline-block;background:white;padding:4px 8px;border-radius:4px;font-family:monospace;color:var(--primary);font-weight:700;">npm run approve</code>
+  これ1個だけ。あとは画面の指示に従うだけ。
+</div>
+
+<h3>ID指定で個別操作（上級・通常使わない）</h3>
+
+<div class="code-block">
+<button class="copy-btn" data-copy="npm run approve ok post-xxxxx-xxxx">📋 コピー</button>
+# 承認だけ
+npm run approve ok post-xxxxx-xxxx
+
+# 承認＋即配信
+npm run approve ok post-xxxxx-xxxx --deliver
+
+# 却下（理由つき）
+npm run approve no post-xxxxx-xxxx 季節外れのため
+
+# 修正（本文を差し替えて再承認待ち）
+npm run approve edit post-xxxxx-xxxx "新しい投稿本文"
+</div>
+
+<!-- 5. シーン別フロー -->
+<h2 id="scenarios"><span class="num">5</span><i class="fa-solid fa-route"></i>シーン別の判断フロー</h2>
+
+<h3>🌅 朝起きた時</h3>
+<div class="flow">
+  <div class="flow-step">朝、ターミナルを開く</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><code>npm run approve</code> を実行</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">表示されたものを<kbd>o</kbd>か<kbd>r</kbd>で処理</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">最後に <kbd>y</kbd> で即配信 → 完了！</div>
+</div>
+
+<h3>🚇 通勤中・移動中</h3>
+<div class="flow">
+  <div class="flow-step">スマホでDiscordを開く</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">アカネチャンネルの承認待ち通知をタップ</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">本文を読んで判断</div>
+  <div class="flow-branch">
+    <div class="flow-step" style="background:#f0fdf4;border-left-color:var(--success);">問題なし → ✅承認</div>
+    <div class="flow-step" style="background:#fef2f2;border-left-color:var(--danger);">違和感あり → ❌却下</div>
+  </div>
+</div>
+
+<h3>🌃 夜寝る前</h3>
+<div class="flow">
+  <div class="flow-step"><code>npm run approve stats</code> で残数確認</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-branch">
+    <div class="flow-step" style="background:#f0fdf4;">pending=0なら寝てOK😴</div>
+    <div class="flow-step" style="background:#fefce8;border-left-color:var(--warn);">pending有りなら処理してから寝る</div>
+  </div>
+</div>
+
+<!-- 6. コピペ早見表 -->
+<h2 id="cheatsheet"><span class="num">6</span><i class="fa-solid fa-clipboard"></i>コピペ早見表</h2>
+
+<div class="callout callout-warn">
+  <strong>📌 ブクマ推奨</strong>
+  このページをブラウザのブクマに入れて、いつでも開けるようにしてください。
+</div>
+
+<h3>毎日のコマンド</h3>
+
+<div class="code-block">
+<button class="copy-btn" data-copy="cd ~/misenavi-system && npm run approve">📋 コピー</button>
+cd ~/misenavi-system && npm run approve
+</div>
+
+<h3>よく使うコマンド</h3>
+
+<div class="code-block">
+<button class="copy-btn" data-copy="cd ~/misenavi-system">📋 コピー</button>
+cd ~/misenavi-system
+
+# 承認待ちを処理（メイン）
+npm run approve
+
+# 承認待ち一覧だけ見る
+npm run approve list
+
+# 統計を見る（pending何件あるか）
+npm run approve stats
+
+# 承認済みを今すぐ配信
+npm run approve deliver
+</div>
+
+<h3>運用システムの状態確認</h3>
+
+<div class="code-block">
+<button class="copy-btn" data-copy="pm2 list">📋 コピー</button>
+# 自動運用が動いているか確認
+pm2 list
+
+# misenaviのログを見る
+pm2 logs misenavi --lines 30
+
+# 万一停止していたら再起動
+pm2 restart misenavi
+pm2 restart lien-bot
+</div>
+
+<h3>緊急: 承認モードを一時的に無効化（自動投稿に戻す）</h3>
+
+<div class="callout callout-danger">
+  <strong>⚠️ 慎重に</strong>
+  これをやると承認なしで自動投稿されます。長期休暇など特殊な時のみ使用してください。
+</div>
+
+<div class="code-block">
+<button class="copy-btn" data-copy="echo 'APPROVAL_REQUIRED=false' >> ~/misenavi-system/.env && pm2 restart misenavi">📋 コピー</button>
+# 承認OFF（自動投稿モードに）
+echo 'APPROVAL_REQUIRED=false' >> ~/misenavi-system/.env && pm2 restart misenavi
+
+# 承認ONに戻す（.env手動編集してから）
+# .envの「APPROVAL_REQUIRED=false」の行を削除してから:
+pm2 restart misenavi
+</div>
+
+<!-- 7. FAQ -->
+<h2 id="faq"><span class="num">7</span><i class="fa-solid fa-circle-question"></i>困った時のFAQ</h2>
+
+<div class="faq-item">
+  <div class="faq-q">承認したのにGoogleに投稿されてない</div>
+  <div class="faq-a">承認後、最大5分以内に配信されます。それ以上待っても出ない場合：<br>
+  <code>npm run approve deliver</code> で手動配信してみてください。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">Discordの通知が来ない</div>
+  <div class="faq-a"><code>pm2 logs lien-bot --lines 50 | grep misenavi</code> でブリッジが起動しているか確認。<br>
+  起動してなければ <code>pm2 restart lien-bot</code> で復旧。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">ターミナルでコマンドが「command not found」と出る</div>
+  <div class="faq-a">ターミナルを開いた直後は <code>cd ~/misenavi-system</code> で先にディレクトリ移動してください。<br>
+  これを忘れると npm が見つからずエラーになります。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">承認待ちが大量に溜まってる</div>
+  <div class="faq-a">48時間で自動失効するので慌てなくてOK。一気に処理したい場合：<br>
+  <code>npm run approve</code> で対話モード → <kbd>o</kbd>連打で全部承認も可。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">間違って承認してしまった</div>
+  <div class="faq-a">5分以内なら間に合うかも。<code>cd ~/misenavi-system/data && cat approval_pending.json</code> でstatusが「approved」のまま「delivered」になっていなければ、status=rejectedに手動変更すればOK。<br>
+  既にdeliveredならGoogleに投稿済み → GBP管理画面から手動削除してください。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">「pending」「approved」「delivered」って何？</div>
+  <div class="faq-a">
+    <strong>pending</strong> = 承認待ち（未処理）<br>
+    <strong>approved</strong> = 承認済み（5分以内に配信される）<br>
+    <strong>delivered</strong> = Googleに送信済み（完了）<br>
+    <strong>rejected</strong> = 却下（送らない）<br>
+    <strong>expired</strong> = 期限切れ（48時間放置で自動）
+  </div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">「ID」って何？覚える必要ある？</div>
+  <div class="faq-a">いいえ、覚える必要なし。対話モード（<code>npm run approve</code>）なら番号で操作できます。<br>
+  「ID」は内部識別用です。エラー報告時だけ使います。</div>
+</div>
+
+<div class="faq-item">
+  <div class="faq-q">スマホだけで完結したい（Macは触りたくない）</div>
+  <div class="faq-a">DiscordだけでOK。ボタン押下のみで運用可能。<br>
+  ただし通知見落としを防ぐため、Discordの通知をONに、ミュートにしないこと。</div>
+</div>
+
+<!-- 8. 緊急時 -->
+<h2 id="emergency"><span class="num">8</span><i class="fa-solid fa-triangle-exclamation"></i>緊急時の対処</h2>
+
+<h3>🆘 「すべてが動いてない！」と感じた時</h3>
+
+<div class="step-list">
+
+<div class="step">
+  <h4>状態確認</h4>
+  <div class="code-block">
+<button class="copy-btn" data-copy="pm2 list">📋 コピー</button>
+pm2 list
+  </div>
+  <p>misenaviとlien-botがonlineになっているか確認。</p>
+</div>
+
+<div class="step">
+  <h4>停止していたら再起動</h4>
+  <div class="code-block">
+<button class="copy-btn" data-copy="pm2 restart misenavi && pm2 restart lien-bot">📋 コピー</button>
+pm2 restart misenavi && pm2 restart lien-bot
+  </div>
+</div>
+
+<div class="step">
+  <h4>ログを見る</h4>
+  <div class="code-block">
+<button class="copy-btn" data-copy="pm2 logs misenavi --lines 50">📋 コピー</button>
+pm2 logs misenavi --lines 50
+pm2 logs lien-bot --lines 50
+  </div>
+  <p>ERRORの行があれば、その内容を担当者（竹林）にスクショで送ってください。</p>
+</div>
+
+<div class="step">
+  <h4>ヘルスチェック</h4>
+  <div class="code-block">
+<button class="copy-btn" data-copy="cd ~/misenavi-system && npm run health">📋 コピー</button>
+cd ~/misenavi-system && npm run health
+  </div>
+  <p>環境変数・GBPトークン・accounts.jsonをまとめて確認します。</p>
+</div>
+
+</div>
+
+<h3>🆘 「顧客から不適切な投稿が出てるとクレーム来た」</h3>
+
+<ol style="margin-left:24px;">
+  <li>Googleビジネスプロフィール管理画面 → 投稿 → 該当投稿を削除</li>
+  <li>口コミ返信の場合 → 該当口コミ → 返信を編集 or 削除</li>
+  <li>原因究明: <code>cd ~/misenavi-system && cat data/approval_history.json | grep -A5 該当ID</code> で承認履歴確認</li>
+  <li>同じことが起きないよう、<code>contentGenerator.js</code> のプロンプトを修正</li>
+</ol>
+
+<h3>🆘 「PCも触れない、Discordも見れない」</h3>
+
+<ol style="margin-left:24px;">
+  <li>承認は48時間TTLで自動失効するので、放置でも顧客GBPには影響なし</li>
+  <li>ただし投稿が止まるので、戻り次第まとめて承認</li>
+  <li>長期不在の場合は、別の人に「<code>npm run approve</code>」を任せる or APPROVAL_REQUIRED=falseで自動運用に切り替え</li>
+</ol>
+
+<div class="deco">🎉</div>
+<div class="callout callout-success" style="text-align:center;">
+  <strong>これで完璧。あなたはもう承認フローのプロです。</strong><br>
+  毎朝5分のルーチンを習慣化すれば、事故ゼロの運用が永続的に続きます。
+</div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()"><i class="fa-solid fa-print"></i> 印刷 / PDF保存</button>
+
+<footer>
+  <p>ミセナビ by <a href="/">Lien Edit株式会社</a> | <a href="/proposal">提案書</a> | <a href="/contract">契約書</a> | <a href="/onboarding-guide">オンボーディング</a></p>
+  <p style="margin-top:8px;opacity:0.7;">最終更新: 2026-04-27 / 内部スタッフ向け運用マニュアル</p>
+</footer>
+
+<script>
+'use strict';
+// コピペボタン
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const text = btn.dataset.copy || btn.parentElement.textContent.replace(/📋 コピー/g, '').trim();
+    try {
+      await navigator.clipboard.writeText(text);
+      btn.textContent = '✓ コピー完了';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = '📋 コピー';
+        btn.classList.remove('copied');
+      }, 2000);
+    } catch (e) {
+      btn.textContent = '⚠️ 失敗';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
