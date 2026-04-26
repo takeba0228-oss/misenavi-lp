@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ミセナビ オンボーディングガイド | 契約後の流れ・GBP権限取得手順 | Lien Edit株式会社</title>
+<meta name="description" content="ミセナビ ご契約後のオンボーディング手順。GBP管理者権限取得方法を画像付きで解説。">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --primary: #E03562;
+    --primary-dark: #c02850;
+    --accent: #1a1a2e;
+    --bg: #fafafa;
+    --surface: #ffffff;
+    --text: #1a1a2e;
+    --muted: #737373;
+    --border: #e5e5e5;
+    --success: #16a34a;
+    --warn: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.85; padding-bottom: 80px;
+  }
+  .nav {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 14px 24px; position: sticky; top: 0; z-index: 50;
+  }
+  .nav-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo { font-weight: 900; color: var(--primary); font-size: 1.15rem; }
+  .logo span { color: var(--accent); font-size: 0.75rem; margin-left: 6px; font-weight: 500; }
+  .nav-back { color: var(--muted); font-size: 0.85rem; }
+
+  .hero {
+    background: linear-gradient(135deg, #fff5f7, #ffeef2);
+    padding: 60px 24px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 900; color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .hero h1 em { color: var(--primary); font-style: normal; }
+  .hero p { color: var(--muted); max-width: 640px; margin: 0 auto; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+
+  .step-list {
+    counter-reset: step;
+    margin-bottom: 40px;
+  }
+  .step {
+    background: white; border-radius: 14px; padding: 28px 28px 28px 80px;
+    margin-bottom: 16px; border: 1px solid var(--border);
+    position: relative; counter-increment: step;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
+  .step::before {
+    content: counter(step);
+    position: absolute; left: 24px; top: 28px;
+    width: 40px; height: 40px; background: var(--primary); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1.1rem;
+  }
+  .step h3 {
+    font-size: 1.15rem; color: var(--accent); margin-bottom: 8px;
+  }
+  .step .meta {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    font-size: 0.8rem; color: var(--muted); margin-bottom: 14px;
+  }
+  .step .meta span {
+    background: #fafafa; border: 1px solid var(--border);
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .step .meta i { color: var(--primary); margin-right: 4px; }
+
+  .step ol, .step ul {
+    margin: 12px 0 12px 22px;
+  }
+  .step ol li, .step ul li { margin-bottom: 8px; font-size: 0.95rem; }
+
+  .callout {
+    background: #fff5f7; border-left: 4px solid var(--primary);
+    padding: 14px 18px; border-radius: 6px; margin: 14px 0;
+    font-size: 0.9rem;
+  }
+  .callout-warn {
+    background: #fefce8; border-left-color: var(--warn);
+  }
+  .callout-success {
+    background: #f0fdf4; border-left-color: var(--success);
+  }
+  .callout strong { color: var(--accent); }
+
+  .checklist { list-style: none; margin-left: 0 !important; }
+  .checklist li {
+    padding-left: 28px; position: relative;
+  }
+  .checklist li::before {
+    content: '☐'; position: absolute; left: 0; top: 0;
+    color: var(--primary); font-weight: 900; font-size: 1.1rem;
+  }
+
+  h2 {
+    font-size: 1.4rem; color: var(--accent);
+    margin: 40px 0 16px; padding-bottom: 8px;
+    border-bottom: 3px solid var(--primary);
+  }
+  h2 i { color: var(--primary); margin-right: 8px; }
+
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 14px 0; font-size: 0.88rem;
+    background: white; border-radius: 8px; overflow: hidden;
+  }
+  th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; }
+  th { background: #fafafa; font-weight: 700; }
+
+  .url-block {
+    background: #1a1a2e; color: white;
+    padding: 12px 16px; border-radius: 8px;
+    font-family: monospace; font-size: 0.88rem;
+    margin: 10px 0; word-break: break-all;
+  }
+  .url-block::before {
+    content: '🔗 ';
+  }
+
+  .code {
+    background: #f5f5f5; padding: 2px 6px; border-radius: 4px;
+    font-family: monospace; font-size: 0.88rem; color: var(--primary);
+  }
+
+  .grid-2 {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  @media(max-width: 700px){ .grid-2 { grid-template-columns: 1fr; } }
+
+  .timeline {
+    position: relative; padding-left: 30px;
+    border-left: 3px solid var(--primary);
+  }
+  .timeline-item { padding: 8px 0 16px; position: relative; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -38px; top: 14px;
+    width: 14px; height: 14px; background: var(--primary);
+    border-radius: 50%; border: 3px solid white;
+  }
+  .timeline-day { font-weight: 900; color: var(--primary); }
+
+  footer {
+    background: var(--accent); color: #999;
+    padding: 24px; text-align: center;
+    font-size: 0.85rem; margin-top: 60px;
+  }
+  footer a { color: #ccc; margin: 0 8px; }
+
+  .print-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    padding: 14px 22px; background: var(--primary); color: white;
+    border: none; border-radius: 999px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(224,53,98,0.3); font-size: 0.92rem;
+    font-family: inherit;
+  }
+  .print-btn:hover { background: var(--primary-dark); }
+
+  @media print {
+    .nav, .print-btn, footer { display: none !important; }
+    body { background: white; }
+    .step, table, .callout { box-shadow: none !important; }
+    .step { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">ミセナビ <span>by Lien Edit</span></a>
+    <a href="/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> サービスTOPへ</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1><em>はじめてでも安心</em><br>ミセナビ オンボーディングガイド</h1>
+  <p>ご契約後、運用開始までのすべての手順を1ページにまとめました。<br>所要時間：合計1時間程度（ご都合に合わせて分割可能）</p>
+</section>
+
+<div class="container">
+
+<h2><i class="fa-solid fa-route"></i>全体フロー</h2>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-day">Day 0</div>
+    <div>ご契約・キックオフ（30分）</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-day">Day 1〜3</div>
+    <div>ヒアリング・GBP管理者権限の付与（オーナー側 約20分）</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-day">Day 4〜7</div>
+    <div>こちら側でGBP最適化作業・撮影日程調整</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-day">Day 8〜</div>
+    <div>自動運用開始（投稿・口コミ返信・月次レポート）</div>
+  </div>
+</div>
+
+<h2><i class="fa-solid fa-user-plus"></i>STEP A: GBP管理者権限の付与（最重要・必須）</h2>
+
+<p>運用代行を行うには、ミセナビ運営側のGoogleアカウントを<strong>「管理者」</strong>として追加していただく必要があります。所要時間：<strong>約5分</strong></p>
+
+<div class="callout callout-warn">
+  <strong>⚠️ ご注意</strong><br>
+  「編集者」ではなく<strong>「管理者」</strong>での追加をお願いします。「編集者」では投稿・口コミ返信・サービス追加など主要な代行作業が制限されてしまいます。<br>
+  なお、<strong>オーナー権限はお客様のまま</strong>です。当社が乗っ取ることは絶対にありません（Googleの仕組み上、不可能）。
+</div>
+
+<div class="step-list">
+
+<div class="step">
+  <h3>Googleビジネスプロフィールにログイン</h3>
+  <div class="meta">
+    <span><i class="fa-solid fa-clock"></i>所要1分</span>
+    <span><i class="fa-solid fa-laptop"></i>PCでもスマホでもOK</span>
+  </div>
+
+  <p>下記URLにアクセスし、お店のGBPを登録しているGoogleアカウントでログイン：</p>
+  <div class="url-block">https://business.google.com/</div>
+
+  <div class="callout">
+    <strong>パスワードがわからない場合</strong>: 「ログインに関する問題」→「パスワードをお忘れの場合」から再設定可能です。再設定が困難な場合は、別途LINEでご相談ください。
+  </div>
+</div>
+
+<div class="step">
+  <h3>該当ビジネスを選択</h3>
+  <div class="meta">
+    <span><i class="fa-solid fa-clock"></i>所要1分</span>
+  </div>
+
+  <p>ログイン後、登録されているお店一覧が表示されます。代行を依頼するお店をクリックしてください。</p>
+  <p>1店舗のみ運営の場合、自動的にそのお店の管理画面が表示されます。</p>
+</div>
+
+<div class="step">
+  <h3>「ビジネスプロフィールの管理」を開く</h3>
+  <div class="meta">
+    <span><i class="fa-solid fa-clock"></i>所要30秒</span>
+  </div>
+
+  <p>左側メニュー（または上部メニュー）から以下を選択：</p>
+  <ol>
+    <li><strong>「メニュー」</strong>または<strong>「︙」（3点リーダー）</strong>を開く</li>
+    <li><strong>「ビジネスプロフィールの設定」</strong>をクリック</li>
+    <li><strong>「ユーザーとアクセス権」</strong>を選択</li>
+  </ol>
+
+  <div class="callout">
+    画面UIはGoogleのアップデートで変わることがあります。「ユーザー」「アクセス権」「権限」「管理者」のいずれかの単語が含まれる項目を探してください。
+  </div>
+</div>
+
+<div class="step">
+  <h3>「招待」または「ユーザーを追加」をクリック</h3>
+  <div class="meta">
+    <span><i class="fa-solid fa-clock"></i>所要30秒</span>
+  </div>
+
+  <p>画面右上または上部にある「<strong>+ 追加</strong>」「<strong>招待</strong>」ボタンを探してクリック。</p>
+</div>
+
+<div class="step">
+  <h3>当社のメールアドレスを入力</h3>
+  <div class="meta">
+    <span><i class="fa-solid fa-clock"></i>所要1分</span>
+    <span><i class="fa-solid fa-key"></i>権限選択がポイント</span>
+  </div>
+
+  <p>表示されたフォームに以下を入力してください：</p>
+
+  <table>
+    <tr><th>項目</th><th>入力内容</th></tr>
+    <tr><td>メールアドレス</td><td><span class="code">takeba0228@gmail.com</span></td></tr>
+    <tr><td>権限・役割</td><td><strong style="color:var(--primary);">管理者</strong>（Manager）<br><span style="color:var(--muted);font-size:0.82rem;">※「編集者」ではありません！</span></td></tr>
+  </table>
+
+  <p>入力したら「<strong>送信</strong>」または「<strong>招待</strong>」をクリック。</p>
+</div>
+
+<div class="step">
+  <h3>承諾完了の確認</h3>
+  <div class="meta">
+    <span><i class="fa-solid fa-clock"></i>当社側で1時間以内に承諾</span>
+  </div>
+
+  <p>当社のメールアドレスに招待メールが届きます。当社側で承諾後、ユーザー一覧に「Yoshito Takebayashi（管理者）」が追加されたことをお客様側でご確認いただけます。</p>
+
+  <div class="callout callout-success">
+    <strong>✅ ここまで完了したら、お客様側の作業は一旦終わりです。</strong><br>
+    あとはこちら側でGBP最適化作業を進めます。何かあればLINEでお声がけします。
+  </div>
+</div>
+
+</div>
+
+<h2><i class="fa-solid fa-clipboard-list"></i>STEP B: ヒアリングシートのご記入</h2>
+
+<p>正確な運用代行を行うため、お店の情報をヒアリングシートにご記入いただきます。下記URLから記入用紙をご確認ください：</p>
+
+<div class="url-block">https://misenavi-lp.vercel.app/hearing-sheet</div>
+
+<p>主な記入項目：</p>
+
+<ul class="checklist">
+  <li>店舗の基本情報（屋号・所在地・連絡先）</li>
+  <li>主要な提供サービス・メニュー（5〜10件）</li>
+  <li>ターゲット層・客層</li>
+  <li>競合店・差別化ポイント</li>
+  <li>禁止トピック（投稿で扱ってほしくないテーマ）</li>
+  <li>営業時間・定休日</li>
+  <li>SNS・ホームページのURL</li>
+</ul>
+
+<div class="callout">
+  <strong>記入が難しい項目はLINEでヒアリング可能です。</strong> 全項目埋まらなくても運用開始できます。30分のZoomで聞き取りも対応します。
+</div>
+
+<h2><i class="fa-solid fa-camera"></i>STEP C: 撮影日程の調整（任意・推奨）</h2>
+
+<p>GBP写真を充実させるため、当社スタッフが撮影に伺います（大阪市内の場合）。</p>
+
+<div class="grid-2">
+  <div class="callout">
+    <strong>📷 撮影内容</strong><br>
+    ・外観（昼/夜）2枚<br>
+    ・内観（席・雰囲気）3枚<br>
+    ・メニュー・商品 3枚<br>
+    ・スタッフ（任意）1枚<br>
+    所要：約45分
+  </div>
+  <div class="callout callout-warn">
+    <strong>⚠️ ご都合がつかない場合</strong><br>
+    お手元の写真データの提供でも大丈夫です（最低10枚）。スマホ撮影でも十分品質が出ます。<br>
+    <strong>大阪市以外</strong>の場合は、写真データ提供をお願いしています。
+  </div>
+</div>
+
+<h2><i class="fa-solid fa-cogs"></i>STEP D: 当社側で実施する作業（お客様の対応不要）</h2>
+
+<p>権限付与とヒアリング完了後、以下を当社が実施します（Day 4〜7）：</p>
+
+<table>
+  <tr><th>作業項目</th><th>内容</th><th>所要時間</th></tr>
+  <tr><td>GBPプロフィール最適化</td><td>カテゴリ・属性・サービス・営業時間など全項目見直し</td><td>1.5時間</td></tr>
+  <tr><td>説明文（D欄）の最適化</td><td>主要キーワードを含む750文字版を作成・反映</td><td>30分</td></tr>
+  <tr><td>サービス・メニュー登録</td><td>15件以上のサービスを登録</td><td>1時間</td></tr>
+  <tr><td>写真追加（撮影 or 提供素材）</td><td>外観・内観・メニュー等10枚以上</td><td>45分</td></tr>
+  <tr><td>AIO対策仕込み</td><td>FAQ生成・構造化データ作成</td><td>1時間</td></tr>
+  <tr><td>初回投稿準備</td><td>1ヶ月分の投稿カレンダー作成</td><td>1時間</td></tr>
+</table>
+
+<h2><i class="fa-solid fa-rocket"></i>STEP E: 自動運用フェーズへ</h2>
+
+<p>Day 8以降、AIによる自動運用が始まります。お客様が日々対応すべきことはありません。</p>
+
+<table>
+  <tr><th>項目</th><th>頻度</th><th>担当</th></tr>
+  <tr><td>GBP投稿</td><td>週2〜4回（プランによる）</td><td>AI生成 + 当社チェック</td></tr>
+  <tr><td>口コミ返信</td><td>3時間毎チェック・24時間以内返信</td><td>AI下書き + 当社承認</td></tr>
+  <tr><td>月次レポート</td><td>毎月1日</td><td>自動PDF生成</td></tr>
+  <tr><td>順位計測</td><td>月1回</td><td>自動 or 当社実施</td></tr>
+  <tr><td>定例ミーティング</td><td>月1回・30分</td><td>Zoom or LINE</td></tr>
+</table>
+
+<h2><i class="fa-solid fa-life-ring"></i>困ったときは</h2>
+
+<p>本ページの内容でわからないことがあれば、いつでもお気軽にLINEでお問い合わせください。</p>
+
+<div class="grid-2">
+  <a href="https://line.me/ti/p/v4O9xEFNhY" target="_blank" rel="noopener" style="display:block;text-decoration:none;">
+    <div style="background:#06C755;color:white;padding:20px;border-radius:12px;text-align:center;">
+      <i class="fa-brands fa-line" style="font-size:2rem;"></i>
+      <div style="font-weight:700;margin-top:8px;">LINEで質問する</div>
+      <div style="font-size:0.82rem;opacity:0.9;">3営業日以内に返信</div>
+    </div>
+  </a>
+  <a href="mailto:takeba0228@gmail.com" style="display:block;text-decoration:none;">
+    <div style="background:var(--accent);color:white;padding:20px;border-radius:12px;text-align:center;">
+      <i class="fa-solid fa-envelope" style="font-size:2rem;"></i>
+      <div style="font-weight:700;margin-top:8px;">メールで連絡</div>
+      <div style="font-size:0.82rem;opacity:0.9;">takeba0228@gmail.com</div>
+    </div>
+  </a>
+</div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()"><i class="fa-solid fa-print"></i> 印刷 / PDF保存</button>
+
+<footer>
+  <p>ミセナビ by <a href="/">Lien Edit株式会社</a> | <a href="/proposal">提案書</a> | <a href="/contract">契約書</a> | <a href="/hearing-sheet">ヒアリングシート</a></p>
+  <p style="margin-top:8px;opacity:0.7;">本ガイドは契約後のお客様向け資料です。</p>
+</footer>
+
+</body>
+</html>
