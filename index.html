@@ -1074,19 +1074,51 @@ ul { list-style: none; }
 }
 
 .pricing-card.popular::before {
-  content: '一番人気';
+  content: '🔥 ローンチ半額キャンペーン中 / 先着20社限定';
   position: absolute;
   top: -14px;
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: #fff;
-  padding: 5px 20px;
+  padding: 6px 20px;
   border-radius: var(--radius-full);
-  font-size: .75rem;
+  font-size: .78rem;
   font-weight: 700;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(224, 53, 98, .25);
+  box-shadow: 0 4px 12px rgba(224, 53, 98, .35);
+  letter-spacing: .02em;
+}
+
+.pricing-card.popular {
+  border: 2px solid var(--primary);
+}
+
+.pricing-original {
+  font-size: 1rem;
+  color: var(--g500);
+  text-decoration: line-through;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.pricing-discount-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff6b6b, var(--primary));
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: 8px;
+  letter-spacing: .03em;
+}
+
+.pricing-discount-note {
+  font-size: .72rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin-top: 4px;
 }
 
 .pricing-card:hover {
@@ -2649,7 +2681,7 @@ ul { list-style: none; }
 <div class="container">
   <div class="section-label center">Pricing</div>
   <h2 class="section-title text-center">シンプルな<span class="highlight">料金プラン</span></h2>
-  <p class="section-sub text-center mx-auto">すべてのプランに初期費用0円・契約縛りなし。まずは1ヶ月お試しください。</p>
+  <p class="section-sub text-center mx-auto">すべてのプランに初期費用0円・契約縛りなし。<br><strong style="color:var(--primary);">🔥 ローンチ記念キャンペーン：スタンダードプラン半額（先着20社・6ヶ月間）</strong></p>
   <div class="pricing-grid">
     <div class="pricing-card reveal">
       <div class="pricing-name">ライトプラン</div>
@@ -2668,8 +2700,11 @@ ul { list-style: none; }
     <div class="pricing-card popular reveal reveal-d1">
       <div class="pricing-name">スタンダードプラン</div>
       <div class="pricing-desc">本気で集客したい方に</div>
-      <div class="pricing-price"><span class="pricing-yen">&yen;</span><span class="pricing-amount">39,800</span></div>
+      <div class="pricing-discount-badge">🔥 50% OFF（6ヶ月間）</div>
+      <div class="pricing-original"><span class="pricing-yen">&yen;</span>39,800</div>
+      <div class="pricing-price"><span class="pricing-yen">&yen;</span><span class="pricing-amount">19,800</span></div>
       <div class="pricing-period">/月（税込）</div>
+      <div class="pricing-discount-note">※ローンチ価格・6ヶ月後は通常価格</div>
       <ul class="pricing-features">
         <li><span class="pricing-check"><i class="fa-solid fa-check"></i></span>ライトプランの全機能</li>
         <li><span class="pricing-check"><i class="fa-solid fa-check"></i></span>AI投稿 週4回配信</li>
@@ -2890,9 +2925,12 @@ ul { list-style: none; }
       <h3 style="font-size:.95rem;font-weight:700;color:var(--g700);margin-bottom:12px;">運営会社</h3>
       <table class="legal-table">
         <tr><th>会社名</th><td>Lien Edit株式会社</td></tr>
+        <tr><th>法人番号</th><td>8120001284556</td></tr>
         <tr><th>屋号</th><td>キズナビ</td></tr>
         <tr><th>代表者</th><td>竹林 義人</td></tr>
-        <tr><th>所在地</th><td>大阪府大阪市中央区</td></tr>
+        <tr><th>所在地</th><td>〒547-0045<br>大阪府大阪市平野区平野上町2丁目10-4 HABITAT平野505</td></tr>
+        <tr><th>電話番号</th><td>090-6244-1826</td></tr>
+        <tr><th>メール</th><td>takeba0228@gmail.com</td></tr>
         <tr><th>事業内容</th><td>MEO/AIO対策、SNS運用代行、映像制作、採用支援</td></tr>
         <tr><th>お問い合わせ</th><td><a href="https://line.me/ti/p/v4O9xEFNhY" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">LINE</a> または <a href="#contact" style="color:var(--primary);font-weight:600;">お問い合わせフォーム</a></td></tr>
       </table>
@@ -2911,53 +2949,14 @@ ul { list-style: none; }
 
   <div class="footer-bottom">
     &copy; 2026 ミセナビ by Lien Edit株式会社. All rights reserved.
-    <span style="margin-left:16px;"><a href="#privacy" style="color:var(--g500);text-decoration:underline;">プライバシーポリシー</a></span>
-    <span style="margin-left:12px;"><a href="#tokushoho" style="color:var(--g500);text-decoration:underline;">特定商取引法に基づく表記</a></span>
+    <span style="margin-left:16px;"><a href="/privacy.html" style="color:var(--g500);text-decoration:underline;">プライバシーポリシー</a></span>
+    <span style="margin-left:12px;"><a href="/terms.html" style="color:var(--g500);text-decoration:underline;">利用規約</a></span>
+    <span style="margin-left:12px;"><a href="/tokushoho.html" style="color:var(--g500);text-decoration:underline;">特定商取引法に基づく表記</a></span>
   </div>
 </div>
 </footer>
 
-<!-- ===== PRIVACY POLICY ===== -->
-<section class="legal-section" id="privacy" style="display:none;">
-<div class="container" style="max-width:800px;">
-  <h2>プライバシーポリシー</h2>
-  <p>Lien Edit株式会社（以下「当社」）は、お客様の個人情報の保護に関し、以下の方針を定めます。</p>
-  <h3>1. 個人情報の収集</h3>
-  <p>当社は、サービス提供に必要な範囲で、店舗名、ご担当者名、電話番号、メールアドレス等の情報を収集します。</p>
-  <h3>2. 利用目的</h3>
-  <p>収集した個人情報は、以下の目的にのみ利用いたします。</p>
-  <ul>
-    <li>お問い合わせへの対応</li>
-    <li>サービスの提供・改善</li>
-    <li>レポート等の送付</li>
-  </ul>
-  <h3>3. 第三者提供</h3>
-  <p>法令に基づく場合を除き、お客様の同意なく個人情報を第三者に提供することはありません。</p>
-  <h3>4. 安全管理</h3>
-  <p>当社は、個人情報の漏洩、滅失、毀損を防止するため、適切な安全管理措置を講じます。</p>
-  <h3>5. お問い合わせ</h3>
-  <p>個人情報に関するお問い合わせは、LINEまたはお問い合わせフォームよりご連絡ください。</p>
-</div>
-</section>
-
-<!-- ===== 特定商取引法に基づく表記 ===== -->
-<section class="legal-section" id="tokushoho" style="display:none;">
-<div class="container" style="max-width:800px;">
-  <h2>特定商取引法に基づく表記</h2>
-  <table class="legal-table">
-    <tr><th>販売業者</th><td>Lien Edit株式会社</td></tr>
-    <tr><th>運営責任者</th><td>竹林 義人</td></tr>
-    <tr><th>所在地</th><td>大阪府大阪市中央区</td></tr>
-    <tr><th>お問い合わせ</th><td>LINEまたはお問い合わせフォームより</td></tr>
-    <tr><th>サービス料金</th><td>月額19,800円〜69,800円（税込）</td></tr>
-    <tr><th>料金以外の費用</th><td>なし（初期費用0円）</td></tr>
-    <tr><th>支払方法</th><td>銀行振込</td></tr>
-    <tr><th>支払時期</th><td>毎月末日締め翌月10日払い</td></tr>
-    <tr><th>サービス提供時期</th><td>お申し込み後、初期設定完了次第（通常5営業日以内）</td></tr>
-    <tr><th>返品・キャンセル</th><td>月末の14日前までにご連絡いただければ翌月より解約可能。日割り返金は行いません。</td></tr>
-  </table>
-</div>
-</section>
+<!-- 旧アンカー型 Privacy / 特商法 セクションは独立ページ（/privacy.html, /terms.html, /tokushoho.html）に移行済み -->
 
 <!-- STICKY LINE BUTTON (MOBILE) -->
 <div class="sticky-line">
@@ -3006,14 +3005,17 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// Legal modal toggle
+// Legal modal toggle (独立ページ移行のため無効化)
 document.querySelectorAll('a[href="#privacy"], a[href="#tokushoho"]').forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
+    const href = link.getAttribute('href');
+    if (href === '#privacy') window.location.href = '/privacy.html';
+    if (href === '#tokushoho') window.location.href = '/tokushoho.html';
+    return;
     const target = document.querySelector(link.getAttribute('href'));
     if (target) {
       const isVisible = target.style.display !== 'none';
-      // Hide all legal sections first
       document.querySelectorAll('.legal-section').forEach(s => s.style.display = 'none');
       target.style.display = isVisible ? 'none' : 'block';
       if (!isVisible) target.scrollIntoView({ behavior: 'smooth' });
