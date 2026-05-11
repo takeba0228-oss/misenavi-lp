@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEO/AIO完全ガイド｜ミセナビが何をするのか・クライアント説明資料 - Lien Edit株式会社</title>
+<meta name="description" content="MEOとAIOの基礎から、ミセナビが実際に何を自動化しているかまで。クライアント向け完全説明資料。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#E03562;
+  --primary-dark:#c42a53;
+  --primary-light:#ff6b8a;
+  --primary-bg:#fff5f7;
+  --primary-soft:#ffe9ee;
+  --accent:#1a1a2e;
+  --accent-light:#2d2d4e;
+  --green:#22c55e;
+  --green-bg:#dcfce7;
+  --yellow:#FFD976;
+  --text:#1a1a1a;
+  --muted:#525252;
+  --light:#737373;
+  --border:#F0D5DE;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans JP',sans-serif;color:var(--text);background:#fafafa;
+  line-height:1.85;-webkit-font-smoothing:antialiased;
+}
+.container{max-width:920px;margin:0 auto;padding:0 24px}
+
+/* HERO */
+header{
+  background:linear-gradient(135deg,var(--primary-light) 0%,var(--primary) 50%,var(--primary-dark) 100%);
+  color:#fff;padding:64px 0 56px;position:relative;overflow:hidden;
+}
+header::before{
+  content:"";position:absolute;top:-30%;right:-10%;width:60%;height:200%;
+  background:radial-gradient(circle,rgba(255,255,255,.12) 0%,transparent 65%);
+}
+.brand-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px;position:relative;z-index:2}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-logo{
+  width:44px;height:44px;background:#fff;color:var(--primary);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:1.3rem;box-shadow:0 6px 16px rgba(0,0,0,.18);
+}
+.brand-text{font-weight:800;font-size:1rem}
+.brand-text small{display:block;font-weight:400;opacity:.85;font-size:.7rem;margin-top:2px}
+.tag-pill{
+  background:rgba(255,255,255,.22);padding:6px 14px;border-radius:999px;
+  font-size:.72rem;font-weight:700;letter-spacing:.05em;
+}
+header h1{font-size:2.4rem;font-weight:900;line-height:1.3;margin-bottom:14px;position:relative;z-index:2;letter-spacing:-.02em}
+header h1 .accent{
+  background:linear-gradient(transparent 60%,rgba(255,217,118,.5) 60%);
+  padding:0 4px;
+}
+header .lead{font-size:1.05rem;line-height:1.9;opacity:.96;position:relative;z-index:2;max-width:720px}
+header .meta{margin-top:24px;font-size:.78rem;opacity:.85;position:relative;z-index:2;display:flex;gap:18px;flex-wrap:wrap}
+header .meta span{display:flex;align-items:center;gap:6px}
+
+/* TOC */
+.toc{
+  background:#fff;border:1px solid var(--border);border-radius:14px;
+  padding:24px 28px;margin:-24px auto 48px;max-width:880px;
+  box-shadow:0 12px 32px rgba(224,53,98,.10);position:relative;z-index:5;
+}
+.toc-title{font-weight:900;color:var(--primary-dark);margin-bottom:14px;display:flex;align-items:center;gap:8px;font-size:1rem}
+.toc-title i{color:var(--primary)}
+.toc-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 24px;font-size:.85rem}
+.toc-list a{
+  color:var(--text);text-decoration:none;padding:6px 0;display:flex;align-items:center;gap:8px;
+  transition:color .15s;
+}
+.toc-list a:hover{color:var(--primary)}
+.toc-list a::before{content:counter(toc) ".";counter-increment:toc;font-weight:800;color:var(--primary);min-width:22px}
+.toc-list{counter-reset:toc}
+
+/* MAIN */
+main{padding:24px 0 80px}
+section.chapter{
+  background:#fff;border-radius:16px;padding:40px 44px;margin-bottom:32px;
+  border:1px solid var(--border);box-shadow:0 8px 24px rgba(224,53,98,.06);
+}
+.chapter-num{
+  display:inline-block;font-size:.7rem;font-weight:800;color:var(--primary);
+  background:var(--primary-soft);padding:4px 12px;border-radius:999px;
+  letter-spacing:.1em;margin-bottom:14px;
+}
+.chapter h2{font-size:1.7rem;font-weight:900;color:var(--accent);margin-bottom:8px;letter-spacing:-.01em;line-height:1.4}
+.chapter h2 .em{color:var(--primary)}
+.chapter .sub{font-size:.95rem;color:var(--muted);margin-bottom:28px;line-height:1.85}
+
+.chapter h3{font-size:1.15rem;font-weight:800;color:var(--accent);margin:28px 0 12px;padding-left:14px;border-left:4px solid var(--primary)}
+.chapter h4{font-size:1rem;font-weight:800;color:var(--primary-dark);margin:18px 0 8px}
+.chapter p{margin-bottom:14px;color:#333;font-size:.94rem;line-height:1.9}
+.chapter ul,.chapter ol{margin:14px 0 14px 24px}
+.chapter li{margin-bottom:6px;font-size:.92rem;line-height:1.85}
+.chapter strong{color:var(--primary-dark);font-weight:700}
+
+/* CALLOUT */
+.callout{
+  background:var(--primary-bg);border-left:4px solid var(--primary);
+  padding:18px 22px;border-radius:10px;margin:20px 0;
+}
+.callout-title{font-weight:900;color:var(--primary-dark);font-size:.95rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.callout-title i{color:var(--primary)}
+.callout p{margin-bottom:0;font-size:.88rem}
+.callout.green{background:var(--green-bg);border-color:var(--green)}
+.callout.green .callout-title{color:#15803d}
+.callout.green .callout-title i{color:var(--green)}
+.callout.warn{background:#FFF4D6;border-color:#FFA500}
+.callout.warn .callout-title{color:#8B6914}
+.callout.warn .callout-title i{color:#FF8C00}
+
+/* COMPARISON TABLE */
+.table-wrap{overflow-x:auto;margin:20px 0;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+table th,table td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--border)}
+table thead{background:linear-gradient(135deg,var(--primary-light) 0%,var(--primary) 100%);color:#fff}
+table th{font-weight:800;font-size:.85rem}
+table tbody tr:nth-child(even){background:var(--primary-bg)}
+table tbody td:first-child{font-weight:700;color:var(--primary-dark)}
+table .ok{color:var(--green);font-weight:800}
+table .ng{color:#999}
+
+/* STAT BOX */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}
+.stat-box{
+  background:linear-gradient(135deg,var(--primary-bg) 0%,#fff 100%);
+  border:1px solid var(--primary-soft);border-radius:12px;padding:20px;text-align:center;
+}
+.stat-box .num{font-size:2rem;font-weight:900;color:var(--primary);line-height:1;letter-spacing:-.02em}
+.stat-box .num small{font-size:1rem;color:var(--primary-dark);font-weight:700;margin-left:2px}
+.stat-box .label{font-size:.75rem;color:var(--muted);font-weight:700;margin-top:6px}
+
+/* SERVICE GRID */
+.service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:18px 0}
+.service-cell{
+  background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 18px;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.service-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:linear-gradient(135deg,var(--primary-light) 0%,var(--primary-dark) 100%);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;flex-shrink:0;
+}
+.service-text h5{font-size:.92rem;font-weight:800;color:var(--accent);margin-bottom:3px}
+.service-text p{font-size:.78rem;color:var(--muted);margin:0;line-height:1.6}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:28px;margin:24px 0}
+.timeline::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:var(--primary-soft)}
+.tl-item{position:relative;margin-bottom:24px}
+.tl-item::before{
+  content:"";position:absolute;left:-28px;top:6px;width:14px;height:14px;
+  background:var(--primary);border-radius:50%;border:3px solid #fff;
+  box-shadow:0 0 0 2px var(--primary);
+}
+.tl-time{font-size:.72rem;font-weight:800;color:var(--primary);letter-spacing:.05em;margin-bottom:2px}
+.tl-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:4px}
+.tl-desc{font-size:.85rem;color:#444;line-height:1.7}
+
+/* FAQ */
+.faq-item{
+  background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px 22px;
+  margin-bottom:10px;
+}
+.faq-q{font-weight:800;font-size:.95rem;color:var(--accent);margin-bottom:8px;display:flex;align-items:flex-start;gap:10px}
+.faq-q::before{content:"Q.";color:var(--primary);font-weight:900;font-size:1rem;flex-shrink:0}
+.faq-a{font-size:.88rem;color:#333;line-height:1.85;padding-left:24px;position:relative}
+.faq-a::before{content:"A.";color:var(--primary);font-weight:900;font-size:.95rem;position:absolute;left:0;top:0}
+
+/* PRICE */
+.price-final{
+  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+  color:#fff;border-radius:18px;padding:40px;margin:40px 0;text-align:center;
+  box-shadow:0 16px 40px rgba(224,53,98,.3);
+}
+.price-final h3{color:#fff;font-size:1.6rem;margin-bottom:18px;border:none;padding:0}
+.price-final .row{display:flex;justify-content:center;align-items:baseline;gap:30px;flex-wrap:wrap;margin:18px 0}
+.price-final .col{text-align:center}
+.price-final .col .tag{font-size:.85rem;opacity:.9;font-weight:700;margin-bottom:8px}
+.price-final .col .num{font-size:2.6rem;font-weight:900;letter-spacing:-.02em}
+.price-final .col .num small{font-size:1rem;opacity:.85;margin-left:2px}
+.price-final .col.bundle .num{font-size:3rem;color:var(--yellow)}
+.price-final .info{font-size:.85rem;opacity:.95;margin-top:14px}
+
+/* FOOTER */
+footer{
+  padding:36px 0 32px;background:var(--accent);color:#aaa;text-align:center;font-size:.78rem;line-height:1.8;
+}
+footer strong{color:#fff;font-size:.88rem}
+footer a{color:#ccc;text-decoration:none;margin:0 10px}
+
+@media(max-width:768px){
+  header h1{font-size:1.7rem}
+  .chapter{padding:28px 24px}
+  .toc-list{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:1fr}
+  .service-grid{grid-template-columns:1fr}
+  .price-final .row{flex-direction:column;gap:24px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand-row">
+      <div class="brand">
+        <div class="brand-logo">M</div>
+        <div class="brand-text">ミセナビ｜MEO×AIO 集客代行<small>Lien Edit株式会社</small></div>
+      </div>
+      <div class="tag-pill">クライアント説明用 完全ガイド</div>
+    </div>
+    <h1>「MEO」「AIO」って結局なに？<br>ミセナビは<span class="accent">何をしてくれる</span>のか</h1>
+    <p class="lead">
+      Googleマップ集客（MEO）と、ChatGPT/Gemini等のAI検索対策（AIO）。<br>
+      この2つを<strong>AIで自動化</strong>して、毎月¥19,800で運用代行するのが「ミセナビ」です。<br>
+      この資料は、「何ができるんですか？」と聞かれた時にお見せできる<strong>完全説明書</strong>です。
+    </p>
+    <div class="meta">
+      <span><i class="fa-regular fa-clock"></i>読了 約12分</span>
+      <span><i class="fa-solid fa-layer-group"></i>8章構成</span>
+      <span><i class="fa-solid fa-pen-to-square"></i>2026-05-11 更新</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- TOC -->
+  <nav class="toc">
+    <div class="toc-title"><i class="fa-solid fa-list-ul"></i>目次</div>
+    <div class="toc-list">
+      <a href="#ch1">MEO・AIOってそもそも何？</a>
+      <a href="#ch2">なぜ今これが「超」重要なのか</a>
+      <a href="#ch3">ミセナビが解決すること（５つ）</a>
+      <a href="#ch4">中身：何を自動化してるか</a>
+      <a href="#ch5">使ってるAI技術（裏側）</a>
+      <a href="#ch6">他社ツールと何が違う？</a>
+      <a href="#ch7">効果が出るタイムライン</a>
+      <a href="#ch8">よくあるQ&A・料金</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ===== 第1章 ===== -->
+    <section class="chapter" id="ch1">
+      <div class="chapter-num">CHAPTER 01</div>
+      <h2>MEO・AIO ってそもそも<span class="em">何？</span></h2>
+      <p class="sub">専門用語で語ると分からんから、いっぺん「お客さんの動き」で説明します。</p>
+
+      <h3>MEO（エム・イー・オー）</h3>
+      <p>
+        <strong>Map Engine Optimization</strong> の略。
+        Googleマップで「近所の整骨院」「近くのカフェ」みたいに検索したとき、<strong>上位3件に表示される</strong>ための対策のこと。
+      </p>
+      <p>
+        Googleマップの上位3件は<strong>「Googleの3-pack」</strong>と呼ばれ、検索結果の最上部に表示される一等地。
+        ここに入れるかどうかで、その日の電話・経路問い合わせ・来店数がガラッと変わります。
+      </p>
+
+      <h3>AIO（エー・アイ・オー）</h3>
+      <p>
+        <strong>AI Optimization</strong> の略。
+        最近、お客さんが Google検索じゃなくて <strong>ChatGPT</strong>・<strong>Gemini</strong>・<strong>Perplexity</strong> みたいなAIに
+        「平野区で評判いい整骨院教えて」って直接聞くようになってます。
+      </p>
+      <p>
+        そのAIに自分のお店を<strong>「答えとして紹介してもらう」</strong>ための対策が AIO。
+        従来のSEOとも、MEOとも、また別物。<strong>2025年から急速に重要になってきた</strong>新しい集客領域です。
+      </p>
+
+      <div class="callout">
+        <div class="callout-title"><i class="fa-solid fa-lightbulb"></i>ものすごく簡単に言うと</div>
+        <p>
+          <strong>MEO</strong> = Googleマップで一等地に出る<br>
+          <strong>AIO</strong> = AIに「いいお店」として推薦してもらう<br>
+          この2つを同時にやって、地域のお客さんがどこから検索してきても「あなたのお店」がトップに出る状態を作るのがミセナビです。
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 第2章 ===== -->
+    <section class="chapter" id="ch2">
+      <div class="chapter-num">CHAPTER 02</div>
+      <h2>なぜ今、これが<span class="em">「超」重要</span>なのか</h2>
+      <p class="sub">「ホームページあるから大丈夫」が通用しない理由です。</p>
+
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="num">76<small>%</small></div>
+          <div class="label">スマホ「近所の」<br>検索が来店につながる</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">3<small>件</small></div>
+          <div class="label">マップ上位3件以外は<br>ほぼクリックされない</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">28<small>%</small></div>
+          <div class="label">2025年Q1のChatGPT検索<br>シェア（伸び続け）</div>
+        </div>
+      </div>
+
+      <h3>① お客さんは「ホームページ」じゃなく「Googleマップ」を見てる</h3>
+      <p>
+        スマホ世代のお客さんは、お店を選ぶ時に <strong>Googleマップを直接開いて、その場で星の数と口コミを見て判断</strong> します。
+        ホームページを開く前に、もう来店するかどうか決まってるケースがほとんど。
+      </p>
+
+      <h3>② ライバル店は既にMEOやってる</h3>
+      <p>
+        美容室・整体・飲食・士業…<strong>同業のライバル店はすでに業者にMEOを任せている</strong>店舗が多い。
+        放置してると、自分のお店だけ検索順位が下がり続けます。
+      </p>
+
+      <h3>③ AI検索が本気で来てる</h3>
+      <p>
+        2025年に入って ChatGPT・Geminiの検索利用が急増。
+        「平野区でランチおすすめ」って直接AIに聞く人が増えてます。
+        <strong>AIに自分のお店を「答え」として認識させとかんと、これからの数年で取り残されます。</strong>
+      </p>
+
+      <div class="callout warn">
+        <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i>放置のリスク</div>
+        <p>
+          MEO/AIOやってない店舗は、<strong>ホームページ作って満足してる状態</strong>です。
+          検索する側からは存在しないのと同じ。お客さんが「他のお店」を選んでしまうのは止められません。
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 第3章 ===== -->
+    <section class="chapter" id="ch3">
+      <div class="chapter-num">CHAPTER 03</div>
+      <h2>ミセナビが解決すること <span class="em">（5つ）</span></h2>
+      <p class="sub">「お店にとって何が起こるか」で説明します。</p>
+
+      <div class="service-grid">
+        <div class="service-cell">
+          <div class="service-icon"><i class="fa-solid fa-arrow-up"></i></div>
+          <div class="service-text">
+            <h5>① Googleマップで上位表示される</h5>
+            <p>「近所の◯◯」検索で3-pack（上位3件）に入る対策を継続的に実行</p>
+          </div>
+        </div>
+        <div class="service-cell">
+          <div class="service-icon"><i class="fa-solid fa-robot"></i></div>
+          <div class="service-text">
+            <h5>② AI検索でも紹介される</h5>
+            <p>ChatGPT・Gemini・Perplexity が「答え」として推薦する設計</p>
+          </div>
+        </div>
+        <div class="service-cell">
+          <div class="service-icon"><i class="fa-solid fa-star"></i></div>
+          <div class="service-text">
+            <h5>③ ★1の口コミにも丁寧に返信</h5>
+            <p>新着口コミ→AIが返信3案→LINEで「OK」→自動投稿（寝てる間も対応）</p>
+          </div>
+        </div>
+        <div class="service-cell">
+          <div class="service-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+          <div class="service-text">
+            <h5>④ GBP投稿を毎週自動運用</h5>
+            <p>業種別テンプレで投稿を生成→承認→自動投稿。週1〜2回の継続更新</p>
+          </div>
+        </div>
+        <div class="service-cell">
+          <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="service-text">
+            <h5>⑤ 効果を月次レポートで可視化</h5>
+            <p>順位・電話発信・経路問い合わせ・写真表示数 を毎月PDFで報告</p>
+          </div>
+        </div>
+        <div class="service-cell">
+          <div class="service-icon"><i class="fa-solid fa-eye"></i></div>
+          <div class="service-text">
+            <h5>⑥ 競合店も同時に追跡</h5>
+            <p>同業ライバル店の順位変動を自動で監視・必要に応じて対策を切り替え</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout green">
+        <div class="callout-title"><i class="fa-solid fa-circle-check"></i>結果として</div>
+        <p>
+          <strong>「電話・経路問い合わせが増える」</strong>「<strong>来店客が増える</strong>」「<strong>口コミの数と質が上がる</strong>」を、
+          お店の方が何もしなくても、AIと運用代行で実現するのがミセナビです。
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 第4章 ===== -->
+    <section class="chapter" id="ch4">
+      <div class="chapter-num">CHAPTER 04</div>
+      <h2>中身：実際に<span class="em">何をAIで動かしてるか</span></h2>
+      <p class="sub">クライアントに聞かれたら答えられるレベルで、裏でどう動いてるか説明します。</p>
+
+      <h3>① 投稿運用エンジン（毎週自動）</h3>
+      <p>
+        <strong>Claude AI</strong>（Anthropic社の最新AI）が、お店の業種・立地・季節・直近の口コミ動向を読み取って、
+        最適な投稿文を毎週生成。<strong>業種別テンプレート</strong>で「訪問看護なら丁寧トーン」「カフェなら親しみやすいトーン」と書き分けます。
+      </p>
+      <ul>
+        <li>業種別の必須要素を組み込み（NG表現は自動排除）</li>
+        <li>季節キーワード自動挿入（5月なら「母の日」「衣替え」等）</li>
+        <li>CTA（行動喚起）の最適化（電話・予約・来店）</li>
+      </ul>
+
+      <h3>② 口コミ管理エンジン（24時間自動）</h3>
+      <p>
+        <strong>Google Business Profile API</strong>と直接つながり、新着口コミを5分以内に検知。
+        AIが3パターン（丁寧／フランク／お詫び型）の返信案を生成して、<strong>LINE経由でオーナーに送付</strong>。
+        オーナーが「OK」スタンプ1個押すだけで、Googleに自動投稿されます。
+      </p>
+      <ul>
+        <li>★1の口コミは強制承認モード（人手で必ず確認）</li>
+        <li>感情解析AIが口コミの感情を判定（怒り・喜び・要望）</li>
+        <li>不正口コミ検知（同一IPの連投・テンプレ文章を検出）</li>
+      </ul>
+
+      <h3>③ MEO最適化エンジン（裏で常時稼働）</h3>
+      <p>
+        Googleマップの順位を毎日測定して、上位を取りたいキーワードに対して
+        GBPプロフィール・投稿頻度・写真・カテゴリ設定を最適化し続けます。
+      </p>
+      <ul>
+        <li>競合店の順位を週1で追跡（順位変動アラート）</li>
+        <li>キーワード辞書を業種別に保有（4業種 × 各40語）</li>
+        <li>写真生成AIで「映える写真」を自動編集して投稿</li>
+      </ul>
+
+      <h3>④ AIO最適化エンジン</h3>
+      <p>
+        ChatGPT・Gemini・Perplexity に実際に「近所の◯◯」を聞いてみて、
+        自分のお店が答えに含まれるかを<strong>マルチAI検証</strong>。含まれてない場合は、
+        含まれる設計（FAQ強化・構造化データ追加・引用されやすい記述）を自動で施します。
+      </p>
+
+      <h3>⑤ レポートエンジン（毎月1日に自動配信）</h3>
+      <p>
+        前月の数字をPDFで自動生成。
+        「順位の変化」「電話の数」「経路問い合わせ数」「写真表示数」「口コミ数の増減」「次の月にやること」
+        を1枚のPDFにまとめて、Discord/メールで自動配信します。
+      </p>
+
+      <div class="callout">
+        <div class="callout-title"><i class="fa-solid fa-gear"></i>裏で動いている機能数</div>
+        <p>
+          実装されているサービス（裏方）は <strong>31機能</strong>。
+          投稿・口コミ・順位追跡・競合監視・写真生成・感情解析・不正検知・自動承認・通知・レポート…
+          全部AIが裏で連動して動いてます。
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 第5章 ===== -->
+    <section class="chapter" id="ch5">
+      <div class="chapter-num">CHAPTER 05</div>
+      <h2>使ってるAI技術 <span class="em">（裏側を一部公開）</span></h2>
+      <p class="sub">「どんな技術使ってるん？」と聞かれた時の答え方。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用途</th><th>使ってるAI／API</th><th>役割</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>投稿文生成</td><td>Claude API (Anthropic)</td><td>業種別最適投稿文を生成</td></tr>
+            <tr><td>口コミ返信生成</td><td>Claude API + 業種別プロンプト</td><td>3案返信を生成（丁寧/フランク/お詫び）</td></tr>
+            <tr><td>口コミ感情解析</td><td>感情解析AI</td><td>怒り・喜び・要望を自動判定</td></tr>
+            <tr><td>不正口コミ検知</td><td>パターン検知AI</td><td>テンプレ文章・連投を検出</td></tr>
+            <tr><td>マルチAI検証（AIO）</td><td>ChatGPT + Gemini + Perplexity</td><td>3つのAIで実際に検索して上位確認</td></tr>
+            <tr><td>GBP操作</td><td>Google Business Profile API</td><td>投稿・口コミ取得・返信を直接実行</td></tr>
+            <tr><td>サイト品質測定</td><td>Lighthouse API</td><td>ホームページの表示速度を継続監視</td></tr>
+            <tr><td>写真生成</td><td>画像生成AI</td><td>「映える写真」をAIが選定・編集</td></tr>
+            <tr><td>競合追跡</td><td>順位スクレイピング</td><td>同業ライバル店の順位変動を週次取得</td></tr>
+            <tr><td>レポート生成</td><td>PDFKit + Claude</td><td>月次PDFを自動生成→配信</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== 第6章 ===== -->
+    <section class="chapter" id="ch6">
+      <div class="chapter-num">CHAPTER 06</div>
+      <h2>他社ツールと <span class="em">何が違う</span>？</h2>
+      <p class="sub">「他社でいいんちゃう？」と言われた時の答え方。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>比較項目</th><th>ミセナビ</th><th>他社MEOツール</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>運用代行</td><td class="ok">✓ 全自動＋人手承認</td><td class="ng">✗ ツール提供のみ</td></tr>
+            <tr><td>口コミ返信</td><td class="ok">✓ AI3案＋LINE承認</td><td class="ng">✗ 自分で書く</td></tr>
+            <tr><td>AIO（AI検索対策）</td><td class="ok">✓ マルチAI検証付き</td><td class="ng">✗ ほぼ未対応</td></tr>
+            <tr><td>業種別テンプレ</td><td class="ok">✓ 30業種以上</td><td class="ng">✗ 汎用テンプレのみ</td></tr>
+            <tr><td>月次レポート</td><td class="ok">✓ AI解析付きPDF</td><td>△ 数字だけ</td></tr>
+            <tr><td>初期費用</td><td class="ok">¥0</td><td>¥30,000〜¥100,000</td></tr>
+            <tr><td>契約縛り</td><td class="ok">なし</td><td>1〜2年縛り多い</td></tr>
+            <tr><td>料金</td><td class="ok">月¥19,800</td><td>月¥30,000〜¥80,000</td></tr>
+            <tr><td>承認フロー</td><td class="ok">LINEで即承認</td><td>メール・電話・遅い</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout green">
+        <div class="callout-title"><i class="fa-solid fa-thumbs-up"></i>ミセナビの強み</div>
+        <p>
+          <strong>「半自動」運用</strong>がポイント。完全自動だと炎上・誤投稿のリスクが高い。
+          人手承認を1工程はさむことで、「AIの速度」と「人の安心」を両立させてます。
+          オーナーはLINEで「OK」押すだけ、それ以外は全部こちらでやります。
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 第7章 ===== -->
+    <section class="chapter" id="ch7">
+      <div class="chapter-num">CHAPTER 07</div>
+      <h2>効果が出るまでの <span class="em">タイムライン</span></h2>
+      <p class="sub">「どれくらいで効果出るん？」と聞かれた時の正直な答え。</p>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-time">DAY 0 〜 7</div>
+          <div class="tl-title">初期セットアップ</div>
+          <div class="tl-desc">GBP権限のお引き渡し→こちらでプロフィール最適化＋初期投稿5本＋写真整理。お店の方は「LINEに承認スタンプ」だけ。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">WEEK 2 〜 4</div>
+          <div class="tl-title">投稿運用スタート</div>
+          <div class="tl-desc">週1〜2回のGBP投稿、新着口コミの自動返信が回り始める。<strong>「やってる感」を実感できる時期</strong>。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">MONTH 1</div>
+          <div class="tl-title">初回レポート配信</div>
+          <div class="tl-desc">前月の数字をPDFで配信。投稿回数・口コミ数・順位の変化を確認。<strong>まだ大きな順位変動は出ない時期</strong>。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">MONTH 2 〜 3</div>
+          <div class="tl-title">MEO順位が動き始める</div>
+          <div class="tl-desc">主要キーワードでマップ順位が上昇開始。電話・経路問い合わせの増加を実感できることが多い。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">MONTH 4 〜 6</div>
+          <div class="tl-title">来店数の体感アップ</div>
+          <div class="tl-desc">3-pack内に定着し始める。来店客から「マップで見ました」の声が増える。<strong>ここからが本番</strong>。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">MONTH 6 以降</div>
+          <div class="tl-title">運用が完全に資産化</div>
+          <div class="tl-desc">毎月レポートで前年比較が可能に。投稿コンテンツが蓄積され、検索流入が安定。<strong>自然と「強い店舗」になる</strong>。</div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-title"><i class="fa-solid fa-hourglass-half"></i>正直に言うと</div>
+        <p>
+          MEOは<strong>「2〜3ヶ月で動き始める」</strong>性質のもの。1ヶ月で順位が爆上がりするツールがあったら、それはGoogleの規約違反です。
+          安全に・正しく上げるなら半年は腰を据えてやる必要があります。
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 第8章 ===== -->
+    <section class="chapter" id="ch8">
+      <div class="chapter-num">CHAPTER 08</div>
+      <h2>よくあるQ&A・料金 <span class="em">完全版</span></h2>
+      <p class="sub">クライアントに必ず聞かれる質問8つ、全部答えます。</p>
+
+      <div class="faq-item">
+        <div class="faq-q">効果保証はあるんですか？</div>
+        <div class="faq-a">
+          ありません。<strong>Googleアルゴリズムの変動を保証できる業者は存在しない</strong>のが業界の常識です。代わりに、毎月のレポートで「何をやったか」「数字がどう変わったか」を可視化し、効果なければ正直に「合いません」とお伝えします。3ヶ月使って動きが無ければ解約OK、違約金もありません。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">他社ツールでも自分でやれば無料じゃないですか？</div>
+        <div class="faq-a">
+          GBPを自分で運用するのは可能ですが、<strong>「毎週投稿」「★1の即返信」「競合追跡」「AIO対策」を継続できる人</strong>はほぼいません。実際に半年続けられる店舗は約3割と言われてます。本業に集中したい方が、運用ごと外注するのがミセナビです。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">契約期間はありますか？</div>
+        <div class="faq-a">
+          <strong>契約縛りなし</strong>です。月単位で契約・解約OK（前月末までにお知らせいただくだけ）。違約金もありません。「3年契約必須」みたいな業界の悪習からは離れてます。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">うちみたいな業種でも対応できますか？</div>
+        <div class="faq-a">
+          飲食・美容・整体・士業・小売・医療など<strong>30業種以上のテンプレートを保有</strong>しています。テンプレに無い業種でも、初回ヒアリングで業種特性を把握してカスタムします。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">途中で「合わへんな」と思ったら？</div>
+        <div class="faq-a">
+          すぐ解約してOK、違約金なし。それと別に、こちらから「合いません」とお伝えする場合もあります。3ヶ月運用しても順位や問い合わせ数に変化が出ない場合、お店の方の時間とお金を無駄にしないため正直に申し上げます。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">パソコン苦手なんですけど大丈夫？</div>
+        <div class="faq-a">
+          大丈夫です。<strong>GBPの権限引き渡し（5分）</strong>とその後の<strong>LINEで「OK」スタンプ</strong>だけお願いします。それ以外の設定・投稿・口コミ返信・写真編集は全部こちらでやります。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">毎月のレポートはどんな内容ですか？</div>
+        <div class="faq-a">
+          PDF1枚〜2枚にまとめてDiscord/LINEで自動配信。内容は ①検索キーワード別の順位推移 ②電話発信・経路問い合わせ数 ③写真表示数 ④口コミ件数と平均星 ⑤投稿の効果分析 ⑥次月の改善提案。AIが文章化してるので、専門用語じゃなく日本語で読めます。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">他のお店とセットでお得なプランはありますか？</div>
+        <div class="faq-a">
+          あります。<strong>ミセナビ＋クチナビ（口コミ管理）＋ライナビ（AI接客LINE）の3点パック</strong>を月¥39,800で提供しています（単独で頼むと¥59,400/月）。集客→口コミ→LINE接客までまるごと任せたい方向け。
+        </div>
+      </div>
+
+      <!-- 料金 -->
+      <div class="price-final">
+        <h3>料金プラン</h3>
+        <div class="row">
+          <div class="col">
+            <div class="tag">ミセナビ単独</div>
+            <div class="num">¥19,800<small>/月</small></div>
+          </div>
+          <div class="col bundle">
+            <div class="tag">3点ナビパック（推奨）</div>
+            <div class="num">¥39,800<small>/月</small></div>
+          </div>
+        </div>
+        <p class="info">
+          初期費用 <strong>¥0</strong>　／　契約縛り <strong>なし</strong>　／　月単位で解約可<br>
+          税抜表示。法人・個人事業主どちらも契約可。
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<footer>
+  <div class="container">
+    <strong>Lien Edit株式会社</strong>　ミセナビ MEO/AIO 集客代行<br>
+    〒547-0045 大阪市平野区平野上町2-10-4 HABITAT平野505<br>
+    代表 竹林 義人　／　TEL 090-6244-1826　／　法人番号 8120001284556<br><br>
+    <a href="https://misenavi-lp.vercel.app" target="_blank">公式LP</a>
+    <a href="https://misenavi-lp.vercel.app/tokushoho.html" target="_blank">特商法</a>
+    <a href="https://misenavi-lp.vercel.app/terms.html" target="_blank">利用規約</a>
+    <a href="https://misenavi-lp.vercel.app/privacy.html" target="_blank">プライバシー</a>
+  </div>
+</footer>
+
+</body>
+</html>
